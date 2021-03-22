@@ -20,6 +20,7 @@ namespace Deckel_Shop
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            // Test
         }
 
         public IConfiguration Configuration { get; }
