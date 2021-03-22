@@ -12,6 +12,7 @@ namespace Deckel_Shop
     //yahya
     //looool
     //dfdf
+    //jasdhjkfhdakj
     public class Program
     {
         public static void Main(string[] args)
