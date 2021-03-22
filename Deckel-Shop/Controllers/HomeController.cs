@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Deckel_Shop.Controllers
 {
-    //det var inte jag
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
