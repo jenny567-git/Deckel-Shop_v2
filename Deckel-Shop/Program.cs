@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Deckel_Shop
 {
     //yahya
+    //looool
     public class Program
     {
         public static void Main(string[] args)
