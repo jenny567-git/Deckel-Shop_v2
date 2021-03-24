@@ -10,7 +10,7 @@ namespace Deckel_Shop.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("views/profile/Customer/index.cshtml");
         }
 
         public IActionResult Customer()
