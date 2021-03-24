@@ -12,5 +12,15 @@ namespace Deckel_Shop.Controllers
         {
             return View();
         }
+
+        public IActionResult Customer()
+        {
+            return View();
+        }
+        
+        public IActionResult Administrator()
+        {
+            return View();
+        }
     }
 }
