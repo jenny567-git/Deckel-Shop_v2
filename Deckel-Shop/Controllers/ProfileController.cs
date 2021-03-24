@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,24 @@ namespace Deckel_Shop.Controllers
             return View("views/profile/Customer/index.cshtml");
         }
 
+
         public IActionResult Customer()
         {
-            return View();
+            return View("views/profile/Customer/index.cshtml");
         }
         
         public IActionResult Administrator()
         {
-            return View();
+            return View("views/profile/Administrator/index.cshtml");
         }
+        
+        
+        public IActionResult CustomerOrderHistory()
+        {
+            return View("views/profile/Customer/OrderHistory.cshtml");
+        }
+
+
+
     }
 }

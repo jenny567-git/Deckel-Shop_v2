@@ -3,3 +3,166 @@
 *@
 @{
 }
+
+
+<h1>Order History</h1>
+
+<h3>Name of customer</h3>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" asp-action="Index">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="OrderHistory.cshtml">Order History</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+</ul>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Day</th>
+                        <th scope="col">Article Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Shares</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Bootstrap 4 CDN and Starter Template</td>
+                        <td>Cristina</td>
+                        <td>2.846</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="far fa-eye"></i>Details</button>
+                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i>Placeholder</button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i>RMA</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Bootstrap Grid 4 Tutorial and Examples</td>
+                        <td>Cristina</td>
+                        <td>3.417</td>
+                        <td>
+                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Bootstrap Flexbox Tutorial and Examples</td>
+                        <td>Cristina</td>
+                        <td>1.234</td>
+                        <td>
+                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Order #placeholder-OrderID</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @*// Layout*@
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>
+                                        Purchased products
+                                    </h3>
+                                    <hr />
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Item #1
+                                            <span class="badge badge-primary badge-pill">14</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Item #2
+                                            <span class="badge badge-primary badge-pill">2</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Item #3
+                                            <span class="badge badge-primary badge-pill">1</span>
+                                        </li>
+                                    </ul></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>
+                                Details
+                            </h3>
+                            <br />
+                            <hr />
+                            <address>
+                                <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
+                            </address>
+                            <style>
+                                ul {
+                                    list-style: none;
+                                    padding-left: 0;
+                                }
+                            </style>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Shipping cost: 50 kr
+                                    
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Extra cost: 29 kr
+                                    
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Order cost: 1550 kr
+                                    
+                                </li>
+                            </ul>
+
+                            <p class="font-weight-bold">Total cost: 1629 kr</p>
+                        </div>
+                    </div>
+                </div>
+                @*//layout end*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
