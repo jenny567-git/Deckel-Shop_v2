@@ -14,7 +14,7 @@
         <a class="nav-link" asp-action="Index">Profile</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="OrderHistory.cshtml">Order History</a>
+        <a class="nav-link active" asp-action="CustomerOrderHistory" >Order History</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -120,7 +120,8 @@
                                             Item #3
                                             <span class="badge badge-primary badge-pill">1</span>
                                         </li>
-                                    </ul></div>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -132,12 +133,6 @@
                             <address>
                                 <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
                             </address>
-                            <style>
-                                ul {
-                                    list-style: none;
-                                    padding-left: 0;
-                                }
-                            </style>
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Shipping cost: 50 kr
@@ -149,7 +144,6 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Order cost: 1550 kr
-                                    
                                 </li>
                             </ul>
 
