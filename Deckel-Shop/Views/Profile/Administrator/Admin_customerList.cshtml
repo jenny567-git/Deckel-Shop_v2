@@ -2,6 +2,7 @@
     ViewData["Title"] = "Customers";
 }
 
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -9,7 +10,7 @@
             @*---------------------------------------------------------------------------------*@
             <!-- NEW: Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-customer">
-                Create new
+                <i class="far fa-plus-square"></i>
             </button>
 
             <!-- Modal -->
@@ -197,7 +198,7 @@
                             @*---------------------------------------------------------------------------------*@
                             <!-- DETAILS Button trigger modal -->
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal-details">
-                                Details
+                                <i class="fas fa-info-circle"></i>
                             </button>
 
                             <!-- Modal -->
@@ -207,7 +208,6 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
-                                            </button>
                                         </div>
                                         <div class="modal-body">
                                             <form>
@@ -272,7 +272,7 @@
                             @*---------------------------------------------------------------------------------*@
                             <!-- DELETE Button trigger modal -->
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-delete">
-                                Delete
+                                <i class="far fa-trash-alt"></i>
                             </button>
 
                             <!-- Modal -->
@@ -280,12 +280,12 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         @*<div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>*@
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>*@
                                         <div class="modal-body">
-                                           Delete customer?
+                                            Delete customer?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger">Yes</button>
@@ -301,3 +301,5 @@
         </div>
     </div>
 </div>
+
+<script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
