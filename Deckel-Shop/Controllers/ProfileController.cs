@@ -20,7 +20,12 @@ namespace Deckel_Shop.Controllers
         
         public IActionResult Administrator()
         {
-            return View();
+            return View("/views/profile/administrator/index.cshtml");
+        }
+
+        public IActionResult Admin_customerList()
+        {
+            return View("/views/profile/administrator/Admin_customerList.cshtml");
         }
     }
 }
