@@ -6,13 +6,17 @@
 <div class="container">
     <div class="row">
         @*row with title and NEW:button modal*@
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h1>Customers</h1>
+            </div>
             @*---------------------------------------------------------------------------------*@
             <!-- NEW: Button trigger modal -->
-            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
-                <i class="far fa-plus-square"></i>
-            </button>
+            <div class=" col-sm-6 text-right">
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
+                    <i class="far fa-plus-square"></i> Add customer
+                </button>
+
+            </div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
