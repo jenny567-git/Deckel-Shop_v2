@@ -10,7 +10,7 @@ namespace Deckel_Shop.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("views/profile/Customer/index.cshtml");
         }
 
         public IActionResult Customer()
@@ -21,6 +21,11 @@ namespace Deckel_Shop.Controllers
         public IActionResult Administrator()
         {
             return View();
+        }
+
+        public IActionResult Stock()
+        {
+            return View("views/Stock/index.cshtml");
         }
     }
 }
