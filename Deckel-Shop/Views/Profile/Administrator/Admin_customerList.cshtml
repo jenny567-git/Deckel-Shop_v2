@@ -3,6 +3,18 @@
 }
 
 
+<ul class="nav nav-tabs nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-action="DeliveredOrders">Delivered Orders</a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link active" asp-action="Admin_customerList">Customer List</a>
+    </li>
+</ul>
+
 <div class="container">
     <div class="row">
         @*row with title and NEW:button modal*@

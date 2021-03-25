@@ -5,53 +5,73 @@
 }
 
 @*nav bar*@
-    <ul class="nav nav-tabs nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-action="DeliveredOrders">Delivered Orders</a>
-        </li>
-    </ul>
+<ul class="nav nav-tabs nav-tabs">
+    <li class="nav-item ">
+        <a class="nav-link active" asp- asp-action="Administrator">Pending Orders</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-action="DeliveredOrders">Delivered Orders</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-action="Admin_customerList">Customer List</a>
+    </li>
+</ul>
 
-    @*orders table*@
+@*orders table*@
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-image">
-                    <thead>
-                        <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col">Order Date </th>
-                            <th scope="col">Customer Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Order Date </th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                        <tr>
-                            <th scope="row">1</th>
+                    <tr>
+                        <th scope="row">1</th>
 
-                            <td>25/03/2021 </td>
-                            <td>alex</td>
-                            <td> 2</td>
-                            <td>129 </td>
-                            <td>
-                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                        <td>25/03/2021 </td>
+                        <td>alex</td>
+                        <td> 2</td>
+                        <td>129 </td>
+                        <td>
+                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-deleteOrder"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*delete order modal*@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-deleteOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                Delete Order?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
