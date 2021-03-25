@@ -14,7 +14,7 @@
         <a class="nav-link" asp-action="Index">Profile</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" asp-action="CustomerOrderHistory" >Order History</a>
+        <a class="nav-link active" asp-action="CustomerOrderHistory">Order History</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="~/Identity/Account/Manage/">Manage account</a>
@@ -26,57 +26,52 @@
 
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Day</th>
-                        <th scope="col">Article Name</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Shares</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Bootstrap 4 CDN and Starter Template</td>
-                        <td>Cristina</td>
-                        <td>2.846</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="far fa-eye"></i>Details</button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i>Placeholder</button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i>RMA</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Bootstrap Grid 4 Tutorial and Examples</td>
-                        <td>Cristina</td>
-                        <td>3.417</td>
-                        <td>
-                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Bootstrap Flexbox Tutorial and Examples</td>
-                        <td>Cristina</td>
-                        <td>1.234</td>
-                        <td>
-                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="row">
+    <table class="table" id="tblOrderHistory">
+        <thead>
+            <tr>
+                <th>
+                    ORDER#
+                </th>
+                <th>
+                    ORDER STATUS
+                </th>
+                <th>
+                    SHIPPING DATE
+                </th>
+                <th>
+                    ORDERED BY
+                </th>
+                <th>
+                    ORDER TOTAL
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="customerOrderHistoryTable">
+            <tr>
+                <td>
+                    S123456789
+                </td>
+                <td>
+                    Invoiced
+                </td>
+                <td>
+                    2021-01-01
+                </td>
+                <td>
+                    Customer#01
+                </td>
+                <td>
+                    $213.23
+                </td>
+                <td>
+                    <a data-toggle="modal" data-target="#exampleModalCenter" asp-action="Details"><i class="fas fa-list-ul"></i> Details</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 
 
