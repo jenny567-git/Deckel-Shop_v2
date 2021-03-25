@@ -3,16 +3,19 @@
 *@
 @{
 }
-
-<ul class="nav nav-tabs">
+@*nav bar*@
+<ul class="nav nav-tabs nav-tabs">
     <li class="nav-item">
         <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
     </li>
+    <li class="nav-item ">
+        <a class="nav-link active" asp-action="DeliveredOrders">Delivered Orders</a>
+    </li>
     <li class="nav-item">
-        <a class="nav-link" asp-action="DeliveredOrders">Delivered Orders</a>
+        <a class="nav-link" asp-action="Admin_customerList">Customer List</a>
     </li>
 </ul>
-
+@*deliverde orders table*@
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -38,12 +41,28 @@
                         <td>239 </td>
                         <td>
                             <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-deleteOrder"><i class="far fa-trash-alt" ></i></button>
                         </td>
                     </tr>
 
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+@*delete order modal*@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-deleteOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+           
+            <div class="modal-body">
+                Delete Order?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
