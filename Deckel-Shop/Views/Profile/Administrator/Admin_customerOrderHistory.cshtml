@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Customer#01 Order History";
+}
+
+<div class="container">
+    <div class="row">
+        <h1>Customer #001 order history</h1>
+    </div>
+    @*-------------------------------------------------------------------------*@
+    @*search bar*@
+    <div class="row mt-5 pt-3 mb-3">
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search by Order#, Customer# etc" id="tableSearch">
+                <div class="input-group-append">
+                    <button class="input-group-text"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="d-flex">
+                <div class="dropdown mr-1">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Status
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        <a class="dropdown-item" value="1" href="#">Invoiced</a>
+                        <a class="dropdown-item" value="2" href="#">Delivered</a>
+                        <a class="dropdown-item" value="3" href="#">Cancelled</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*start of date picker*@
+        <div class="col-md-3">
+            <div class="md-form md-outline input-with-post-icon datepicker">
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+                <label for="example">Start date</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="md-form md-outline input-with-post-icon datepicker">
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+                <label for="example">End date</label>
+            </div>
+        </div>
+        @*end of date picker*@
+    </div>
+    @*-------------------------------------------------------------------------*@
+    <div class="row">
+        <table class="table" id="tblOrderHistory">
+            <thead>
+                <tr>
+                    <th>
+                        ORDER#
+                    </th>
+                    <th>
+                        ORDER STATUS
+                    </th>
+                    <th>
+                        SHIPPING DATE
+                    </th>
+                    <th>
+                        ORDERED BY
+                    </th>
+                    <th>
+                        ORDER TOTAL
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="customerOrderHistoryTable">
+                <tr>
+                    <td>
+                        S123456789
+                    </td>
+                    <td>
+                        Invoiced
+                    </td>
+                    <td>
+                        2021-01-01
+                    </td>
+                    <td>
+                        Customer#01
+                    </td>
+                    <td>
+                        $213.23
+                    </td>
+                    <td>
+                        <a asp-action="Details"><i class="fas fa-list-ul"></i> Details</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@*font*@
+<script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>

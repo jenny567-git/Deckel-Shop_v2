@@ -22,16 +22,17 @@ namespace Deckel_Shop.Controllers
         
         public IActionResult Administrator()
         {
-            return View("views/profile/Administrator/index.cshtml");
+            return View("/views/profile/administrator/index.cshtml");
         }
-        
-        
-        public IActionResult CustomerOrderHistory()
+
+        public IActionResult Admin_customerList()
         {
-            return View("views/profile/Customer/OrderHistory.cshtml");
+            return View("/views/profile/administrator/Admin_customerList.cshtml");
         }
 
-
-
+        public IActionResult Admin_customerOrderHistory()
+        {
+            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
+        }
     }
 }
