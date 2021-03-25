@@ -9,8 +9,14 @@ namespace Deckel_Shop.Controllers
 {
     public class ProfileController : Controller
     {
+
+        [Authorize]
         public IActionResult Index()
         {
+            if (User.IsInRole("Administator"))
+            {
+                return View("views/profile/administrator/index.cshtml");
+            }
             return View("views/profile/Customer/index.cshtml");
         }
         public IActionResult CustomerOrderHistory()
@@ -22,7 +28,7 @@ namespace Deckel_Shop.Controllers
         {
             return View("views/profile/Customer/index.cshtml");
         }
-        
+
         public IActionResult Administrator()
         {
             return View("/views/profile/administrator/index.cshtml");
