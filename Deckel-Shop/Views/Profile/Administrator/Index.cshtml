@@ -1,6 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-index for admin
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+<h1>Administrator page</h1>
+
+<h3>@UserManager.GetUserAsync(User).Result.UserName</h3>
