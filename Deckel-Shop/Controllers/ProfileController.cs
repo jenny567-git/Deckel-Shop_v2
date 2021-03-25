@@ -20,12 +20,17 @@ namespace Deckel_Shop.Controllers
         
         public IActionResult Administrator()
         {
-            return View();
+            return View("views/Profile/Administrator/index.cshtml");
         }
 
         public IActionResult Stock()
         {
             return View("views/Stock/index.cshtml");
+        }
+
+        public IActionResult DeliveredOrders()
+        {
+            return View("views/profile/Administrator/DeliveredOrders.cshtml");
         }
     }
 }
