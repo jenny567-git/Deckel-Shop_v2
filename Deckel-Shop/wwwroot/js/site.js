@@ -12,3 +12,13 @@ function showPassword() {
         x.type = "password";
     }
 };
+
+//Admin -> Customer order history -> table search (Filter table)
+$(document).ready(function () {
+    $("#tableSearch").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#customerOrderHistoryTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
