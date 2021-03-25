@@ -30,6 +30,7 @@ function showSlides(n) {
     }
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
+} 
 
 //Admin -> Edit customer -> Show password
 function showPassword() {
