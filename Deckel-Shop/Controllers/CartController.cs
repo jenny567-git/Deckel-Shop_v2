@@ -12,5 +12,10 @@ namespace Deckel_Shop.Controllers
         {
             return View();
         }
+
+        public IActionResult Checkout()
+        {
+            return View();
+        }
     }
 }
