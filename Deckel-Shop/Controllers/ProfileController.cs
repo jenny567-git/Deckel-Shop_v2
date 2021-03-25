@@ -42,6 +42,17 @@ namespace Deckel_Shop.Controllers
         public IActionResult Admin_customerOrderHistory()
         {
             return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
+            return View("views/Profile/Administrator/index.cshtml");
+        }
+
+        public IActionResult Stock()
+        {
+            return View("views/Stock/index.cshtml");
+        }
+
+        public IActionResult DeliveredOrders()
+        {
+            return View("views/profile/Administrator/DeliveredOrders.cshtml");
         }
     }
 }

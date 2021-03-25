@@ -1,9 +1,63 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*nav bar*@
+    <ul class="nav nav-tabs nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="DeliveredOrders">Delivered Orders</a>
+        </li>
+    </ul>
+
+    @*orders table*@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-image">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Order Date </th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <th scope="row">1</th>
+
+                            <td>25/03/2021 </td>
+                            <td>alex</td>
+                            <td> 2</td>
+                            <td>129 </td>
+                            <td>
+                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 
 
-<h1>Administrator page</h1>
+
 
 <h3>@UserManager.GetUserAsync(User).Result.UserName</h3>
