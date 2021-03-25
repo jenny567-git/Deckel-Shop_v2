@@ -13,7 +13,10 @@ namespace Deckel_Shop.Controllers
         {
             return View("views/profile/Customer/index.cshtml");
         }
-
+        public IActionResult CustomerOrderHistory()
+        {
+            return View("views/profile/Customer/OrderHistory.cshtml");
+        }
 
         public IActionResult Customer()
         {
