@@ -8,19 +8,19 @@
     </div>
     @*-------------------------------------------------------------------------*@
     @*search bar*@
-    <div class="row mt-5 pt-3">
+    <div class="row mt-5 pt-3 mb-3">
         <div class="col-md-4">
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search by Order#, Customer# etc" id="tableSearch">
                 <div class="input-group-append">
                     <button class="input-group-text"><i class="fa fa-search"></i></button>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="d-flex">
                 <div class="dropdown mr-1">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" >
+                    <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
                         Status
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
@@ -31,7 +31,21 @@
                 </div>
             </div>
         </div>
+        @*start of date picker*@
+        <div class="col-md-3">
+            <div class="md-form md-outline input-with-post-icon datepicker">
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+                <label for="example">Start date</label>
+            </div>
         </div>
+        <div class="col-md-3">
+            <div class="md-form md-outline input-with-post-icon datepicker">
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+                <label for="example">End date</label>
+            </div>
+        </div>
+        @*end of date picker*@
+    </div>
     @*-------------------------------------------------------------------------*@
     <div class="row">
         <table class="table" id="tblOrderHistory">
