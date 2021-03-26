@@ -13,11 +13,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 
+        
+     
+
+
         .container {
             border-radius: 5px;
-            background-color: #f2f2f2;
             padding: 20px;
+            
         }
+
+        .container-sm{
+            height: 70px;
+            background-color: #f2f2f2;
+        }
+
 
         input[type=text], select, textarea {
             width: 100%;
@@ -57,24 +67,29 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm py-3 navbar-dark bg-secondary shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="index">
+    <nav class="navbar navbar-expand-sm py-3 navbar-dark bg-secondary shadow-sm DeckelHeader">
+        <div class="container container-sm DeckelNavBar">
+            <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="index">
                 <!-- Logo Image -->
                 <img src="~/Image/Deckel-Shop-Logo.png" width="80" height="80" alt="" class="d-inline-block align-middle mr-2">
             </a>
 
-            <div id="navbarSupportedContent" class="">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a style="color:#a78e5a" class="nav-link nav-item" asp-area="" asp-controller="Product" asp-action="index">Product</a></li>
-                    <li class="nav-item"><a style="color:#a78e5a" class="nav-link">About Us</a></li>
-                    <li class="nav-item"><a style="color:#a78e5a" class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
-
-                    <form class="navbar-expand-sm col-lg-auto mb-3 mb-lg-0 me-lg-3 nav-item">
-                        <input type="search" class="form-control form-control-dark" placeholder="Search...">
-                    </form>
-                    <partial name="_LoginPartial" />
-                    <a class="fas fa-shopping-cart" style="font-size:48px; color:#a78e5a;"></a>
+            <div id="navbarSupportedContent" class="    ">
+                <ul class="navbar-nav ml-auto catBlock">
+                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link  " asp-area="" asp-controller="Product" asp-action="index">Product</a></li>
+                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link btn btn-link ">About Us</a></li>
+                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link " asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
+                    <li class="nav-item ">
+                        <form class="navbar-expand-sm col-lg-auto mb-3 mb-lg-0 me-lg-3 nav-item">
+                            <input type="search" class="form-control form-control-dark" placeholder="Search...">
+                        </form>
+                    </li>
+                    <li class="nav-item ">
+                        <partial name="_LoginPartial" />
+                    </li>
+                    <li class="nav-item ">
+                        <a class="fas fa-shopping-cart" style="font-size:48px; color:#a78e5a;"></a>
+                    </li>
                 </ul>
             </div>
         </div>
