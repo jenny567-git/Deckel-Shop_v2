@@ -2,25 +2,18 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Logo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 col-sm-offset mx-2" type="submit">Search</button>
-            
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Product</button>
-        </form>
-
+<div class="ml-auto my-2 col-lg-4">
+    <div class="">
+        <div class="input-group">
+            <input type="text" class="form-control col-lg-6" placeholder="Search " id="tableSearch">
+            <div class="input-group-append">
+                <button class="input-group-text mr-1"><i class="fa fa-search"></i></button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal-customer" type="submit">Add Product</button>
+            </div>
+        </div>
     </div>
-</nav>
 
-
+</div>
 
 
 
@@ -54,9 +47,9 @@
                         <td>50 </td>
                         <td>79 </td>
                         <td>
-                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-details"><i class="far fa-eye"></i></button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal-customer"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-delete"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
 
@@ -65,5 +58,145 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @*start of form*@
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputStockID">Product ID</label>
+                            <input type="text" class="form-control" id="inputCustomerID">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Product Name</label>
+                            <input type="text" class="form-control" id="inputFirstName">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Amount</label>
+                            <input type="text" class="form-control" id="inputLastName">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Price</label>
+                            <input type="email" class="form-control" id="inputEmail4">
+                        </div>
+                    </div>
+                    @*uploading image*@
+                    <div>
+                        <label for="inputZip">Image</label>
+                        <div class="container mt-5">
+                            <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-8">
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label><strong>Upload Files</strong></label>
+                                        <div class="custom-file">
+                                            <input type="file" name="files[]" multiple class="custom-file-input form-control" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" name="upload" value="upload" id="upload" class="btn btn-block btn-dark"><i class="fa fa-fw fa-upload"></i> Upload</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @*end of form*@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--Detail Modal -->
+<div class="modal fade" id="exampleModal-details" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @*start of form*@
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ProductID">Product ID</label>
+                            <input type="text" class="form-control" id="inputCustomerID" disabled />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputProductName">Product Name</label>
+                            <input type="text" class="form-control" id="inputFirstName" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Amount</label>
+                            <input type="text" class="form-control" id="inputLastName" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Price</label>
+                            <input type="email" class="form-control" id="inputEmail4" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="inputPrice">Image</label>
+                        <img src="..." alt="..." class="img-thumbnail">
+                    </div>
+                    @*end of form*@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div><!--Delete Modal -->
+<div class="modal fade" id="exampleModal-delete" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>*@
+            <div class="modal-body">
+                Delete Product?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">JAJAMEEEEN</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
