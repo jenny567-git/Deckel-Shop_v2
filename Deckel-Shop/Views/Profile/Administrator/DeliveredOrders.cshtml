@@ -3,16 +3,19 @@
 *@
 @{
 }
-
-<ul class="nav nav-tabs">
+@*nav bar*@
+<ul class="nav nav-tabs nav-tabs">
     <li class="nav-item">
         <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
     </li>
+    <li class="nav-item ">
+        <a class="nav-link active" asp-action="DeliveredOrders">Delivered Orders</a>
+    </li>
     <li class="nav-item">
-        <a class="nav-link" asp-action="DeliveredOrders">Delivered Orders</a>
+        <a class="nav-link" asp-action="Admin_customerList">Customer List</a>
     </li>
 </ul>
-
+@*deliverde orders table*@
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -37,8 +40,8 @@
                         <td> 4</td>
                         <td>239 </td>
                         <td>
-                            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="far fa-eye"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-deleteOrder"><i class="far fa-trash-alt" ></i></button>
                         </td>
                     </tr>
 
@@ -47,5 +50,115 @@
         </div>
     </div>
 </div>
+@*order detail modal *@
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Order #placeholder-OrderID</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        @*Left side*@
+                        <div class="col-md-6">
+                            <h3 class="d-flex justify-content-between align-items-center mb-3">
+                                Purchased products
+                                <span class="badge bg-primary rounded-pill">3</span>
+                            </h3>
+                            <hr />
 
-<script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div>
+                                        <h6 class="my-0">Product name</h6>
+                                        <small class="text-muted">Brief description</small>
+                                    </div>
+                                    <span class="text-muted">$12</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div>
+                                        <h6 class="my-0">Second product</h6>
+                                        <small class="text-muted">Brief description</small>
+                                    </div>
+                                    <span class="text-muted">$8</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div>
+                                        <h6 class="my-0">Third item</h6>
+                                        <small class="text-muted">Brief description</small>
+                                    </div>
+                                    <span class="text-muted">$5</span>
+                                </li>
+                            </ul>
+
+                        </div>
+                        @*Right Side*@
+                        <div class="col-md-6">
+                            <h3>
+                                Order Details
+                            </h3>
+                            <hr />
+
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Twitter, Inc</h5>
+                                    <p class="card-text">795 Folsom Ave, Suite 600 San Francisco, CA 94107</p>
+                                    <abbr title="Phone">Phone:</abbr> (123) 456-7890
+                                    <br />
+                                    <br />
+                                    <a href="#" class="btn btn-primary">Change</a>
+                                </div>
+                            </div>
+                            <br />
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <h6 class="my-0">Shipping cost:</h6>
+                                    <span class="text-muted">50 kr</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <h6 class="my-0">Extra cost:</h6>
+                                    <span class="text-muted">29 kr</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <h6 class="my-0">Order cost:</h6>
+                                    <span class="text-muted">1550 kr</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between bg-light"></li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Total (SEK)</span>
+                                    <strong>1629 kr</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*delete order modal*@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-deleteOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+           
+            <div class="modal-body">
+                Delete Order?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

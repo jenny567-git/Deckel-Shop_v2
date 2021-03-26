@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+            .active, .collapsible:hover {
+                background-color: #555;
+            }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <input placeholder="sök i vanliga frågor" type="text" id="search">
+    <input type="button" value="Go" onclick="search(document.getElementById('search').value)">
+    <h2>Vanliga frågor</h2>
+
+
+    <button type="button" class="collapsible">Levarnstid</button>
+    <div class="content">
+        <p>Finns dina varor i lager så packas de och skickas inom 24 timmar. Sen är leveranstiden 3-5 dagar</p>
+    </div>
+    <button type="button" class="collapsible">Varifrån skickas varorna </button>
+    <div class="content">
+        <p>Varorna skickas från vårt huvudlager i Heidelberg</p>
+    </div>
+    <button type="button" class="collapsible">Vad kostar frakten</button>
+    <div class="content">
+        <p>Överstiger din beställning 1000 kronor så blir det ingen frakt. Under 1000 kronor är det 120 kronor i frakt</p>
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+
+        function search(string) {
+            window.find(string);
+        }
+    </script>
+
+</body>
+</html>
