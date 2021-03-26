@@ -2,6 +2,35 @@
     ViewData["Title"] = "Home Page";
 }
 <body>
+
+    <style>
+        .carousel-item {
+            height: 32rem;
+            background: rgb(0, 0, 0);
+            color: white;
+            position: relative;
+        }
+
+        .container-p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding-bottom: 50px;
+        }
+
+        .overlay-image {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.8;
+        }
+    </style>
+
     <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel slide">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
