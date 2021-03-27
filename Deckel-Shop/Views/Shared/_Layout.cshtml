@@ -63,21 +63,21 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm py-3 navbar-dark bg-secondary shadow-sm DeckelHeader">
+    <nav class="navbar navbar-expand-sm py-3 navbar-dark navbar fixed-top bg-secondary shadow-sm DeckelHeader">
         <div class="container container-sm DeckelNavBar">
             <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="index">
                 <!-- Logo Image -->
                 <img src="~/Image/Deckel-Shop-Logo.png" width="80" height="80" alt="" class="d-inline-block align-middle mr-2">
             </a>
 
-            <div id="navbarSupportedContent" class="    ">
+            <div id="" class="    ">
                 <ul class="navbar-nav ml-auto catBlock">
                     <li class="nav-item "><a style="color:#a78e5a" class="nav-link  " asp-area="" asp-controller="Product" asp-action="index">Product</a></li>
-                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link btn btn-link ">About Us</a></li>
+                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link  ">About Us</a></li>
                     <li class="nav-item "><a style="color:#a78e5a" class="nav-link " asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
                     <li class="nav-item ">
-                        <form class="navbar-expand-sm col-lg-auto mb-3 mb-lg-0 me-lg-3 nav-item">
-                            <input type="search" class="form-control form-control-dark" placeholder="Search...">
+                        <form class="form-inline">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         </form>
                     </li>
                     <li class="nav-item ">
@@ -90,6 +90,7 @@
             </div>
         </div>
     </nav>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
