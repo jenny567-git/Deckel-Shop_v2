@@ -12,8 +12,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-
-
+        
         .container {
             border-radius: 5px;
             padding: 20px;
@@ -77,7 +76,7 @@
             <div id="" class="    ">
                 <ul class="navbar-nav ml-auto catBlock">
                     <li class="nav-item "><a style="color:#a78e5a" class="nav-link  " asp-area="" asp-controller="Product" asp-action="index">Product</a></li>
-                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link  ">About Us</a></li>
+                    <li class="nav-item "><a style="color:#a78e5a" class="nav-link  " asp-area="" asp-controller="Home" asp-action="About">About Us</a></li>
                     <li class="nav-item "><a style="color:#a78e5a" class="nav-link " asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
                     <li class="nav-item ">
                         <form class="form-inline">
@@ -101,6 +100,7 @@
         </main>
     </div>
 
+    <hr />
     <!-- Footer -->
     <footer class="page-footer font-small elegant-color">
 
@@ -209,16 +209,16 @@
 
                     <ul class="list-unstyled foot-desc">
                         <li class="mb-2">
-                            <a href="#!">Your Mom</a>
+                            <a href="#!">News</a>
                         </li>
                         <li class="mb-2">
-                            <a href="#!">Careers</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Careers">Careers</a>
                         </li>
                         <li class="mb-2">
                             <a href="#!">Shipping and Delivery</a>
                         </li>
                         <li class="mb-2">
-                            <a asp-area="" asp-controller="Home" asp-action="Faq">Faq</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Faq">FaQ</a>
                         </li>
                     </ul>
 
@@ -239,7 +239,7 @@
                             <span class="fa-li"><i class="far fa-map"></i></span>New York, Avenue Street 10
                         </li>
                         <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt"></i></span>042 876 836 908</li>
-                        <li class="mb-2"><span class="fa-li"><i class="far fa-envelope"></i></span>company@example.com</li>
+                        <li class="mb-2"><span class="fa-li"><i class="far fa-envelope"></i></span>Deckel-Shop@Yahoo.com</li>
                         <li><span class="fa-li"><i class="far fa-clock"></i></span>Monday - Friday: 10-17</li>
                     </ul>
 
@@ -253,8 +253,8 @@
         <!-- Footer Links -->
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
-            © 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+            © 2021 Copyright:
+            <a> Deckel-Shop Inc</a>
         </div>
         <!-- Copyright -->
 

@@ -1,9 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<body>
+<body class="flex-column">
 
     <style>
+
+        .headline-3{
+            margin-top: 100px
+        }
+
         .carousel-item {
             height: 32rem;
             background: rgb(0, 0, 0);
@@ -39,7 +44,7 @@
         </ol>
         <div class="carousel-inner" data-interval="500">
             <div class="carousel-item active">
-                <div class="overlay-image" style="background-image:url(./image/HappypropelerMan.png);"></div>
+                <div class="overlay-image" style="background-image: url(./image/Surprised-propeller\ keps.jpg);"></div>
                 <div class="container-p">
                     <h1>True pleasure</h1>
                     <p>
@@ -91,13 +96,17 @@
         </a>
     </div>
 
+    <h2 class="headline-3 text-color-primary-dark">Enjoy our collection</h2>
+    <br />
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <img alt="Bootstrap Image Preview" class="w-100" src="~/Image/Surprised-propeller keps.jpg" />
+                <img alt="Bootstrap Image Preview" class="w-100" src="~/Image/Surprised-propeller keps.jpg" width="500" height="500" />
+                <a href="" class="btn btn-lg btn-primary">Shop</a>
             </div>
             <div class="col-md-6">
-                <img alt="Bootstrap Image Preview" class="w-100" src="~/Image/Happy propeler Man.png" />
+                <img alt="Bootstrap Image Preview" class="w-100" src="~/Image/Happy propeler Man.png" width="500" height="500" />
+                <a href="" class="btn btn-lg btn-primary">Shop</a>
             </div>
         </div>
     </div>

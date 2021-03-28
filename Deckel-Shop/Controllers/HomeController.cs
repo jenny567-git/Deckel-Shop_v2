@@ -23,6 +23,11 @@ namespace Deckel_Shop.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -34,6 +39,11 @@ namespace Deckel_Shop.Controllers
         }
 
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult Careers()
         {
             return View();
         }
