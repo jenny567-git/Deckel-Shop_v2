@@ -28,16 +28,6 @@ namespace Deckel_Shop.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Faq()
-        {
-            return View();
-        }
-
         public IActionResult Contact()
         {
             return View();
@@ -47,6 +37,22 @@ namespace Deckel_Shop.Controllers
         {
             return View();
         }
+
+        public IActionResult Faq()
+        {
+            return View();
+        }
+
+        public IActionResult News()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
