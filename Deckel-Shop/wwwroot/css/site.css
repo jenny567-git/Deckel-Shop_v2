@@ -20,6 +20,10 @@ for details on configuring this project to bundle and minify static web assets. 
             }
 }
 
+.btn-primary{
+    background-color: black !important;
+}
+
 
 .DeckelModal {
     background-color: #f2f2f2;
