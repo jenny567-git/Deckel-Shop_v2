@@ -66,7 +66,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm py-3 navbar-dark navbar fixed-top bg-secondary shadow-sm DeckelHeader">
+    <nav class="navbar navbar-expand-sm py-3 navbar-dark navbar fixed-top shadow-sm DeckelHeader">
         <div class="container container-sm DeckelNavBar">
             <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="index">
                 <!-- Logo Image -->
@@ -89,7 +89,7 @@
                         <partial name="_LoginPartial" />
                     </li>
                     <li class="nav-item ">
-                        <a class="fas fa-shopping-cart" style="font-size:48px; color:#a78e5a;"></a>
+                        <a class="fas fa-shopping-cart" onclick="location.href = 'cart';" style="font-size:48px; color:#a78e5a;"></a>
                     </li>
                 </ul>
             </div>
