@@ -357,3 +357,22 @@ body {
         margin-bottom: 30px
     }
 }
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    margin-left: 0;
+    width: 50%;
+}
+
+.form-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0;
+    width: 70%
+}
+
+.needs-validation {
+    margin-left: auto;
+}
