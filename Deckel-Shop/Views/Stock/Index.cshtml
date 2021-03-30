@@ -19,71 +19,94 @@
     </li>
 </ul>
 
-
-<div class="ml-auto my-2 col-lg-4">
-    <div class="">
+@*search bar*@
+<div class="row mt-3 pt-3 mb-3">
+    <div class="col-sm-4">
         <div class="input-group">
-            <input type="text" class="form-control col-lg-6" placeholder="Search " id="tableSearch">
+            <input type="text" class="form-control" placeholder="Search by Order#, Customer# etc" id="tableSearch">
             <div class="input-group-append">
-                <button class="input-group-text mr-1"><i class="fa fa-search"></i></button>
-                <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal-customer" type="submit">Add Product</button>
+                <button class="input-group-text"><i class="fa fa-search"></i></button>
             </div>
         </div>
     </div>
+    @*row with title and NEW:button modal*@
 
+    @*---------------------------------------------------------------------------------*@
+    <!-- NEW: Button trigger modal -->
+    <div class="col-sm-8 text-right">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
+            <i class="far fa-plus-square"></i> Add customer
+        </button>
+    </div>
 </div>
 
+@*<div class="ml-auto my-2 col-lg-4 mt-3 pt-3 mb-3">
+        <div class="">
+            <div class="input-group">
+                <input type="text" class="form-control col-lg-6" placeholder="Search " id="tableSearch">
+                <div class="input-group-append">
+                    <button class="input-group-text mr-1"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-light my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal-customer" type="submit" style="background-color:transparent">
+                        <i class="far fa-plus-square"></i> Add Product
+                    </button>
+                </div>
+            </div>
+        </div>
 
+    </div>*@
+
+@*line break*@
+<div class="row">
+    <div class="col">
+        <hr>
+    </div>
+</div>
 
 
 @*stock table*@
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-striped table-bordered dt-responsive display nowrap">
-                <thead>
-                    <tr>
-                        <th scope="col">PRODUCT#</th>
-                        <th scope="col">IMAGE</th>
-                        <th scope="col">PRODUCT NAME</th>
-                        <th scope="col">AMOUNT</th>
-                        <th scope="col">PRICE</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @*
-                        foreach loop för att loopa igenom listan me stock ???*@
-                    <tr>
-                        <th scope="row">1</th>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped table-bordered dt-responsive display nowrap table-image">
+            <thead>
+                <tr>
+                    <th scope="col">PRODUCT#</th>
+                    <th scope="col">IMAGE</th>
+                    <th scope="col">PRODUCT NAME</th>
+                    <th scope="col">AMOUNT</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*
+                    foreach loop för att loopa igenom listan me stock ???*@
+                <tr>
+                    <th scope="row">1</th>
 
-                        <td>
-                            <img src="" class="img-fluid img-thumbnail" alt="aubergineHatt">
-                        </td>
-                        <td>auberginehatt</td>
-                        <td>50 </td>
-                        <td>79 </td>
-                        <td>
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
-                                <i class="fas fa-info-circle"></i>
-                            </button>
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <td>
+                        <img src="" class="img-fluid img-thumbnail" alt="aubergineHatt">
+                    </td>
+                    <td>auberginehatt</td>
+                    <td>50 </td>
+                    <td>79 </td>
+                    <td>
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
+                            <i class="far fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
@@ -200,7 +223,9 @@
             </div>
         </div>
     </div>
-</div><!--Delete Modal -->
+</div>
+
+<!--Delete Modal -->
 <div class="modal fade" id="exampleModal-delete" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
@@ -219,8 +244,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<script src="https://kit.fontawesome.com/0b2886ee51.js" crossorigin="anonymous"></script>
