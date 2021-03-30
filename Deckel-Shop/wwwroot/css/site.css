@@ -33,6 +33,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .DeckelHeader {
     height: 55px;
+    background-color: #4e4e4e !important;
 }
 
 ul.catBlock {
