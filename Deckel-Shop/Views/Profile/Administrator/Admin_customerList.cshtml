@@ -13,6 +13,9 @@
     <li class="nav-item ">
         <a class="nav-link active" asp-action="Admin_customerList">Customer List</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-action="Stock">Stock</a>
+    </li>
 </ul>
 
 <div class="container">
@@ -33,7 +36,7 @@
         <!-- Modal -->
         <div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="DeckelModal modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">New customer</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -149,7 +152,7 @@
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="DeckelModal modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Edit customer info</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -223,9 +226,10 @@
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal-details" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="DeckelModal modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>                                            
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"/>
                                                 <span aria-hidden="true">&times;</span>
                                         </div>
                                         <div class="modal-body">
@@ -301,7 +305,7 @@
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal-delete" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="DeckelModal modal-content">
                                         @*<div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>

@@ -1,10 +1,7 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+﻿
     <style>
         .collapsible {
-            background-color: #777;
+            background-color: #6c757d;
             color: white;
             cursor: pointer;
             padding: 18px;
@@ -26,24 +23,32 @@
             background-color: #f1f1f1;
         }
     </style>
-</head>
-<body>
-    <input placeholder="sök i vanliga frågor" type="text" id="search">
-    <input type="button" value="Go" onclick="search(document.getElementById('search').value)">
-    <h2>Vanliga frågor</h2>
+
+    <div class="input-group">
+        <input placeholder="Search in frequently asked questions" type="search" id="search" class="form-control form-control-dark">
+        <input type="button" value="Search" onclick="search(document.getElementById('search').value)">
+    </div>
+       
+    
+    
+    <h2>frequently asked questions</h2>
 
 
-    <button type="button" class="collapsible">Levarnstid</button>
+    <button type="button" class="collapsible">Delivery time</button>
     <div class="content">
-        <p>Finns dina varor i lager så packas de och skickas inom 24 timmar. Sen är leveranstiden 3-5 dagar</p>
+        <p>If your goods are in stock, they will be packed and sent within 24 hours.</p>
     </div>
-    <button type="button" class="collapsible">Varifrån skickas varorna </button>
+    <button type="button" class="collapsible">Where is goods sent from</button>
     <div class="content">
-        <p>Varorna skickas från vårt huvudlager i Heidelberg</p>
+        <p>The goods are sent from our main warehouse in Heidelberg</p>
     </div>
-    <button type="button" class="collapsible">Vad kostar frakten</button>
+    <button type="button" class="collapsible">What are the shipping costs</button>
     <div class="content">
-        <p>Överstiger din beställning 1000 kronor så blir det ingen frakt. Under 1000 kronor är det 120 kronor i frakt</p>
+        <p>The shipping cost is based on which shipping method you choose at checkout</p>
+    </div>
+    <button type="button" class="collapsible">To what countries do you deliver</button>
+    <div class="content">
+        <p>We deliver to all countries</p>
     </div>
 
     <script>
@@ -67,5 +72,3 @@
         }
     </script>
 
-</body>
-</html>

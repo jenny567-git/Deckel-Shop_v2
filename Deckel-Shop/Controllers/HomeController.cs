@@ -23,7 +23,17 @@ namespace Deckel_Shop.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult Careers()
         {
             return View();
         }
@@ -33,10 +43,20 @@ namespace Deckel_Shop.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult News()
         {
             return View();
         }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult ShippingDelivery()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
