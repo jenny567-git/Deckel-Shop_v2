@@ -81,26 +81,32 @@
                             @*---------------------------------------------------------------------------------*@
 
                             <!-- INFO Button trigger modal -->
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
-                                <i class="fas fa-info-circle"></i>
-                            </button>
-
+                            <span data-toggle="tooltip" data-placement="bottom" title="info">
+                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </span>
                             <!-- EDIT: Button trigger modal -->
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" style="background-color:transparent">
-                                <i class="far fa-edit"></i>
-                            </button>
-
+                            <span data-toggle="tooltip" data-placement="bottom" title="edit">
+                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" style="background-color:transparent">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                            </span>
                             @*---------------------------------------------------------------------------------*@
                             <!-- DELETE Button trigger modal -->
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
+                            <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </span>
 
                             @*---------------------------------------------------------------------------------*@
                             @*Order history detail button*@
+                        <span data-toggle="tooltip" data-placement="bottom" title="order history">
                             <a class="btn btn-light" style="background-color:transparent" asp-action="Admin_customerOrderHistory" asp-controller="profile">
                                 <i class="fas fa-history"></i>
                             </a>
+                        </span>
                         </div>
                     </td>
             </tbody>
@@ -186,7 +192,7 @@
         <div class="DeckelModal modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit customer info</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
