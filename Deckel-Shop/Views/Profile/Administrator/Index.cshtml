@@ -25,7 +25,7 @@
 <div class="row mt-3 pt-3 mb-3">
     <div class="col-sm-4">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by Order#, Customer# etc" id="tableSearch">
+            <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc">
             <div class="input-group-append">
                 <button class="input-group-text"><i class="fa fa-search"></i></button>
             </div>
@@ -40,7 +40,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                     <a class="dropdown-item" value="1" href="#">Invoiced</a>
                     <a class="dropdown-item" value="2" href="#">Delivered</a>
-                    <a class="dropdown-item" value="3" href="#">Cancelled</a>
+                    <a class="droptabldown-item" value="3" href="#">Cancelled</a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="tableSearch">
 
                 <tr>
                     <th scope="row">1</th>
