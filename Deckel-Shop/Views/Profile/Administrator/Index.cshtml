@@ -3,6 +3,9 @@
 *@
 @{
 }
+@model IEnumerable<Deckel_Shop.Models.Customer>
+
+
 
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
@@ -85,14 +88,15 @@
                 </tr>
             </thead>
             <tbody>
-
+                @foreach (var item in Model)
+                {
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
 
-                    <td>25/03/2021 </td>
-                    <td>alex</td>
-                    <td> 2</td>
-                    <td>129 </td>
+                    <td>@Html.DisplayFor(modelItem => item.Date) </td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
                     <td>
                         <span data-toggle="tooltip" data-placement="bottom" title="info">
                             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
@@ -108,7 +112,7 @@
                         </span>
                     </td>
                 </tr>
-
+                }
             </tbody>
         </table>
     </div>
