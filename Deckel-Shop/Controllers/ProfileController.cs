@@ -17,7 +17,10 @@ namespace Deckel_Shop.Controllers
             {
                 return View("views/profile/administrator/index.cshtml");
             }
-            return View("views/profile/Customer/index.cshtml");
+            Database.Models.DeckelShopContext ctx = new Database.Models.DeckelShopContext();
+
+
+            return View("views/profile/Customer/index.cshtml", ctx.Customers);
         }
         public IActionResult CustomerOrderHistory()
         {
