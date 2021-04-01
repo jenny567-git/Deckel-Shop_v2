@@ -25,7 +25,7 @@ namespace Database {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Database=DeckelShop;Server=.\\\\sqlexpress;Integrated Security=SSPI")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Database=DeckelShop;Server=.\\sqlexpress;Integrated Security=SSPI")]
         public string DbConnectionString {
             get {
                 return ((string)(this["DbConnectionString"]));

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DbConnectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Database=DeckelShop;Server=.\\sqlexpress;Integrated Security=SSPI</Value>
+      <Value Profile="(Default)">Database=DeckelShop;Server=.\sqlexpress;Integrated Security=SSPI</Value>
     </Setting>
   </Settings>
 </SettingsFile>
