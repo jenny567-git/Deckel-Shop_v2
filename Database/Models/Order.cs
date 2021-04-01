@@ -10,6 +10,7 @@ namespace Database.Models
         public Order()
         {
             OrderedItems = new HashSet<OrderedItem>();
+            OrderStatus = "Pending"; // **** 
         }
 
         public int OrderId { get; set; }
