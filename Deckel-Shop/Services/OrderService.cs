@@ -1,4 +1,5 @@
 ﻿using Database.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Deckel_Shop.Services
         public IEnumerable<Order> GetAllOrdersByOrderStatus(string status)
         {
             if (status != null) { 
-            return deckelShopContext.Orders.Where(o=> o.OrderStatus == status).AsEnumerable();
+                return deckelShopContext.Orders.Where(o => o.OrderStatus == status).Include(c => c.Customer).AsEnumerable();
             }
             else
             {
@@ -29,9 +30,9 @@ namespace Deckel_Shop.Services
             }
         }
 
-        public IEnumerable<Order> GetOrder(int id)
+        public Order GetOrder(int id)
         {
-            return deckelShopContext.Orders.Where(o => o.OrderId == id).AsEnumerable();
+            return deckelShopContext.Orders.FirstOrDefault(o => o.OrderId == id);
         }
 
         public void AddOrder(Order order)

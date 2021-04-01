@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model IEnumerable<Deckel_Shop.Models.Customer>
+@model IEnumerable<Database.Models.Order>
 
 
 
@@ -91,22 +91,22 @@
                 @foreach (var item in Model)
                 {
                 <tr>
-                    <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                    <th scope="row" id="OrderIdRow-@item.OrderId">@Html.DisplayFor(modelItem => item.OrderId)</th>
 
-                    <td>@Html.DisplayFor(modelItem => item.Date) </td>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderDate) </td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderedItems.Count)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
                     <td>
                         <span data-toggle="tooltip" data-placement="bottom" title="info">
-                            <button type="button" id="infoModalBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                            <button type="button" onclick="MyFunction(@item.OrderId)" id="infoModalBtn-@item.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
                                 <i class="fas fa-info-circle"></i>
 
                             </button>
                         </span>
 
                         <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                            <button onclick="MyFunction(@*model.id*@)" type="button" id="ModalShowBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                            <button  type="button" id="ModalShowBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </span>
@@ -139,27 +139,16 @@
                             </h3>
                             <hr />
 
-                            <ul class="list-group mb-3">
+                            <ul class="list-group mb-3" id="OrderedItemsList">
+
+
+
                                 <li class="list-group-item d-flex justify-content-between lh-sm">
                                     <div>
                                         <h6 class="my-0">Product name</h6>
                                         <small class="text-muted">Brief description</small>
                                     </div>
                                     <span class="text-muted">$12</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div>
-                                        <h6 class="my-0">Second product</h6>
-                                        <small class="text-muted">Brief description</small>
-                                    </div>
-                                    <span class="text-muted">$8</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div>
-                                        <h6 class="my-0">Third item</h6>
-                                        <small class="text-muted">Brief description</small>
-                                    </div>
-                                    <span class="text-muted">$5</span>
                                 </li>
                             </ul>
 
@@ -217,8 +206,72 @@
 <script type="text/javascript">
 
     function MyFunction(id) {
+        // Api call
+        $(function () {
+            alert("testing function");
+            
 
+                //var person = '{Name: "' + $("#txtName").val() + '" }';
+            var orderId = '{"Id": "' + $("#OrderIdRow-" + id).html() + '"}';
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Orders",
+                    data: orderId, // order id
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) { // response = order info
+                        //alert("Hello: " + response.id);
+                        $("#exampleModalLongTitle").html("Order id: " + response.orderId);
+                        AddProductsToList(response);
+                    },
+                    failure: function (response) {
+                        alert("Failure " + response.responseText);
+                    },
+                    error: function (response) {
+                        alert("Error " + response.responseText);
+                    }
+                });
+        });
     }
+
+    function AddProductsToList(order) {
+        var messagesList = document.getElementById("OrderedItemsList");
+
+        var entry = document.createElement('li');
+
+
+        var div = document.createElement('div');
+        var headline = document.createElement('h6');
+        var small = document.createElement('small');
+        var span = document.createElement('span');
+        
+
+        document.body.appendChild(div);
+        document.body.appendChild(headline);
+        document.body.appendChild(small);
+        document.body.appendChild(span);
+
+
+        // add relevant classes to each element
+        entry.classList.add("list-group-item", "d-flex", "justify-content-between", "lh-sm");
+        headline.classList.add("my-0");
+        small.classList.add("text-muted");
+        span.classList.add("text-muted");
+
+        // add the text to the element
+        headline.appendChild(document.createTextNode(order.orderId));
+        small.appendChild(document.createTextNode("description text"));
+        span.appendChild(document.createTextNode(order.orderTotal));
+
+        entry.appendChild(div);
+        div.appendChild(headline);
+        div.appendChild(small);
+        entry.appendChild(span);
+
+        messagesList.appendChild(entry);
+    }
+
 
     // Wait for window to load
     window.addEventListener('load', function () {
@@ -231,30 +284,7 @@
             $('#DeleteBtn').val($("#orderIdRow").html());
         });
 
-        // Api call
-        $(function () {
-            $("#infoModalBtn").click(function () {
-                //var person = '{Name: "' + $("#txtName").val() + '" }';
-                var orderId = '{"Id": "' + $("#orderIdRow").html() + '"}';
-                $.ajax({
-                    type: "POST",
-                    url: "/api/Orders",
-                    data: orderId, // order id
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) { // response = order info
-                        alert("Hello: " + response.id);
-                        $("#exampleModalLongTitle").html("Order id: " + response.id);
-                    },
-                    failure: function (response) {
-                        alert("Failure " + response.responseText);
-                    },
-                    error: function (response) {
-                        alert("Error " + response.responseText);
-                    }
-                });
-            });
-        });
+        
 
 
     });

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Database.Models;
+using Deckel_Shop.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,15 +19,16 @@ namespace Deckel_Shop.ApiControllers
             t.Id = 3434;
             return t;
         }
-
-
-
         
         [HttpPost]
-        public Test Post(Test id)
+        public Order Post(Test id)
         {
-            id.Id = 23123;
-            return id;
+
+            OrderService os = new OrderService();
+
+
+
+            return os.GetOrder(id.Id);
         }
     }
 

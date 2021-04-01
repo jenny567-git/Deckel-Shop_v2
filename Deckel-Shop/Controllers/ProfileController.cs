@@ -1,4 +1,5 @@
 ﻿using Deckel_Shop.Models;
+using Deckel_Shop.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -40,7 +41,11 @@ namespace Deckel_Shop.Controllers
                  new Customer() { Id = 1, Date = DateTime.Now, Name = "John", Amount = 2, TotalPrice = 222 } ,
                   new Customer() { Id = 2, Date = DateTime.Now, Name = "Fisko", Amount = 6, TotalPrice = 1000 } ,
             };
-            return View("/views/profile/administrator/index.cshtml", customer);
+
+            OrderService os = new OrderService();
+
+
+            return View("/views/profile/administrator/index.cshtml", os.GetAllOrdersByOrderStatus("Not Delivered"));
         }
 
         public IActionResult Admin_customerList()
