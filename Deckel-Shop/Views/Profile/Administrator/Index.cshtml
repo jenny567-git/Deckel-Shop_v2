@@ -224,6 +224,7 @@
                         //alert("Hello: " + response.id);
                         $("#exampleModalLongTitle").html("Order id: " + response.orderId);
                         AddProductsToList(response);
+                        console.log(response);
                     },
                     failure: function (response) {
                         alert("Failure " + response.responseText);
@@ -236,11 +237,10 @@
     }
 
     function AddProductsToList(order) {
-        var messagesList = document.getElementById("OrderedItemsList");
+        var productList = document.getElementById("OrderedItemsList");
 
-        var entry = document.createElement('li');
-
-
+            var listItem = document.createElement('li');
+ 
         var div = document.createElement('div');
         var headline = document.createElement('h6');
         var small = document.createElement('small');
@@ -254,7 +254,7 @@
 
 
         // add relevant classes to each element
-        entry.classList.add("list-group-item", "d-flex", "justify-content-between", "lh-sm");
+        listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "lh-sm");
         headline.classList.add("my-0");
         small.classList.add("text-muted");
         span.classList.add("text-muted");
@@ -262,14 +262,14 @@
         // add the text to the element
         headline.appendChild(document.createTextNode(order.orderId));
         small.appendChild(document.createTextNode("description text"));
-        span.appendChild(document.createTextNode(order.orderTotal));
+        span.appendChild(document.createTextNode(order.orderTotal + " SEK"));
 
-        entry.appendChild(div);
+        listItem.appendChild(div);
         div.appendChild(headline);
         div.appendChild(small);
         entry.appendChild(span);
 
-        messagesList.appendChild(entry);
+        productList.appendChild(listItem);
     }
 
 
