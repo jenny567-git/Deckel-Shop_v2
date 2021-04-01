@@ -32,7 +32,7 @@ namespace Deckel_Shop.Services
 
         public Order GetOrder(int id)
         {
-            return deckelShopContext.Orders.FirstOrDefault(o => o.OrderId == id).Include(c => c.Customer);
+            return deckelShopContext.Orders.FirstOrDefault(o => o.OrderId == id);
         }
 
         public void AddOrder(Order order)
