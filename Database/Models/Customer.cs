@@ -11,6 +11,7 @@ namespace Database.Models
         {
             Orders = new HashSet<Order>();
         }
+        //jsjsjs
 
         public int Id { get; set; }
         public string FirstName { get; set; }
