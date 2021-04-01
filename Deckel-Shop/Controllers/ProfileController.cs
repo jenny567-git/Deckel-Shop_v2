@@ -65,8 +65,9 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult Stock()
         {
-            return View("views/Stock/index.cshtml");
+            return View("views/Stock/index.cshtml", _ss.GetAllProducts());
         }
+
 
         public IActionResult DeliveredOrders()
         {
