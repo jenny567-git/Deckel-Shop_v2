@@ -3,6 +3,8 @@
 *@
 @{
 }
+@model IEnumerable<Deckel_Shop.Models.Customer>
+
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item">
@@ -85,29 +87,33 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
 
-                <tr>
-                    <th scope="row">1</th>
-
-                    <td>15/03/2021 </td>
-                    <td>andy</td>
-                    <td> 4</td>
-                    <td>239 </td>
-                    <td>
-                        <span data-toggle="tooltip" data-placement="bottom" title="info">
-                            <button type="button" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
-                                <i class="fas fa-info-circle"></i>
-                            </button>
-                        </span>
-                        <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                            <button type="button" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
+                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                        <td>
+                            <span data-toggle="tooltip" data-placement="bottom" title="info">
+                                <button type="button" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </span>
+                            <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                                <button type="button" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
 
 
-                        </span>
-                    </td>
-                </tr>
+                            </span>
+                        </td>
+                    </tr>
+
+                }
+
 
             </tbody>
         </table>

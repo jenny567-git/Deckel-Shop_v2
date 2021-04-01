@@ -58,7 +58,12 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult DeliveredOrders()
         {
-            return View("views/profile/Administrator/DeliveredOrders.cshtml");
+            var deliverdOrders = new List<Customer>()
+            {
+                 new Customer() { Id = 1, Date = DateTime.Now, Name = "John", Amount = 2, TotalPrice = 222 } ,
+                  new Customer() { Id = 2, Date = DateTime.Now, Name = "Fisko", Amount = 6, TotalPrice = 1000 } ,
+            };
+            return View("views/profile/Administrator/DeliveredOrders.cshtml", deliverdOrders);
         }
     }
 }
