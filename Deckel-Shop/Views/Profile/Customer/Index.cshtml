@@ -6,6 +6,11 @@
 
 <h3>@UserManager.GetUserAsync(User).Result.UserName</h3>
 
+
+
+@model IEnumerable<Database.Models.Customer>
+
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link active" asp-action="Index">Profile</a>
@@ -19,4 +24,15 @@
     <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
     </li>
+</ul>
+
+
+<ul>
+    @foreach (var person in Model)
+    {
+        <li>
+            @person.FirstName " " @person.LastName
+            <small>@person.City</small>
+        </li>
+    }
 </ul>

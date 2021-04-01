@@ -12,6 +12,8 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+*.settings
+Settings1.Designer.cs
 
 # Build results
 [Dd]ebug/
@@ -338,3 +340,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Database/Settings1.settings
+/Database/Settings1.Designer.cs
