@@ -16,13 +16,24 @@ namespace Deckel_Shop.Services
             deckelShopContext = new DeckelShopContext();
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public List<Customer> GetAllCustomers()
         {
-            return deckelShopContext.Customers.AsEnumerable();
+            return deckelShopContext.Customers.ToList();
         }
-        public IEnumerable< Customer> GetCustomer(int id)
+
+        public List<Customer> GetGustomerByFirstName(string firstName)
         {
-            return deckelShopContext.Customers.Where(c => c.Id == id).AsEnumerable();
+            return deckelShopContext.Customers.Where(x => x.FirstName.Contains(firstName)).ToList();
+        }      
+
+        public List<Customer> GetCustomerByLastName(string lastName)
+        {
+            return deckelShopContext.Customers.Where(x => x.LastName.Contains(lastName)).ToList();
+        }
+        
+        public List< Customer> GetCustomerById(int id)
+        {
+            return deckelShopContext.Customers.Where(x => x.Id == id).ToList();
         }
 
         public void  AddCustomer(Customer customer)
