@@ -87,7 +87,7 @@
             <tbody class="tableSearch">
 
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row" id="orderIdRow">1</th>
 
                     <td>25/03/2021 </td>
                     <td>alex</td>
@@ -95,14 +95,14 @@
                     <td>129 </td>
                     <td>
                         <span data-toggle="tooltip" data-placement="bottom" title="info">
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                            <button type="button" id="infoModalBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
                                 <i class="fas fa-info-circle"></i>
 
                             </button>
                         </span>
 
                         <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                            <button onclick="MyFunction(@*model.id*@)" type="button" id="ModalShowBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </span>
@@ -210,6 +210,53 @@
 </div>
 
 
+<script type="text/javascript">
+
+    function MyFunction(id) {
+
+    }
+
+    // Wait for window to load
+    window.addEventListener('load', function () {
+        //console.log('All assets are loaded')
+        // When clicking the modal button
+        $("#ModalShowBtn").click(function () {
+            event.preventDefault();
+            //console.log($("#orderIdRow").html());
+            // Set value of the delete button. Value is sent to controller
+            $('#DeleteBtn').val($("#orderIdRow").html());
+        });
+
+        // Api call
+        $(function () {
+            $("#infoModalBtn").click(function () {
+                //var person = '{Name: "' + $("#txtName").val() + '" }';
+                var orderId = '{"Id": "' + $("#orderIdRow").html() + '"}';
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Orders",
+                    data: orderId, // order id
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) { // response = order info
+                        alert("Hello: " + response.id);
+                        $("#exampleModalLongTitle").html("Order id: " + response.id);
+                    },
+                    failure: function (response) {
+                        alert("Failure " + response.responseText);
+                    },
+                    error: function (response) {
+                        alert("Error " + response.responseText);
+                    }
+                });
+            });
+        });
+
+
+    });
+</script>
+
+
 
 @*delete order modal*@
 <!-- Modal -->
@@ -221,7 +268,9 @@
                 Delete Order?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Yes</button>
+                <form method="post">
+                    <button class="btn btn-danger" id="DeleteBtn" name="deleteId" value="">Yes</button>
+                </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
