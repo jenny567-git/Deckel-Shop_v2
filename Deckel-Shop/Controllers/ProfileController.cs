@@ -13,7 +13,7 @@ namespace Deckel_Shop.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            if (User.IsInRole("Administator"))
+            if (User.IsInRole("Administrator"))
             {
                 return View("views/profile/administrator/index.cshtml");
             }
