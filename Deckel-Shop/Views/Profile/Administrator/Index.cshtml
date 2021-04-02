@@ -134,21 +134,11 @@
                         <div class="col-md-6">
                             <h3 class="d-flex justify-content-between align-items-center mb-3">
                                 Purchased products
-                                <span class="badge bg-primary rounded-pill">3</span>
+                                <span class="badge bg-light rounded-pill">3</span>
                             </h3>
                             <hr />
 
                             <ul class="list-group mb-3" id="OrderedItemsList">
-
-
-
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div>
-                                        <h6 class="my-0">Product name</h6>
-                                        <small class="text-muted">Brief description</small>
-                                    </div>
-                                    <span class="text-muted">$12</span>
-                                </li>
                             </ul>
 
                         </div>
@@ -161,9 +151,9 @@
 
                             <div class="card" style="width: 100%;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Twitter, Inc</h5>
-                                    <p class="card-text">795 Folsom Ave, Suite 600 San Francisco, CA 94107</p>
-                                    <abbr title="Phone">Phone:</abbr> (123) 456-7890
+                                    <h5 class="card-title" id="personName">Twitter, Inc</h5>
+                                    <p class="card-text" id="personAddress">795 Folsom Ave, Suite 600 San Francisco, CA 94107</p>
+                                    <span id="personPhone">Phone:</span> 
                                     <br />
                                     <br />
                                     <a href="#" class="btn btn-primary">Change</a>
@@ -176,17 +166,13 @@
                                     <span class="text-muted">50 kr</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <h6 class="my-0">Extra cost:</h6>
-                                    <span class="text-muted">29 kr</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
                                     <h6 class="my-0">Order cost:</h6>
-                                    <span class="text-muted">1550 kr</span>
+                                    <span id="orderCost" class="text-muted">1550 kr</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between bg-light"></li>
                                 <li class="list-group-item d-flex justify-content-between">
                                     <span>Total (SEK)</span>
-                                    <strong>1629 kr</strong>
+                                    <strong id="total">1629 kr</strong>
                                 </li>
                             </ul>
                         </div>
@@ -194,8 +180,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -238,10 +223,8 @@
     function AddProductsToList(order) {
         var productList = document.getElementById("OrderedItemsList");
 
+        // Ordered items list
         for (var i = 0; i < order.orderedItems.length; i++) {
-
-
-
             var listItem = document.createElement('li');
 
             var div = document.createElement('div');
@@ -274,6 +257,14 @@
 
             productList.appendChild(listItem);
         }
+
+        $("#personName").html(order.customer.firstName + " " + order.customer.lastName );
+        $("#personAddress").html(order.customer.street + ", " + order.customer.zipCode + " " + order.customer.city );
+        $("#personPhone").html(order.customer.phone );
+        $("#orderCost").html(order.orderTotal);
+
+        var shippingCost = 50;
+        $("#total").html(order.orderTotal + shippingCost);
     }
 
 
@@ -288,9 +279,11 @@
             $('#DeleteBtn').val($("#orderIdRow").html());
         });
 
+        // When modal is closed
+        $('#exampleModalCenter').on('hidden.bs.modal', function () {
+            $("#OrderedItemsList").empty();
 
-
-
+        })
     });
 </script>
 
