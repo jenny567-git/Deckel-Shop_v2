@@ -105,11 +105,17 @@
 
                                 @*---------------------------------------------------------------------------------*@
                                 @*Order history detail button*@
-                                <span data-toggle="tooltip" data-placement="bottom" title="order history">
-                                    <a class="btn btn-light" style="background-color:transparent" asp-action="Admin_customerOrderHistory" asp-controller="profile">
+                                @*<span data-toggle="tooltip" data-placement="bottom" title="order history" class="btn btn-light" style="background-color:transparent">*@
+                                @*@Html.ActionLink("Order History", "Admin_customerOrderHistory", new { id = item.Id })*@
+
+                            <form method="post">
+                                <span data-toggle="tooltip" title="order history">
+                                    <button class="btn btn-light" style="background-color:transparent" asp-action="Admin_customerOrderHistory" value="@item.Id" name="id">
                                         <i class="fas fa-history"></i>
-                                    </a>
+                                    </button>
                                 </span>
+                            </form>
+                                @*</span>*@
                             </div>
                         </td>
                     </tr>
@@ -118,7 +124,6 @@
         </table>
     </div>
 </div>
-
 
 <!-- NEW button Modal -->
 <div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
