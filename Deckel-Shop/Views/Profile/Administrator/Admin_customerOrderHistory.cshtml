@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Database.Models.Order>
+
+@{
     ViewData["Title"] = "Customer#01 Order History";
 }
 <div class="row">
@@ -66,38 +68,35 @@
                     SHIPPING DATE
                 </th>
                 <th>
-                    ORDERED BY
-                </th>
-                <th>
                     ORDER TOTAL
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="tableSearch">
-            <tr>
-                <td>
-                    S123456789
-                </td>
-                <td>
-                    Invoiced
-                </td>
-                <td>
-                    2021-01-01
-                </td>
-                <td>
-                    Customer#01
-                </td>
-                <td>
-                    $213.23
-                </td>
-                <td>
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" asp-action="Details" style="background-color:transparent">
-                    <i class="fas fa-list-ul"></i> Details
-                    </button>
-                </td>
-            </tr>
-        </tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>
+                        @order.OrderId
+                    </td>
+                    <td>
+                        @order.OrderStatus
+                    </td>
+                    <td>
+                        @order.ShippingDate
+                    </td>
+                    <td>
+                        $ @order.OrderTotal
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" asp-action="Details" style="background-color:transparent">
+                            <i class="fas fa-list-ul"></i> Details
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
     </table>
 </div>
 

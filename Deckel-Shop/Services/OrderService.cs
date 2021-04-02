@@ -28,6 +28,10 @@ namespace Deckel_Shop.Services
                 throw new NotImplementedException();
             }
         }
+        public IEnumerable<Order> GetAllOrdersByCustomerId(int id)
+        {
+            return deckelShopContext.Orders.Where(o => o.Customer.Id == id).AsEnumerable();
+        }
 
         public IEnumerable<Order> GetOrder(int id)
         {
