@@ -76,7 +76,7 @@ $(function () {
 function GetModalInfo(id, modalType) {
     // Api call
     $(function () {
-        console.log("testing function");
+        console.log("testing function" + id + " " + modalType);
         //var person = '{Name: "' + $("#txtName").val() + '" }';
         var orderId = '{"Id": "' + $("#OrderIdRow-" + id).html() + '"}';
 
