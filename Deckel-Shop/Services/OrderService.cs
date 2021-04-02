@@ -1,4 +1,6 @@
 ﻿using Database.Models;
+using Deckel_Shop.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace Deckel_Shop.Services
         public IEnumerable<Order> GetAllOrdersByOrderStatus(string status)
         {
             if (status != null) { 
-            return deckelShopContext.Orders.Where(o=> o.OrderStatus == status).AsEnumerable();
+                return deckelShopContext.Orders.Where(o => o.OrderStatus == status).Include(c => c.Customer).AsEnumerable();
             }
             else
             {
@@ -29,9 +31,24 @@ namespace Deckel_Shop.Services
             }
         }
 
-        public IEnumerable<Order> GetOrder(int id)
+        public Order GetOrder(int id)
         {
-            return deckelShopContext.Orders.Where(o => o.OrderId == id).AsEnumerable();
+
+            int custid = deckelShopContext.Orders.FirstOrDefault(o => o.OrderId == id).CustomerId;
+
+            CustomerService cs = new CustomerService();
+
+            //Customer cust = cs.GetCustomer(custid);
+
+            Order order = new Order();
+
+            //var viewModel = CreateOrderViewModel(order, cust, order.OrderedItems.ToList());
+
+
+            order = deckelShopContext.Orders.Include(c => c.Customer).Include(o => o.OrderedItems).ThenInclude(p => p.Product).SingleOrDefault(o => o.OrderId == id);
+
+
+            return order;
         }
 
         public void AddOrder(Order order)

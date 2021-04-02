@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Deckel_Shop.Models
 {
-    public class Customer
+    public class Customer2
     {
         public int Id { get; set; }
         public string Name { get; set; }

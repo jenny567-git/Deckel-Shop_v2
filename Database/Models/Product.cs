@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -21,7 +22,7 @@ namespace Database.Models
 
         public string ImgName2 { get; set; }
         public string Category { get; set; }
-
-        public virtual ICollection<OrderedItem> OrderedItems { get; set; }
+        [JsonIgnore]
+        public ICollection<OrderedItem> OrderedItems { get; set; }
     }
 }
