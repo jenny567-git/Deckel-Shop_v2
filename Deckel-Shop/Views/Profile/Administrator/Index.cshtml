@@ -98,7 +98,7 @@
                         <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
                         <td>
                             <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                <button type="button" onclick="MyFunction(@item.OrderId)" id="infoModalBtn-@item.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                                <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
                                     <i class="fas fa-info-circle"></i>
 
                                 </button>
@@ -185,109 +185,6 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-
-    function MyFunction(id) {
-        // Api call
-        $(function () {
-            alert("testing function");
-
-
-            //var person = '{Name: "' + $("#txtName").val() + '" }';
-            var orderId = '{"Id": "' + $("#OrderIdRow-" + id).html() + '"}';
-
-            $.ajax({
-                type: "POST",
-                url: "/api/Orders",
-                data: orderId, // order id
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) { // response = order info
-                    //alert("Hello: " + response.id);
-                    $("#exampleModalLongTitle").html("Order id: " + response.orderId);
-                    AddProductsToList(response);
-                    console.log(response);
-                },
-                failure: function (response) {
-                    alert("Failure " + response.responseText);
-                },
-                error: function (response) {
-                    alert("Error " + response.responseText);
-                }
-            });
-        });
-    }
-
-    function AddProductsToList(order) {
-        var productList = document.getElementById("OrderedItemsList");
-
-        // Ordered items list
-        for (var i = 0; i < order.orderedItems.length; i++) {
-            var listItem = document.createElement('li');
-
-            var div = document.createElement('div');
-            var headline = document.createElement('h6');
-            var small = document.createElement('small');
-            var span = document.createElement('span');
-
-
-            document.body.appendChild(div);
-            document.body.appendChild(headline);
-            document.body.appendChild(small);
-            document.body.appendChild(span);
-
-
-            // add relevant classes to each element
-            listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "lh-sm");
-            headline.classList.add("my-0");
-            small.classList.add("text-muted");
-            span.classList.add("text-muted");
-
-            // add the text to the element
-            headline.appendChild(document.createTextNode(order.orderedItems[i].product.name));
-            small.appendChild(document.createTextNode("Amount: " + order.orderedItems[i].amount));
-            span.appendChild(document.createTextNode(order.orderedItems[i].product.price + " SEK"));
-
-            listItem.appendChild(div);
-            div.appendChild(headline);
-            div.appendChild(small);
-            listItem.appendChild(span);
-
-            productList.appendChild(listItem);
-        }
-
-        $("#personName").html(order.customer.firstName + " " + order.customer.lastName );
-        $("#personAddress").html(order.customer.street + ", " + order.customer.zipCode + " " + order.customer.city );
-        $("#personPhone").html(order.customer.phone );
-        $("#orderCost").html(order.orderTotal);
-
-        var shippingCost = 50;
-        $("#total").html(order.orderTotal + shippingCost);
-    }
-
-
-    // Wait for window to load
-    window.addEventListener('load', function () {
-        //console.log('All assets are loaded')
-        // When clicking the modal button
-        $("#ModalShowBtn").click(function () {
-            event.preventDefault();
-            //console.log($("#orderIdRow").html());
-            // Set value of the delete button. Value is sent to controller
-            $('#DeleteBtn').val($("#orderIdRow").html());
-        });
-
-        // When modal is closed
-        $('#exampleModalCenter').on('hidden.bs.modal', function () {
-            $("#OrderedItemsList").empty();
-
-        })
-    });
-</script>
-
-
 
 @*delete order modal*@
 <!-- Modal -->

@@ -13,16 +13,9 @@ namespace Deckel_Shop.ApiControllers
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
-    {
-        public Test Get()
-        {
-            Test t = new Test();
-            t.Id = 3434;
-            return t;
-        }
-        
+    {        
         [HttpPost]
-        public OrderViewModel Post(Test id)
+        public OrderViewModel Post(InputData id)
         {
             var os = new OrderService();
             var cs = new CustomerService();
@@ -36,7 +29,7 @@ namespace Deckel_Shop.ApiControllers
         }
     }
 
-    public class Test
+    public class InputData
     {
         public int Id { get; set; }
     }

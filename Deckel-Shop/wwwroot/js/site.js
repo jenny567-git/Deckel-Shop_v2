@@ -70,3 +70,102 @@ $(document).ready(function () {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
+// Modal scripts
+
+function GetModalInfo(id, modalType) {
+    // Api call
+    $(function () {
+        console.log("testing function");
+        //var person = '{Name: "' + $("#txtName").val() + '" }';
+        var orderId = '{"Id": "' + $("#OrderIdRow-" + id).html() + '"}';
+
+        $.ajax({
+            type: "POST",
+            url: "/api/Orders",
+            data: orderId, // order id
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) { // response = order info
+                //alert("Hello: " + response.id);
+                if (modalType === 'orderDetails') {
+                    PopulateOrderModal(response);
+                } else {
+                    console.log("Error: Could not find modalType!");
+                }
+            },
+            failure: function (response) {
+                alert("Failure " + response.responseText);
+            },
+            error: function (response) {
+                alert("Error " + response.responseText);
+            }
+        });
+    });
+}
+
+function PopulateOrderModal(order) {
+    var productList = document.getElementById("OrderedItemsList");
+    $("#exampleModalLongTitle").html("Order id: " + order.orderId);
+    // Ordered items list
+    for (var i = 0; i < order.orderedItems.length; i++) {
+        var listItem = document.createElement('li');
+
+        var div = document.createElement('div');
+        var headline = document.createElement('h6');
+        var small = document.createElement('small');
+        var span = document.createElement('span');
+
+
+        document.body.appendChild(div);
+        document.body.appendChild(headline);
+        document.body.appendChild(small);
+        document.body.appendChild(span);
+
+
+        // add relevant classes to each element
+        listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "lh-sm");
+        headline.classList.add("my-0");
+        small.classList.add("text-muted");
+        span.classList.add("text-muted");
+
+        // add the text to the element
+        headline.appendChild(document.createTextNode(order.orderedItems[i].product.name));
+        small.appendChild(document.createTextNode("Amount: " + order.orderedItems[i].amount));
+        span.appendChild(document.createTextNode(order.orderedItems[i].product.price + " SEK"));
+
+        listItem.appendChild(div);
+        div.appendChild(headline);
+        div.appendChild(small);
+        listItem.appendChild(span);
+
+        productList.appendChild(listItem);
+    }
+
+    $("#personName").html(order.customer.firstName + " " + order.customer.lastName);
+    $("#personAddress").html(order.customer.street + ", " + order.customer.zipCode + " " + order.customer.city);
+    $("#personPhone").html(order.customer.phone);
+    $("#orderCost").html(order.orderTotal);
+
+    var shippingCost = 50;
+    $("#total").html(order.orderTotal + shippingCost);
+}
+
+
+// Wait for window to load
+window.addEventListener('load', function () {
+    //console.log('All assets are loaded')
+    // When clicking the modal button
+    $("#ModalShowBtn").click(function () {
+        event.preventDefault();
+        //console.log($("#orderIdRow").html());
+        // Set value of the delete button. Value is sent to controller
+        $('#DeleteBtn').val($("#orderIdRow").html());
+    });
+
+    // When modal is closed
+    $('#exampleModalCenter').on('hidden.bs.modal', function () {
+        $("#OrderedItemsList").empty();
+
+    })
+});
