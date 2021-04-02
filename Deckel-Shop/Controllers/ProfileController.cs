@@ -13,10 +13,14 @@ namespace Deckel_Shop.Controllers
     {
         private readonly CustomerService _cs;
         private readonly StockService _ss;
+        private readonly OrderService _os;
+
         public ProfileController()
         {
             _cs = new CustomerService();
             _ss = new StockService();
+            _os = new OrderService();
+
         }
 
         [Authorize]
@@ -57,10 +61,10 @@ namespace Deckel_Shop.Controllers
             return View("/views/profile/administrator/Admin_customerList.cshtml", listOfCustomers);
         }
 
-        public IActionResult Admin_customerOrderHistory()
+        public IActionResult Admin_customerOrderHistory(int id)
         {
-            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
-            return View("views/Profile/Administrator/index.cshtml");
+            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml", _os.GetAllOrdersByCustomerId(id));
+
         }
 
         public IActionResult Stock()
