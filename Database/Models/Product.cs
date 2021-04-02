@@ -18,6 +18,8 @@ namespace Database.Models
         public string Description { get; set; }
         public int Amount { get; set; }
         public string ImgName { get; set; }
+
+        public string ImgName2 { get; set; }
         public string Category { get; set; }
 
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
