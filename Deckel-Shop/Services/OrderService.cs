@@ -1,4 +1,5 @@
 ﻿using Database.Models;
+using Deckel_Shop.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,22 @@ namespace Deckel_Shop.Services
 
         public Order GetOrder(int id)
         {
-            return deckelShopContext.Orders.FirstOrDefault(o => o.OrderId == id);
+
+            int custid = deckelShopContext.Orders.FirstOrDefault(o => o.OrderId == id).CustomerId;
+
+            CustomerService cs = new CustomerService();
+
+            //Customer cust = cs.GetCustomer(custid);
+
+            Order order = new Order();
+
+            //var viewModel = CreateOrderViewModel(order, cust, order.OrderedItems.ToList());
+
+
+            order = deckelShopContext.Orders.Include(c => c.Customer).Include(o => o.OrderedItems).ThenInclude(p => p.Product).SingleOrDefault(o => o.OrderId == id);
+
+
+            return order;
         }
 
         public void AddOrder(Order order)

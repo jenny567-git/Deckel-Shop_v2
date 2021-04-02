@@ -1,4 +1,5 @@
 ﻿using Database.Models;
+using Deckel_Shop.Models;
 using Deckel_Shop.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +22,17 @@ namespace Deckel_Shop.ApiControllers
         }
         
         [HttpPost]
-        public Order Post(Test id)
+        public OrderViewModel Post(Test id)
         {
+            var os = new OrderService();
+            var cs = new CustomerService();
+            var order = os.GetOrder(id.Id);
+            var customer = cs.GetCustomer(order.CustomerId);
+            var orderedItems = order.OrderedItems;
 
-            OrderService os = new OrderService();
-
-
-
-            return os.GetOrder(id.Id);
+            OrderViewModel viewModel = new OrderViewModel(order, customer, orderedItems);
+            
+            return viewModel;
         }
     }
 

@@ -20,9 +20,9 @@ namespace Deckel_Shop.Services
         {
             return deckelShopContext.Customers.AsEnumerable();
         }
-        public IEnumerable< Customer> GetCustomer(int id)
+        public Customer GetCustomer(int id)
         {
-            return deckelShopContext.Customers.Where(c => c.Id == id).AsEnumerable();
+            return deckelShopContext.Customers.FirstOrDefault(c => c.Id == id);
         }
 
         public void  AddCustomer(Customer customer)

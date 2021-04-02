@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -19,8 +20,9 @@ namespace Database.Models
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
         public decimal OrderTotal { get; set; }
-
-        public virtual Customer Customer { get; set; }
-        public virtual ICollection<OrderedItem> OrderedItems { get; set; }
+        [JsonIgnore]
+        public Customer Customer { get; set; }
+        [JsonIgnore]
+        public ICollection<OrderedItem> OrderedItems { get; set; }
     }
 }
