@@ -1,4 +1,5 @@
 ﻿using Deckel_Shop.Models;
+using Deckel_Shop.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +11,14 @@ namespace Deckel_Shop.Controllers
 {
     public class ProfileController : Controller
     {
-            
+        private readonly CustomerService _cs;
+        private readonly StockService _ss;
+        public ProfileController()
+        {
+            _cs = new CustomerService();
+            _ss = new StockService();
+        }
+
         [Authorize]
         public IActionResult Index()
         {
@@ -45,7 +53,8 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult Admin_customerList()
         {
-            return View("/views/profile/administrator/Admin_customerList.cshtml");
+            var listOfCustomers = _cs.GetAllCustomers();
+            return View("/views/profile/administrator/Admin_customerList.cshtml", listOfCustomers);
         }
 
         public IActionResult Admin_customerOrderHistory()
@@ -56,8 +65,9 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult Stock()
         {
-            return View("views/Stock/index.cshtml");
+            return View("views/Stock/index.cshtml", _ss.GetAllProducts());
         }
+
 
         public IActionResult DeliveredOrders()
         {
