@@ -44,6 +44,12 @@ namespace Deckel_Shop.Controllers
         {
             return View("views/profile/Customer/index.cshtml");
         }
+        
+        public IActionResult AddCustomer()
+        {
+            return View("views/profile/Administrator/AddCustomer.cshtml");
+        }
+
 
         public IActionResult Administrator()
         {
