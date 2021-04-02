@@ -70,7 +70,7 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult DeliveredOrders()
         {
-            
+           
             return View("views/profile/Administrator/DeliveredOrders.cshtml");
         }
     }
