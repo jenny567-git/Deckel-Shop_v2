@@ -94,11 +94,20 @@
                                 @*---------------------------------------------------------------------------------*@
 
                                 <!-- INFO Button trigger modal -->
-                                <span data-toggle="tooltip" data-placement="bottom" title="info">
+                                @*<span data-toggle="tooltip" data-placement="bottom" title="info">
                                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
                                         <i class="fas fa-info-circle"></i>
                                     </button>
-                                </span>
+                                </span>*@
+
+                                <form method="post">
+                                    <span data-toggle="tooltip" title="Info">
+                                        <button class="btn btn-light" style="background-color:transparent" asp-action="CustomerInfo" value="@item.Id" name="id">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+                                    </span>
+                                </form>
+
                                 <!-- EDIT: Button trigger modal -->
                                 <span data-toggle="tooltip" data-placement="bottom" title="edit">
                                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" style="background-color:transparent">
