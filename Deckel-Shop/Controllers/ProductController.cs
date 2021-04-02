@@ -21,5 +21,11 @@ namespace Deckel_Shop.Controllers
             var listOfProducts = _ss.GetAllProducts();
             return View(listOfProducts);
         }
+        
+        public IActionResult AddProduct()
+        {
+            var listOfProducts = _ss.GetAllProducts();
+            return View(listOfProducts);
+        }
     }
 }
