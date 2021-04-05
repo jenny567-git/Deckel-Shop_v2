@@ -124,13 +124,6 @@ nav .nav-link {
     margin-bottom: 50px;
 }
 
-/**Career**/
-.container-fluid .row {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    flex-wrap: nowrap;
-}
-
 
     /**FAQ**/
     .collapsible {
