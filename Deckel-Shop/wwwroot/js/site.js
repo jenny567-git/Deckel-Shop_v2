@@ -104,6 +104,16 @@ function GetModalInfo(id, modalType) {
     });
 }
 
+function RemoveProduct(id) {
+
+    $('#DeleteBtn').val(id);
+
+}
+
+function AddBackToStock(id) {
+    $('#AddBackToStockBtn').val(id);
+}
+
 function PopulateOrderModal(order) {
     var productList = document.getElementById("OrderedItemsList");
     $("#exampleModalLongTitle").html("Order id: " + order.orderId);

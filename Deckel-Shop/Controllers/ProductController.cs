@@ -19,7 +19,7 @@ namespace Deckel_Shop.Controllers
         }
         public IActionResult Index()
         {
-            var listOfProducts = _ss.GetAllProducts();
+            var listOfProducts = _ss.GetAllAvailableProducts();
             return View(listOfProducts);
         }
        

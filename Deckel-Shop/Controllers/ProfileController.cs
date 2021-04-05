@@ -75,11 +75,20 @@ namespace Deckel_Shop.Controllers
         }
 
 
-        public IActionResult Stock()
+        public IActionResult Stock(int filter)
         {
-            return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
+            switch (filter)
+            {
+                case 1:
+                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllAvailableProducts());
+                case 2:
+                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllRemovedProducts());
+                default:
+                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
+                 
+            }
+            
         }
-
 
         public IActionResult DeliveredOrders()
         {
@@ -97,6 +106,23 @@ namespace Deckel_Shop.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View();
+        }
+
+        [HttpPost]
+
+        public IActionResult AddProductBackToStock(int id, int StockAmount)
+        {
+            _ss.AddBackToStock(id,StockAmount);
+            return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
+        }
+    
+
+        [HttpPost]
+
+        public IActionResult RemoveProduct(int id)
+        {
+            _ss.RemoveProduct(id);
+            return View("views/profile/administrator/Stock.cshtml",_ss.GetAllProducts());
         }
     }
 }
