@@ -1,8 +1,9 @@
-﻿@{
+﻿@model IEnumerable<Database.Models.Order> 
+@{
     ViewData["Title"] = "Customer#01 Order History";
 }
 <div class="row">
-    <h1>Customer #001 order history</h1>
+    <h1>Customers' order history</h1>
 </div>
 @*-------------------------------------------------------------------------*@
 @*search bar*@
@@ -60,6 +61,9 @@
                     ORDER#
                 </th>
                 <th>
+                    ORDER DATE
+                </th>
+                <th>
                     ORDER STATUS
                 </th>
                 <th>
@@ -75,21 +79,27 @@
             </tr>
         </thead>
         <tbody class="tableSearch">
+            @foreach (var order in Model)
+            {
+
             <tr>
                 <td>
-                    S123456789
+                    @order.OrderId
                 </td>
                 <td>
-                    Invoiced
+                    @order.OrderDate
                 </td>
                 <td>
-                    2021-01-01
+                    @order.OrderStatus
                 </td>
                 <td>
-                    Customer#01
+                    @order.ShippingDate
                 </td>
                 <td>
-                    $213.23
+                    Customer #@order.Customer.Id
+                </td>
+                <td>
+                    $@order.OrderTotal
                 </td>
                 <td>
                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" asp-action="Details" style="background-color:transparent">
@@ -97,6 +107,7 @@
                     </button>
                 </td>
             </tr>
+            }
         </tbody>
     </table>
 </div>

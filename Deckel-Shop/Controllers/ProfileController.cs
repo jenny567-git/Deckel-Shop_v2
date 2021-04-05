@@ -14,10 +14,12 @@ namespace Deckel_Shop.Controllers
     {
         private readonly CustomerService _cs;
         private readonly StockService _ss;
+        private readonly OrderService _os;
         public ProfileController()
         {
             _cs = new CustomerService();
             _ss = new StockService();
+            _os = new OrderService();
         }
 
         [Authorize]
@@ -39,10 +41,10 @@ namespace Deckel_Shop.Controllers
         public IActionResult Administrator()
         {
 
-            OrderService os = new OrderService();
+            //OrderService os = new OrderService();
 
 
-            return View("/views/profile/administrator/index.cshtml", os.GetAllOrdersByOrderStatus("Not Delivered"));
+            return View("/views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Not Delivered"));
         }
 
         public IActionResult DeliveredOrders()
@@ -89,9 +91,10 @@ namespace Deckel_Shop.Controllers
             return View("/views/profile/administrator/Admin_customerList.cshtml", _cs.GetAllCustomers());
         }
 
-        public IActionResult Admin_customerOrderHistory()
+        public IActionResult Admin_customerOrderHistory(int id)
         {
-            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
+            
+            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(id));
 
         }
         //--------------------------------------------------------------------END OF CUSTOMER

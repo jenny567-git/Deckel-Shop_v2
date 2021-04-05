@@ -104,18 +104,21 @@
                                 @*---------------------------------------------------------------------------------*@
                                 <!-- DELETE Button trigger modal -->
                                 <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                    <button type="button" onclick="RemoveProduct(@item.Id)" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                    <button type="button" onclick="RemoveCustomer(@item.Id)" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </span>
 
                                 @*---------------------------------------------------------------------------------*@
                                 @*Order history detail button*@
-                                <span data-toggle="tooltip" data-placement="bottom" title="order history">
-                                    <a class="btn btn-light" style="background-color:transparent" asp-action="Admin_customerOrderHistory" asp-controller="profile">
-                                        <i class="fas fa-history"></i>
-                                    </a>
-                                </span>
+                                <form asp-action="Admin_customerOrderHistory">
+                                    <span data-toggle="tooltip" data-placement="bottom" title="order history">
+
+                                        <button value="@item.Id" name="id" style="background-color:transparent" class="btn btn-light">
+                                            <i class="fas fa-history"></i>
+                                        </button>
+                                    </span>
+                                </form>
                             </div>
                         </td>
                     </tr>
