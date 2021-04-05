@@ -31,8 +31,9 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges(); 
         }
 
-        public void RemoveCustomer(Customer customer)
+        public void RemoveCustomer(int id)
         {
+            var customer = deckelShopContext.Customers.SingleOrDefault(c => c.Id == id);
             deckelShopContext.Customers.Remove(customer);
             deckelShopContext.SaveChanges();
         }

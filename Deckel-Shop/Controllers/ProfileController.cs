@@ -32,6 +32,34 @@ namespace Deckel_Shop.Controllers
 
             return View("views/profile/Customer/index.cshtml", ctx.Customers);
         }
+
+        //--------------------------------------------------------------------START OF ORDERS
+        
+        //PEDNING ORDERS
+        public IActionResult Administrator()
+        {
+
+            OrderService os = new OrderService();
+
+
+            return View("/views/profile/administrator/index.cshtml", os.GetAllOrdersByOrderStatus("Not Delivered"));
+        }
+
+        public IActionResult DeliveredOrders()
+        {
+
+            return View("views/profile/Administrator/DeliveredOrders.cshtml");
+        }
+        //--------------------------------------------------------------------END OF ORDERS
+
+        //--------------------------------------------------------------------START OF CUSTOMER
+        public IActionResult Admin_customerList()
+        {
+            //var listOfCustomers = _cs.GetAllCustomers();
+            return View("/views/profile/administrator/Admin_customerList.cshtml", _cs.GetAllCustomers());
+        }
+
+
         public IActionResult CustomerOrderHistory()
         {
             return View("views/profile/Customer/OrderHistory.cshtml");
@@ -41,6 +69,7 @@ namespace Deckel_Shop.Controllers
         {
             return View("views/profile/Customer/index.cshtml");
         }
+
         [HttpPost]
         public IActionResult AddCustomer([FromForm] Customer customer)
         {
@@ -52,20 +81,12 @@ namespace Deckel_Shop.Controllers
             return View();
         }
 
+        [HttpPost]
 
-        public IActionResult Administrator()
+        public IActionResult RemoveCustomer(int id)
         {
-
-            OrderService os = new OrderService();
-
-
-            return View("/views/profile/administrator/index.cshtml", os.GetAllOrdersByOrderStatus("Not Delivered"));
-        }
-
-        public IActionResult Admin_customerList()
-        {
-            var listOfCustomers = _cs.GetAllCustomers();
-            return View("/views/profile/administrator/Admin_customerList.cshtml", listOfCustomers);
+            _cs.RemoveCustomer(id);
+            return View("/views/profile/administrator/Admin_customerList.cshtml", _cs.GetAllCustomers());
         }
 
         public IActionResult Admin_customerOrderHistory()
@@ -73,8 +94,9 @@ namespace Deckel_Shop.Controllers
             return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
 
         }
+        //--------------------------------------------------------------------END OF CUSTOMER
 
-
+        //--------------------------------------------------------------------START OF PRODUCTS
         public IActionResult Stock(int filter)
         {
             switch (filter)
@@ -87,15 +109,7 @@ namespace Deckel_Shop.Controllers
                     return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
                  
             }
-            
         }
-
-        public IActionResult DeliveredOrders()
-        {
-
-            return View("views/profile/Administrator/DeliveredOrders.cshtml");
-        }
-
 
         [HttpPost]
         public IActionResult AddProduct([FromForm] Product product)
@@ -124,5 +138,7 @@ namespace Deckel_Shop.Controllers
             _ss.RemoveProduct(id);
             return View("views/profile/administrator/Stock.cshtml",_ss.GetAllProducts());
         }
+
+        //--------------------------------------------------------------------END OF PRODUCTS
     }
 }
