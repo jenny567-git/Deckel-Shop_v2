@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Database.Models.Product>;
 
+
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item ">
@@ -31,7 +32,7 @@
     @*---------------------------------------------------------------------------------*@
     <!-- NEW: Button trigger modal -->
     <div class="col-sm-8 text-right">
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-Product" style="background-color:transparent">
             <i class="far fa-plus-square"></i> Add product
         </button>
     </div>
@@ -122,27 +123,27 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
+<!--Add Product Modal -->
+<div class="modal fade" id="exampleModal-Product" tabindex="-1" aria-labelledby="exampleModalProduct-Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New customer</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form asp-action="AddProduct">
                     @*start of form*@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputStockID">Product ID</label>
-                            <input type="text" class="form-control" id="inputCustomerID">
+                            <input type="text" class="form-control" id="inputProductID">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputName">Product Name</label>
-                            <input type="text" class="form-control" id="inputFirstName">
+                            <input name="Name" type="text" class="form-control" id="inputName">
                         </div>
                     </div>
                     <div class="form-row">
@@ -150,11 +151,11 @@
 
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Amount</label>
-                            <input type="text" class="form-control" id="inputLastName">
+                            <input name="Amount" type="text" class="form-control" id="inputAmount">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Price</label>
-                            <input type="email" class="form-control" id="inputEmail4">
+                            <input name="Price" type="text" class="form-control" id="inputPrice">
                         </div>
                     </div>
                     @*uploading image*@
@@ -162,28 +163,29 @@
                         <label for="inputZip">Image</label>
                         <div class="container mt-5">
                             <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-8">
-                                <form method="post" enctype="multipart/form-data">
+                                <div method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label><strong>Upload Files</strong></label>
                                         <div class="custom-file">
-                                            <input type="file" name="files[]" multiple class="custom-file-input form-control" id="customFile">
+                                            <input type="file" name="ImgName" multiple class="custom-file-input form-control" id="customFile">
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <button type="button" name="upload" value="upload" id="upload" class="btn btn-block btn-dark"><i class="fa fa-fw fa-upload"></i> Upload</button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                     @*end of form*@
+                    <div class="modal-footer">
+                        <input type="submit" value="save" class="btn btn-primary" />
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+
         </div>
     </div>
 </div>

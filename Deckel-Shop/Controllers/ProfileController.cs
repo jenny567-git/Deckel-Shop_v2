@@ -42,7 +42,7 @@ namespace Deckel_Shop.Controllers
             return View("views/profile/Customer/index.cshtml");
         }
         [HttpPost]
-        public IActionResult AddCustomer([FromForm]Customer customer)
+        public IActionResult AddCustomer([FromForm] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult Administrator()
         {
-            
+
             OrderService os = new OrderService();
 
 
@@ -71,19 +71,32 @@ namespace Deckel_Shop.Controllers
         public IActionResult Admin_customerOrderHistory()
         {
             return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
-          
+
         }
+
 
         public IActionResult Stock()
         {
-            return View("views/Stock/index.cshtml", _ss.GetAllProducts());
+            return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
         }
 
 
         public IActionResult DeliveredOrders()
         {
-           
+
             return View("views/profile/Administrator/DeliveredOrders.cshtml");
+        }
+
+
+        [HttpPost]
+        public IActionResult AddProduct([FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _ss.AddProduct(product);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Deckel_Shop.Models;
+﻿using Database.Models;
+using Deckel_Shop.Models;
 using Deckel_Shop.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,5 +22,7 @@ namespace Deckel_Shop.Controllers
             var listOfProducts = _ss.GetAllProducts();
             return View(listOfProducts);
         }
+       
+        
     }
 }
