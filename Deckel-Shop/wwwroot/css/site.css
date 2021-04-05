@@ -3,7 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Custom css */
 
-@media screen and (max-width: 1200px) {
+/*@media screen and (max-width: 1200px) {
     ul.catBlock {
         display: table;
     }
@@ -18,7 +18,7 @@ for details on configuring this project to bundle and minify static web assets. 
             ul.catBlock li a {
                 display: block;
             }
-}
+}*/
 
 .btn-primary {
     color: #e9cf97 !important;
@@ -28,7 +28,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 
-.DeckelModal {
+/*.DeckelModal {
     background-color: #f2f2f2;
     box-shadow: 0 4.2px 2.2px rgba(0, 0, 0, 0.02), 0 8.6px 5.3px rgba(0, 0, 0, 0.025), 0 14px 10px rgba(0, 0, 0, 0.028), 0 21.9px 17.9px rgba(0, 0, 0, 0.032), 0 37.6px 33.4px rgba(0, 0, 0, 0.038), 0 80px 80px rgba(0, 0, 0, 0.06);
 }
@@ -41,9 +41,9 @@ for details on configuring this project to bundle and minify static web assets. 
 .DeckelHeader {
     height: 55px;
     background-color: #4e4e4e !important;
-}
+}*/
 
-ul.catBlock {
+/*ul.catBlock {
     display: table;
 }
 
@@ -56,80 +56,186 @@ ul.catBlock {
 
         ul.catBlock li a {
             display: block;
-        }
+        }*/
 
 
-a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
+/***New css**/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-    color: #0366d6;
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #4e4e4e;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 30px;
+    position:relative;
+    z-index: 3;
+    /*margin: 0 auto;
+    width: 60%;*/
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+.logo img {
+    background-image: none;
+    width: 120px;
+    height: 120px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+.logo img {
+    justify-content: left;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    font-size: 14px;
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    list-style: none;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
+    .nav-links li {
+        list-style: none;
     }
+
+    .nav-links a {
+        color: #a78e5a;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+  
+    .nav-item{
+        list-style:none;
+    }
+
+nav a:before {
+    content: "";
+    border-bottom: 2px solid rgb(255, 255, 255);
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 110%;
+    transition: .3s right;
 }
 
-.border-top {
-    border-top: 1px solid #e5e5e5;
+nav a:hover:before {
+    right: 0%;
 }
 
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
+.text-dark {
+    text-align: justify !important;
+    color: #a78e5a !important;
+    list-style: none !important;
 }
 
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+nav .nav-link {
+    display: block !important;
+    padding: 1px !important;
 }
 
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
+
+.burger {
+    display: none;
+    cursor: pointer;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
+    .burger div {
+        width: 25px;
+        height: 2px;
+        background-color: #a78e5a;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
 
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
+
+
+@media screen and (max-width: 1024px) {
+    .nav-links {
+        width: 30%
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 10vh;
+        background-color: #4e4e4e;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.2s ease-in;
+
+        z-index:auto;
+    }
+
+    .text-dark {
+        opacity: 0;
+    }
+
+    .nav-links li {
+        opacity: 0;
+    }
+
+
+    .footer {
+        width: 50%
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%)
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px,6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px,-6px);
+}
+
+
 
 /*******************Contacts************************/
 

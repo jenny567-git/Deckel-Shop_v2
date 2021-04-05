@@ -31,6 +31,7 @@
             background: rgb(0, 0, 0);
             color: white;
             position: relative;
+            z-index:1;
         }
 
         .container-p {
@@ -39,6 +40,7 @@
             left: 0;
             right: 0;
             padding: 50px;
+            z-index: 1;
         }
         .container-p .btn{
             color:#000000;
@@ -55,6 +57,11 @@
             background-size: cover;
             opacity: 0.8;
         }
+        
+        .carousel-indicators{
+            z-index:2;
+        }
+        
     </style>
 
     <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel slide">
