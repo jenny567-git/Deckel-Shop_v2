@@ -30,7 +30,7 @@ const navSlide = () => {
 }
 
 navSlide();
-
+/**Navbar Function Ends**/
 
 
 var slideIndex = 1;
