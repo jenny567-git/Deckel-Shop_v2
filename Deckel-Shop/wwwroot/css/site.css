@@ -3,45 +3,11 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Custom css */
 
-/*@media screen and (max-width: 1200px) {
-    ul.catBlock {
-        display: table;
-    }
-
-        ul.catBlock li {
-            list-style: none;
-            display: compact;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-            ul.catBlock li a {
-                display: block;
-            }
-}*/
-
 .btn-primary {
     color: #e9cf97 !important;
     background-color: #4e4e4e !important;
     text-decoration: underline;
 }
-
-
-
-/*.DeckelModal {
-    background-color: #f2f2f2;
-    box-shadow: 0 4.2px 2.2px rgba(0, 0, 0, 0.02), 0 8.6px 5.3px rgba(0, 0, 0, 0.025), 0 14px 10px rgba(0, 0, 0, 0.028), 0 21.9px 17.9px rgba(0, 0, 0, 0.032), 0 37.6px 33.4px rgba(0, 0, 0, 0.038), 0 80px 80px rgba(0, 0, 0, 0.06);
-}
-
-.DeckelNavBar {
-    margin-top: 10px;
-    box-shadow: 0 4.2px 2.2px rgba(0, 0, 0, 0.02), 0 8.6px 5.3px rgba(0, 0, 0, 0.025), 0 14px 10px rgba(0, 0, 0, 0.028), 0 21.9px 17.9px rgba(0, 0, 0, 0.032), 0 37.6px 33.4px rgba(0, 0, 0, 0.038), 0 80px 80px rgba(0, 0, 0, 0.06);
-}
-
-.DeckelHeader {
-    height: 55px;
-    background-color: #4e4e4e !important;
-}*/
 
 /*ul.catBlock {
     display: table;
@@ -75,7 +41,8 @@ nav {
     background-color: #4e4e4e;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 30px;
-    position:relative;
+    box-shadow: -22px 22px 20px #aaaaaa, 22px -22px 20px #ffffff;
+    position: relative;
     z-index: 3;
     /*margin: 0 auto;
     width: 60%;*/
@@ -103,13 +70,13 @@ nav {
     }
 
     .nav-links a {
-        color: #a78e5a;
+        color: #c4a970;
         text-decoration: none;
         letter-spacing: 3px;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 16px;
     }
-  
+
     .nav-item{
         list-style:none;
     }
@@ -130,8 +97,7 @@ nav a:hover:before {
 
 .text-dark {
     text-align: justify !important;
-    color: #a78e5a !important;
-    list-style: none !important;
+    color: #c4a970 !important;
 }
 
 nav .nav-link {
@@ -235,10 +201,65 @@ nav .nav-link {
     transform: rotate(45deg) translate(-5px,-6px);
 }
 
+/****Index Carousel***/
+
+.headline-3 {
+    margin-top: 100px
+}
 
 
-/*******************Contacts************************/
+.col-md-6 .btn {
+    position: absolute;
+    top: 85%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
+
+.carousel-item {
+    height: 32rem;
+    background: rgb(0, 0, 0);
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.container-p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 50px;
+    z-index: 1;
+}
+
+    .container-p .btn {
+        color: #000000;
+        background-color: white;
+    }
+
+.overlay-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.carousel-indicators {
+    z-index: 2;
+}
 
 /********************* Shopping Demo-4 **********************/
 .product-grid4, .product-grid4 .product-image4 {
