@@ -1,4 +1,5 @@
-﻿using Deckel_Shop.Models;
+﻿using Database.Models;
+using Deckel_Shop.Models;
 using Deckel_Shop.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,17 @@ namespace Deckel_Shop.Controllers
         {
             return View("views/profile/Customer/index.cshtml");
         }
+        [HttpPost]
+        public IActionResult AddCustomer([FromForm]Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _cs.AddCustomer(customer);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
+
 
         public IActionResult Administrator()
         {
@@ -59,7 +71,7 @@ namespace Deckel_Shop.Controllers
         public IActionResult Admin_customerOrderHistory()
         {
             return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
-            return View("views/Profile/Administrator/index.cshtml");
+          
         }
 
         public IActionResult Stock()
