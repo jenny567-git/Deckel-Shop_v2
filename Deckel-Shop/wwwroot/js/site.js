@@ -150,6 +150,15 @@ function PopulateCustomerModal(customer) {
 
 }
 
+function RemoveProduct(id) {
+
+    $('#DeleteBtn').val(id);
+
+}
+
+function AddBackToStock(id) {
+    $('#AddBackToStockBtn').val(id);
+}
 
 function PopulateOrderModal(order) {
     var productList = document.getElementById("OrderedItemsList");
@@ -216,3 +225,12 @@ window.addEventListener('load', function () {
 
     })
 });
+
+function enableForm() {
+    var form = document.getElementById("customerForm");
+    var elements = form.elements;
+    for (var i = 0, len = elements.length; i < len; ++i) {
+        elements[i].disabled = false;
+    }
+    saveBtnForEditCustomer.disabled = false;
+}

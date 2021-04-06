@@ -54,13 +54,16 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Id)
+                        CUSTOMER#
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstName)
+                        FIRST NAME
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LastName)
+                        LAST NAME
+                    </th>
+                    <th>
+                        PHONE NUMBER
                     </th>
                     <th></th>
                 </tr>
@@ -69,7 +72,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td id="customerIdRow-@item.Id">
                             @item.Id
                         </td>
                         <td>
@@ -77,6 +80,9 @@
                         </td>
                         <td>
                             @item.LastName
+                        </td>
+                        <td>
+                            @item.Phone
                         </td>
                         <td>
                             @*column with the buttons*@
@@ -90,26 +96,30 @@
                                     </button>
                                 </span>
                                 <!-- EDIT: Button trigger modal -->
-                                <span data-toggle="tooltip" data-placement="bottom" title="edit">
-                                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" style="background-color:transparent">
-                                        <i class="far fa-edit"></i>
-                                    </button>
-                                </span>
+                                @*<span data-toggle="tooltip" data-placement="bottom" title="edit">
+                                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" style="background-color:transparent">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                    </span>*@
                                 @*---------------------------------------------------------------------------------*@
                                 <!-- DELETE Button trigger modal -->
                                 <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                    @*used products removw function*@
+                                    <button type="button" onclick="RemoveProduct(@item.Id)" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </span>
 
                                 @*---------------------------------------------------------------------------------*@
                                 @*Order history detail button*@
-                                <span data-toggle="tooltip" data-placement="bottom" title="order history">
-                                    <a class="btn btn-light" style="background-color:transparent" asp-action="Admin_customerOrderHistory" asp-controller="profile">
-                                        <i class="fas fa-history"></i>
-                                    </a>
-                                </span>
+                                <form asp-action="Admin_customerOrderHistory">
+                                    <span data-toggle="tooltip" data-placement="bottom" title="order history">
+
+                                        <button value="@item.Id" name="id" style="background-color:transparent" class="btn btn-light">
+                                            <i class="fas fa-history"></i>
+                                        </button>
+                                    </span>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -162,7 +172,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputState">Phone</label>
+                        <label for="inputPhone">Phone</label>
                         <input name="Phone" type="text" class="form-control" id="inputState">
                     </div>
                     <div class="form-group">
@@ -180,84 +190,16 @@
                             <input name="ZipCode" type="text" class="form-control" id="inputZip">
                         </div>
                     </div>
-                    @*end of form*@
 
 
                     <div class="modal-footer">
                         <input type="submit" value="Create" class="btn btn-primary" />
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                        @*end of form*@
+
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- EDIT: Button Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="DeckelModal modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit customer info</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    @*start of form*@
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCustomerID">Customer ID</label>
-                            <input type="text" class="form-control" id="inputCustomerID" disabled>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control" id="inputFirstName">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputLastName">Last Name</label>
-                            <input type="text" class="form-control" id="inputLastName">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" value="faisalkhan@123">
-                            <input type="checkbox" onclick="showPassword()"> Show Password
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <input type="text" class="form-control" id="inputState">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
-                        </div>
-                    </div>
-                    @*end of form*@
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Save changes</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
@@ -270,11 +212,11 @@
         <div class="DeckelModal modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" />
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 <span aria-hidden="true">&times;</span>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="customerForm">
                     @*start of form*@
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -282,7 +224,7 @@
                             <input type="text" name="detailsCustomerID" class="form-control" id="detailsCustomerID" disabled >
                         </div>
                         <div class="col-md-6 text-right">
-                            <button type="button" class="btn btn-light" style="background-color:transparent">
+                            <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
                                 <i class="far fa-edit"></i>Edit
                             </button>
                         </div>
@@ -304,8 +246,8 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword">Password</label>
-                            @*<input type="password" class="form-control inputpassword" id="inputPassword" value="faisalkhan@123" disabled>
-                                <input type="checkbox" onclick="showPassword()"> Show Password*@
+                            <input type="password" class="form-control inputpassword" id="inputPassword" value="faisalkhan@123" disabled>
+                            <input type="checkbox" onclick="showPassword()"> Show Password
                         </div>
                     </div>
                     <div class="form-group">
@@ -313,7 +255,7 @@
                         <input type="text" name="detailsStreet" class="form-control" id="detailsStreet" placeholder="1234 Main St" disabled>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="inputCity">City</label>
                             <input type="text" name="detailsCity" class="form-control" id="detailsCity" disabled>
                         </div>
@@ -321,7 +263,7 @@
                             <label for="inputState">State</label>
                             <input type="text" name="detailsState" class="form-control" id="detailsState" disabled>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for="inputZip">Zip</label>
                             <input type="text" name="detailsZip" class="form-control" id="detailsZip" disabled>
                         </div>
@@ -330,7 +272,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Save changes</button>
+                <button type="button" id="saveBtnForEditCustomer" class="btn btn-danger" disabled>Save changes</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -351,7 +293,9 @@
                 Delete customer?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Yes</button>
+                <form asp-action="RemoveCustomer">
+                    <button name="id" id="DeleteBtn" value="" class="btn btn-danger">Yes</button>
+                </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>

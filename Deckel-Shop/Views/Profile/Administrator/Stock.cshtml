@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Database.Models.Product>;
 
+
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item ">
@@ -17,40 +18,44 @@
 </ul>
 
 @*search bar*@
-<div class="row mt-3 pt-3 mb-3">
-    <div class="col-sm-4">
-        <div class="input-group">
-            <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc">
-            <div class="input-group-append">
-                <button class="input-group-text"><i class="fa fa-search"></i></button>
-            </div>
-        </div>
-    </div>
-    @*row with title and NEW:button modal*@
+<div>
 
-    @*---------------------------------------------------------------------------------*@
-    <!-- NEW: Button trigger modal -->
-    <div class="col-sm-8 text-right">
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
-            <i class="far fa-plus-square"></i> Add product
-        </button>
-    </div>
-</div>
-
-@*<div class="ml-auto my-2 col-lg-4 mt-3 pt-3 mb-3">
-        <div class="">
+    <div class="row mt-3 pt-3 mb-3">
+        <div class="col-sm-4">
             <div class="input-group">
-                <input type="text" class="form-control col-lg-6" placeholder="Search " id="tableSearch">
+                <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc">
                 <div class="input-group-append">
-                    <button class="input-group-text mr-1"><i class="fa fa-search"></i></button>
-                    <button class="btn btn-light my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal-customer" type="submit" style="background-color:transparent">
-                        <i class="far fa-plus-square"></i> Add Product
-                    </button>
+                    <button class="input-group-text"><i class="fa fa-search"></i></button>
                 </div>
             </div>
         </div>
+        <div class="col-sm-2">
+            <div class="d-flex">
+                <div class="dropdown mr-1">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Status
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        <form asp-action="Stock">
+                            <button name="filter" class="dropdown-item" value="0">All Products</button>
+                            <button name="filter" class="dropdown-item" value="1">Available Products</button>
+                            <button name="filter" class="dropdown-item" value="2">Removed Products</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*row with title and NEW:button modal*@
 
-    </div>*@
+        @*---------------------------------------------------------------------------------*@
+        <!-- NEW: Button trigger modal -->
+        <div class="col-sm-6 text-right">
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-Product" style="background-color:transparent">
+                <i class="far fa-plus-square"></i> Add product
+            </button>
+        </div>
+    </div>
+</div>
 
 @*line break*@
 <div class="row">
@@ -68,10 +73,10 @@
             <thead>
                 <tr>
                     <th scope="col">PRODUCT#</th>
-                    @*<th scope="col">IMAGE</th>*@
                     <th scope="col">PRODUCT NAME</th>
                     <th scope="col">AMOUNT</th>
                     <th scope="col">PRICE</th>
+                    <th scope="col">Status</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -79,11 +84,6 @@
                 @foreach (var p in Model)
                 {
                     <tr>
-                        @*<th scope="row"></th>*@
-
-                        @*<td>
-                                <img src="" class="img-fluid img-thumbnail" alt="aubergineHatt">
-                            </td>*@
                         <td>
                             @p.Id
                         </td>
@@ -97,21 +97,30 @@
                             @p.Price
                         </td>
                         <td>
+                            @p.Status
+                        </td>
+                        <td>
                             <span data-toggle="tooltip" data-placement="bottom" title="info">
                                 <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
                                     <i class="fas fa-info-circle"></i>
                                 </button>
                             </span>
-                            <span data-toggle="tooltip" data-placement="bottom" title="edit">
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
-                                    <i class="far fa-edit"></i>
-                                </button>
-                            </span>
-                            <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </span>
+                            @if (p.Status == "Available")
+                            {
+                                <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                                    <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </span>
+                            }
+                            else
+                            {
+                                <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
+                                    <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
+                                        <i class="far fa-plus-square"></i>
+                                    </button>
+                                </span>
+                            }
                         </td>
                     </tr>
 
@@ -122,27 +131,27 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal-customer" tabindex="-1" aria-labelledby="exampleModalcustomer-Label" aria-hidden="true">
+<!--Add Product Modal -->
+<div class="modal fade" id="exampleModal-Product" tabindex="-1" aria-labelledby="exampleModalProduct-Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New customer</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form asp-action="AddProduct">
                     @*start of form*@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputStockID">Product ID</label>
-                            <input type="text" class="form-control" id="inputCustomerID">
+                            <input type="text" class="form-control" id="inputProductID">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputName">Product Name</label>
-                            <input type="text" class="form-control" id="inputFirstName">
+                            <input name="Name" type="text" class="form-control" id="inputName">
                         </div>
                     </div>
                     <div class="form-row">
@@ -150,11 +159,11 @@
 
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Amount</label>
-                            <input type="text" class="form-control" id="inputLastName">
+                            <input name="Amount" type="text" class="form-control" id="inputAmount">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Price</label>
-                            <input type="email" class="form-control" id="inputEmail4">
+                            <input name="Price" type="text" class="form-control" id="inputPrice">
                         </div>
                     </div>
                     @*uploading image*@
@@ -162,49 +171,52 @@
                         <label for="inputZip">Image</label>
                         <div class="container mt-5">
                             <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-8">
-                                <form method="post" enctype="multipart/form-data">
+                                <div method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label><strong>Upload Files</strong></label>
                                         <div class="custom-file">
-                                            <input type="file" name="files[]" multiple class="custom-file-input form-control" id="customFile">
+                                            <input type="file" name="ImgName" multiple class="custom-file-input form-control" id="customFile">
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <button type="button" name="upload" value="upload" id="upload" class="btn btn-block btn-dark"><i class="fa fa-fw fa-upload"></i> Upload</button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                     @*end of form*@
+                    <div class="modal-footer">
+                        <input type="submit" value="save" class="btn btn-primary" />
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+
         </div>
     </div>
 </div>
-
-
-
-
-
 
 <!--Detail Modal -->
 <div class="modal fade" id="exampleModal-details" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 <span aria-hidden="true">&times;</span>
             </div>
             <div class="modal-body">
                 <form>
                     @*start of form*@
+                    <div class="form-row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
+                                <i class="far fa-edit"></i>Edit
+                            </button>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="ProductID">Product ID</label>
@@ -253,9 +265,31 @@
                 Delete Product?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">JAJAMEEEEN</button>
+                <form asp-action="RemoveProduct">
+                      <button name="id" id="DeleteBtn" value="" class="btn btn-danger">JAJAMEEEEN</button>
+                </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
+        </div>
+    </div>
+</div>
+
+@* Add back to stock modal*@
+<div class="modal fade" id="exampleModal-AddToStock" tabindex="-1" aria-labelledby="exampleModal-AddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="DeckelModal modal-content">
+            <form asp-action="AddProductBackToStock">
+                <div class="modal-body">
+                    <label for="inputAmount">Amount</label>
+                    <input name="StockAmount" type="number" class="form-control" id="inputStockAmount">
+                </div>
+                <div class="modal-footer">
+
+                    <button name="id" id="AddBackToStockBtn" value="" class="btn btn-danger">JAJAMEEEEN</button>
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

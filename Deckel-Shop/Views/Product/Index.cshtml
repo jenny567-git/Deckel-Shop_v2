@@ -1,6 +1,25 @@
 ﻿@model IEnumerable<Database.Models.Product>
 
-<h3 class="h3">Our fine Products!</h3>
+<div class="row">
+    <h3 class="h3">Our fine Products!</h3>
+    <div class="col-sm-2">
+        <div class="d-flex">
+            <div class="dropdown mr-1 text-right">
+                <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                    Sort by
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                    <form asp-action="index">
+                        <button name="sortOrder" class="dropdown-item" value="name">Name: A-Z</button>
+                        <button name="sortOrder" class="dropdown-item" value="name_desc">Name: Z-A</button>
+                        <button name="sortOrder" class="dropdown-item" value="price_asc">Price: Lowest first</button>
+                        <button name="sortOrder" class="dropdown-item" value="price_desc">Price: Highest first</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
 
     @foreach (var p in Model)
