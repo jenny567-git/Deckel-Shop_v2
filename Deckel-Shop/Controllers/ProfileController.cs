@@ -29,10 +29,8 @@ namespace Deckel_Shop.Controllers
             {
                 return View("views/profile/administrator/index.cshtml");
             }
-            Database.Models.DeckelShopContext ctx = new Database.Models.DeckelShopContext();
-
-
-            return View("views/profile/Customer/index.cshtml", ctx.Customers);
+            
+            return View("views/profile/Customer/OrderHistory.cshtml");
         }
 
         //--------------------------------------------------------------------START OF ORDERS
@@ -62,14 +60,14 @@ namespace Deckel_Shop.Controllers
         }
 
 
-        public IActionResult CustomerOrderHistory()
+        public IActionResult CustomerOrderHistory(int id)
         {
-            return View("views/profile/Customer/OrderHistory.cshtml");
+            return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(id));
         }
 
-        public IActionResult Customer()
+        public IActionResult Customer(int id)
         {
-            return View("views/profile/Customer/index.cshtml");
+            return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(id));
         }
 
         [HttpPost]
