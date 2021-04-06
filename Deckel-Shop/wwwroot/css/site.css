@@ -186,6 +186,7 @@ nav .nav-link {
 
     .text-dark {
         opacity: 0;
+        pointer-events: none;
     }
 
     .nav-links li {
