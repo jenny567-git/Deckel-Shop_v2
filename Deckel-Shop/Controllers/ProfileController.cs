@@ -14,10 +14,12 @@ namespace Deckel_Shop.Controllers
     {
         private readonly CustomerService _cs;
         private readonly StockService _ss;
+        private readonly OrderService _os;
         public ProfileController()
         {
             _cs = new CustomerService();
             _ss = new StockService();
+            _os = new OrderService();
         }
 
         [Authorize]
@@ -32,6 +34,34 @@ namespace Deckel_Shop.Controllers
 
             return View("views/profile/Customer/index.cshtml", ctx.Customers);
         }
+
+        //--------------------------------------------------------------------START OF ORDERS
+        
+        //PEDNING ORDERS
+        public IActionResult Administrator()
+        {
+
+            //OrderService os = new OrderService();
+
+
+            return View("/views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Not Delivered"));
+        }
+
+        public IActionResult DeliveredOrders()
+        {
+
+            return View("views/profile/Administrator/DeliveredOrders.cshtml");
+        }
+        //--------------------------------------------------------------------END OF ORDERS
+
+        //--------------------------------------------------------------------START OF CUSTOMER
+        public IActionResult Admin_customerList()
+        {
+            //var listOfCustomers = _cs.GetAllCustomers();
+            return View("/views/profile/administrator/Admin_customerList.cshtml", _cs.GetAllCustomers());
+        }
+
+
         public IActionResult CustomerOrderHistory()
         {
             return View("views/profile/Customer/OrderHistory.cshtml");
@@ -41,8 +71,9 @@ namespace Deckel_Shop.Controllers
         {
             return View("views/profile/Customer/index.cshtml");
         }
+
         [HttpPost]
-        public IActionResult AddCustomer([FromForm]Customer customer)
+        public IActionResult AddCustomer([FromForm] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -52,38 +83,65 @@ namespace Deckel_Shop.Controllers
             return View();
         }
 
+        [HttpPost]
 
-        public IActionResult Administrator()
+        public IActionResult RemoveCustomer(int id)
+        {
+            _cs.RemoveCustomer(id);
+            return View("/views/profile/administrator/Admin_customerList.cshtml", _cs.GetAllCustomers());
+        }
+
+        public IActionResult Admin_customerOrderHistory(int id)
         {
             
-            OrderService os = new OrderService();
+            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(id));
 
-
-            return View("/views/profile/administrator/index.cshtml", os.GetAllOrdersByOrderStatus("Not Delivered"));
         }
+        //--------------------------------------------------------------------END OF CUSTOMER
 
-        public IActionResult Admin_customerList()
+        //--------------------------------------------------------------------START OF PRODUCTS
+        public IActionResult Stock(int filter)
         {
-            var listOfCustomers = _cs.GetAllCustomers();
-            return View("/views/profile/administrator/Admin_customerList.cshtml", listOfCustomers);
+            switch (filter)
+            {
+                case 1:
+                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllAvailableProducts());
+                case 2:
+                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllRemovedProducts());
+                default:
+                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
+                 
+            }
         }
 
-        public IActionResult Admin_customerOrderHistory()
+        [HttpPost]
+        public IActionResult AddProduct([FromForm] Product product)
         {
-            return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml");
-          
+            if (ModelState.IsValid)
+            {
+                _ss.AddProduct(product);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
-        public IActionResult Stock()
+        [HttpPost]
+
+        public IActionResult AddProductBackToStock(int id, int StockAmount)
         {
-            return View("views/Stock/index.cshtml", _ss.GetAllProducts());
+            _ss.AddBackToStock(id,StockAmount);
+            return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
         }
+    
 
+        [HttpPost]
 
-        public IActionResult DeliveredOrders()
+        public IActionResult RemoveProduct(int id)
         {
-           
-            return View("views/profile/Administrator/DeliveredOrders.cshtml");
+            _ss.RemoveProduct(id);
+            return View("views/profile/administrator/Stock.cshtml",_ss.GetAllProducts());
         }
+
+        //--------------------------------------------------------------------END OF PRODUCTS
     }
 }

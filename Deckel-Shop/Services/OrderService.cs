@@ -22,13 +22,19 @@ namespace Deckel_Shop.Services
 
         public IEnumerable<Order> GetAllOrdersByOrderStatus(string status)
         {
-            if (status != null) { 
+            if (status != null)
+            {
                 return deckelShopContext.Orders.Where(o => o.OrderStatus == status).Include(c => c.Customer).AsEnumerable();
             }
             else
             {
                 throw new NotImplementedException();
             }
+        }
+        public IEnumerable<Order> GetAllOrdersBySelectedCustomer(int id)
+        {
+            return deckelShopContext.Orders.Where(o => o.Customer.Id == id).Include(c => c.Customer).AsEnumerable();
+
         }
 
         public Order GetOrder(int id)
@@ -63,7 +69,7 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges();
         }
 
-        public void SendOrder (Order order)
+        public void SendOrder(Order order)
         {
             var currentOrder = deckelShopContext.Orders.FirstOrDefault(x => x.OrderId == order.OrderId);
             if (currentOrder != null)

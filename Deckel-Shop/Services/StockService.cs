@@ -18,6 +18,18 @@ namespace Deckel_Shop.Services
         {
             return deckelShopContext.Products.AsEnumerable();
         }
+
+        public IEnumerable<Product> GetAllAvailableProducts()
+        {
+            return deckelShopContext.Products.Where(p => p.Status == "Available").AsEnumerable();
+        }
+        public IEnumerable<Product> GetAllRemovedProducts()
+        {
+            return deckelShopContext.Products.Where(p => p.Status == "Removed").AsEnumerable();
+        }
+
+        
+
         public IEnumerable<Product> GetProduct(int id)
         {
             return deckelShopContext.Products.Where(p => p.Id == id).AsEnumerable();
@@ -29,9 +41,18 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges(); 
         }
 
-        public void RemoveProduct(Product product)
+        public void AddBackToStock(int id, int amount)
         {
-            deckelShopContext.Products.Remove(product);
+            var product = deckelShopContext.Products.SingleOrDefault(p => p.Id == id);
+            product.Status = "Available";
+            product.Amount = amount;
+            deckelShopContext.SaveChanges();
+        }
+
+        public void RemoveProduct(int id)
+        {
+           var product = deckelShopContext.Products.SingleOrDefault(p => p.Id == id );
+            product.Status = "Removed";
             deckelShopContext.SaveChanges();
         }
 
