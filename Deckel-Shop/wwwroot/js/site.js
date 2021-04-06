@@ -9,24 +9,37 @@ const navSlide = () => {
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
 
+    function ResetAnimation(listItem) {
+        listItem.style.animation = 'none';
+        listItem.offsetHeight; /* trigger reflow */
+        listItem.style.animation = null;
+    }
+
     burger.addEventListener('click', () => {
         //toggle nav
         nav.classList.toggle('nav-active');
 
         //Animate Links
         navLinks.forEach((link, index) => {
-            if (link.style.animation) {
-                //link.style.animation = '';
-            } else {
+            // Fires only the first time. Animation is set by class
+            if (link.style.animation == '') {
+                ResetAnimation(link);
                 link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                // Fires when side nav has been closed at least once
+            } else if (link.style.animation === '0s ease 0s 1 normal forwards running navLinkFade') {
+                ResetAnimation(link);
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                // Fires when opening side nav
+            } else {
+                ResetAnimation(link);
+                link.style.animation = '0s ease 0s 1 normal forwards running navLinkFade';
             }
         });
+       
         //Burger animation
         burger.classList.toggle('toggle');
 
     });
-
-
 }
 
 navSlide();
