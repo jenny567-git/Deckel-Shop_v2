@@ -82,6 +82,18 @@ namespace Deckel_Shop.Controllers
         }
 
         [HttpPost]
+        public async Task< IActionResult> EditCustomer([FromForm] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                await _cs.EditCustomer(customer);
+                
+            }
+            return RedirectToAction(nameof(Admin_customerList));
+        }
+
+        [HttpPost]
 
         public IActionResult RemoveCustomer(int id)
         {

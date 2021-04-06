@@ -38,14 +38,12 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges();
         }
         
-        public void EditCustomer(Customer customer)
+        public async Task <int> EditCustomer(Customer customer)
         {
-            var currentCustomer = deckelShopContext.Customers.FirstOrDefault(x => x.Id == customer.Id);
-            if (currentCustomer != null)
-            {
-                currentCustomer = customer;
-            }
-            deckelShopContext.SaveChanges(); 
+            
+            deckelShopContext.Update(customer);
+           
+            return await deckelShopContext.SaveChangesAsync();
         }
 
         

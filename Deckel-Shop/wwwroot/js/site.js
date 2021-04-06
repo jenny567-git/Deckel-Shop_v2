@@ -138,13 +138,14 @@ function GetModalInfo(id, modalType) {
 }
 
 function PopulateCustomerModal(customer) {
-    $('input[name="detailsCustomerID"]').val(customer.id);
-    $('input[name="detailsFirstName"]').val(customer.firstName);
-    $('input[name="detailsLastName"]').val(customer.lastName);
-    $('input[name="detailsEmail"]').val(customer.email);
-    $('input[name="detailsStreet"]').val(customer.street);
-    $('input[name="detailsCity"]').val(customer.city);
-    $('input[name="detailsZip"]').val(customer.zipCode);
+    $('input[id="detailsCustomerID"]').val(customer.id);
+    $('input[id="detailsFirstName"]').val(customer.firstName);
+    $('input[id="detailsLastName"]').val(customer.lastName);
+    $('input[id="detailsEmail"]').val(customer.email);
+    $('input[id="detailsPhone"]').val(customer.phone);
+    $('input[id="detailsStreet"]').val(customer.street);
+    $('input[id="detailsCity"]').val(customer.city);
+    $('input[id="detailsZip"]').val(customer.zipCode);
 
     console.log(customer.firstName);
 
@@ -224,12 +225,31 @@ window.addEventListener('load', function () {
         $("#OrderedItemsList").empty();
 
     })
+
+    $('#exampleModal-details').on('hidden.bs.modal', function () {
+        var form = document.getElementById("customerForm");
+        var elements = form.elements;
+        for (var i = 0, len = elements.length; i < len; ++i) {
+            
+            elements[i].disabled = true;
+        }
+        saveBtnForEditCustomer.disabled = true;
+        editBtn.disabled = false;
+        
+
+    })
+
+
 });
+
+
+
 
 function enableForm() {
     var form = document.getElementById("customerForm");
     var elements = form.elements;
     for (var i = 0, len = elements.length; i < len; ++i) {
+        
         elements[i].disabled = false;
     }
     saveBtnForEditCustomer.disabled = false;

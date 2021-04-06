@@ -216,12 +216,12 @@
                 <span aria-hidden="true">&times;</span>
             </div>
             <div class="modal-body">
-                <form id="customerForm">
+                <form asp-action="EditCustomer" id="customerForm">
                     @*start of form*@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputCustomerID">Customer ID</label>
-                            <input type="text" name="detailsCustomerID" class="form-control" id="detailsCustomerID" readonly >
+                            <input type="text" name="Id" class="form-control" id="detailsCustomerID" readonly>
                         </div>
                         <div class="col-md-6 text-right">
                             <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
@@ -232,48 +232,46 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" name="detailsFirstName" class="form-control" id="detailsFirstName" disabled>
+                            <input type="text" name="FirstName" class="form-control" id="detailsFirstName" disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputLastName">Last Name</label>
-                            <input type="text" name="detailsLastName" class="form-control" id="detailsLastName"disabled>
+                            <input type="text" name="LastName" class="form-control" id="detailsLastName" disabled>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email</label>
-                            <input type="email" name="detailsEmail" class="form-control" id="detailsEmail" disabled>
+                            <input type="email" name="Email" class="form-control" id="detailsEmail" disabled>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control inputpassword" id="inputPassword" value="faisalkhan@123" disabled>
-                            <input type="checkbox" onclick="showPassword()"> Show Password
+                            <label for="Phone">Phone Number</label>
+                            <input name="Phone" type="number" class="form-control" id="detailsPhone" disabled>
+                           
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress">Address</label>
-                        <input type="text" name="detailsStreet" class="form-control" id="detailsStreet" placeholder="1234 Main St" disabled>
+                        <input type="text" name="Street" class="form-control" id="detailsStreet" placeholder="1234 Main St" disabled>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputCity">City</label>
-                            <input type="text" name="detailsCity" class="form-control" id="detailsCity" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <input type="text" name="detailsState" class="form-control" id="detailsState" disabled>
+                            <input type="text" name="City" class="form-control" id="detailsCity" disabled>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputZip">Zip</label>
-                            <input type="text" name="detailsZip" class="form-control" id="detailsZip" disabled>
+                            <input type="text" name="ZipCode" class="form-control" id="detailsZip" disabled>
                         </div>
                     </div>
                     @*end of form*@
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="saveBtnForEditCustomer" class="btn btn-danger" disabled>Save changes</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+
+
+                    <div class="modal-footer">
+                        <input type="submit" value="Save changes" id="saveBtnForEditCustomer" class="btn btn-danger" disabled />
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+            </form>
             </div>
         </div>
     </div>
