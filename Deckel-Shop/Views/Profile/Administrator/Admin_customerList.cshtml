@@ -104,7 +104,8 @@
                                 @*---------------------------------------------------------------------------------*@
                                 <!-- DELETE Button trigger modal -->
                                 <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                    <button type="button" onclick="RemoveCustomer(@item.Id)" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                    @*used products removw function*@
+                                    <button type="button" onclick="RemoveProduct(@item.Id)" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </span>
