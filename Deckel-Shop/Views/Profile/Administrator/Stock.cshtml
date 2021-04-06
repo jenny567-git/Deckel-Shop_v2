@@ -57,21 +57,6 @@
     </div>
 </div>
 
-@*<div class="ml-auto my-2 col-lg-4 mt-3 pt-3 mb-3">
-        <div class="">
-            <div class="input-group">
-                <input type="text" class="form-control col-lg-6" placeholder="Search " id="tableSearch">
-                <div class="input-group-append">
-                    <button class="input-group-text mr-1"><i class="fa fa-search"></i></button>
-                    <button class="btn btn-light my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal-customer" type="submit" style="background-color:transparent">
-                        <i class="far fa-plus-square"></i> Add Product
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </div>*@
-
 @*line break*@
 <div class="row">
     <div class="col">
@@ -88,7 +73,6 @@
             <thead>
                 <tr>
                     <th scope="col">PRODUCT#</th>
-                    @*<th scope="col">IMAGE</th>*@
                     <th scope="col">PRODUCT NAME</th>
                     <th scope="col">AMOUNT</th>
                     <th scope="col">PRICE</th>
@@ -100,11 +84,6 @@
                 @foreach (var p in Model)
                 {
                     <tr>
-                        @*<th scope="row"></th>*@
-
-                        @*<td>
-                                <img src="" class="img-fluid img-thumbnail" alt="aubergineHatt">
-                            </td>*@
                         <td>
                             @p.Id
                         </td>
@@ -124,11 +103,6 @@
                             <span data-toggle="tooltip" data-placement="bottom" title="info">
                                 <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
                                     <i class="fas fa-info-circle"></i>
-                                </button>
-                            </span>
-                            <span data-toggle="tooltip" data-placement="bottom" title="edit">
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-customer" style="background-color:transparent">
-                                    <i class="far fa-edit"></i>
                                 </button>
                             </span>
                             @if (p.Status == "Available")
@@ -224,23 +198,25 @@
     </div>
 </div>
 
-
-
-
-
-
 <!--Detail Modal -->
 <div class="modal fade" id="exampleModal-details" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 <span aria-hidden="true">&times;</span>
             </div>
             <div class="modal-body">
                 <form>
                     @*start of form*@
+                    <div class="form-row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
+                                <i class="far fa-edit"></i>Edit
+                            </button>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="ProductID">Product ID</label>
@@ -297,6 +273,7 @@
         </div>
     </div>
 </div>
+
 @* Add back to stock modal*@
 <div class="modal fade" id="exampleModal-AddToStock" tabindex="-1" aria-labelledby="exampleModal-AddLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

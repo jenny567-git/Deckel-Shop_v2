@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -21,6 +22,7 @@ namespace Database.Models
         public string Email { get; set; }
         public string Phone { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
