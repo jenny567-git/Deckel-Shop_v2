@@ -27,6 +27,11 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /***New css**/
 
+nav ul{
+    margin-bottom: 0px;
+}
+
+
 * {
     margin: 0px;
     padding: 0px;
