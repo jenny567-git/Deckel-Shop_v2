@@ -188,7 +188,7 @@ nav .nav-link {
         align-items: center;
         width: 50%;
         transform: translateX(100%);
-        /*transition: transform 0.2s ease-in;*/
+        transition: transform 0.2s ease-in;
         opacity: 95%;
 
         z-index:auto;
@@ -215,6 +215,10 @@ nav .nav-link {
 
 .nav-active {
     transform: translateX(0%)
+}
+
+.navAnim {
+    animation: 0s ease 0s 1 normal forwards running navLinkFade;
 }
 
 @keyframes navLinkFade {
