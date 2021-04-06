@@ -108,19 +108,22 @@ function GetModalInfo(id, modalType) {
     $(function () {
         console.log("testing function" + id + " " + modalType);
         //var person = '{Name: "' + $("#txtName").val() + '" }';
-        var orderId = '{"Id": "' + $("#OrderIdRow-" + id).html() + '"}';
-
+        var Id = '{"Id": "' + id + '"}';
+        console.log(Id);
         $.ajax({
             type: "POST",
-            url: "/api/Orders",
-            data: orderId, // order id
+            url: "/api/Orders/" + modalType,
+            data: Id, 
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { // response = order info
                 //alert("Hello: " + response.id);
                 if (modalType === 'orderDetails') {
                     PopulateOrderModal(response);
-                } else {
+                } else if (modalType === 'customerDetails') {
+                    PopulateCustomerModal(response)
+                }
+                else {
                     console.log("Error: Could not find modalType!");
                 }
             },
@@ -133,6 +136,20 @@ function GetModalInfo(id, modalType) {
         });
     });
 }
+
+function PopulateCustomerModal(customer) {
+    $('input[name="detailsCustomerID"]').val(customer.id);
+    $('input[name="detailsFirstName"]').val(customer.firstName);
+    $('input[name="detailsLastName"]').val(customer.lastName);
+    $('input[name="detailsEmail"]').val(customer.email);
+    $('input[name="detailsStreet"]').val(customer.street);
+    $('input[name="detailsCity"]').val(customer.city);
+    $('input[name="detailsZip"]').val(customer.zipCode);
+
+    console.log(customer.firstName);
+
+}
+
 
 function PopulateOrderModal(order) {
     var productList = document.getElementById("OrderedItemsList");
