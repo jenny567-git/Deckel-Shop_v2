@@ -524,6 +524,16 @@ nav .nav-link {
     width: 70%
 }
 
+
+.modal-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0;
+   
+}
+
 .needs-validation {
     margin-left: auto;
 }
