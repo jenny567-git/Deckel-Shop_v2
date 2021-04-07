@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Deckel_Shop.Controllers
 {
-    [Route("cart")]
     public class CartController : Controller
     {
         private readonly StockService _ss = new StockService();
@@ -103,6 +102,13 @@ namespace Deckel_Shop.Controllers
 
             return View("SavedCart", shopCart);
         }
+
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
+
 
 
         //public IActionResult Session()
