@@ -172,6 +172,7 @@ function RemoveOrder(id) {
 
 }
 
+
 function PopulateOrderModal(order) {
     var productList = document.getElementById("OrderedItemsList");
     $("#exampleModalLongTitle").html("Order id: " + order.orderId);
@@ -246,7 +247,7 @@ window.addEventListener('load', function () {
         }
         saveBtnForEditCustomer.disabled = true;
         editBtn.disabled = false;
-        
+        CancleBtn.disabled = false;
 
     })
 
@@ -264,4 +265,5 @@ function enableForm() {
         elements[i].disabled = false;
     }
     saveBtnForEditCustomer.disabled = false;
+   
 }

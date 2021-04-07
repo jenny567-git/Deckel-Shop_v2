@@ -81,7 +81,6 @@
                     <th scope="col">ORDER DATE</th>
                     <th scope="col">CUSTOMER NAME</th>
                     <th scope="col">Order Status</th>
-                    <th scope="col">AMOUNT</th>
                     <th scope="col">ORDER TOTAL</th>
                     <th scope="col"></th>
                 </tr>
@@ -94,7 +93,6 @@
 
                     <td>@Html.DisplayFor(modelItem => item.OrderDate) </td>
                     <td>@Html.DisplayFor(modelItem => item.Customer.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.OrderedItems.Count)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
                     <td>
                         <span data-toggle="tooltip" data-placement="bottom" title="info">
