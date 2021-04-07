@@ -105,9 +105,20 @@ namespace Deckel_Shop.Controllers
             return View("SavedCart", shopCart);
         }
 
-
-        public IActionResult ChangeQuantity()
+        public IActionResult RemoveProduct(int id)
         {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            //var product = shopCart.Products.Single(p => p.Id == id);
+            shopCart.Products.RemoveAll(p => p.Id == id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ChangeQuantity(int id)
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            var product = shopCart.Products.Find(p => p.Id == id);
+            //shopCart.Products.Update(product);
+            
             return RedirectToAction(nameof(Index));
         }
         

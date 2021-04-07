@@ -50,13 +50,15 @@
                                     <div class="input-group-append ">
                                         <!-- DELETE Button -->
                                         @*TODO: need logic to remove function*@
-                                        <button type="button" onclick="RemoveProduct(@product.Id)" class="btn btn-primary" style="background-color:transparent">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                        <!-- EDIT Button trigger modal -->
-                                        <button type="button" onclick="AddBackToStock(@product.Id)" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
-                                            <i class="far fa-edit"></i>
-                                        </button>
+                                        <form asp-action="RemoveProduct">
+                                            <button value="@product.Id" name="id" class="btn btn-primary" style="background-color:transparent">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                            <!-- EDIT Button trigger modal -->
+                                            <button type="button" onclick="AddBackToStock(@product.Id)" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
+                                                <i class="far fa-edit"></i>
+                                            </button>
                                     </div>
                                 </div>
                             </div>
