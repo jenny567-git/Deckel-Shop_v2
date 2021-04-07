@@ -157,8 +157,13 @@ function RemoveProduct(id) {
 
 }
 
+
 function AddBackToStock(id) {
     $('#AddBackToStockBtn').val(id);
+}
+
+function SendOrder(id) {
+    $('#SendOrderBtn').val(id);
 }
 
 function PopulateOrderModal(order) {

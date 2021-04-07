@@ -47,9 +47,17 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult DeliveredOrders()
         {
-
-            return View("views/profile/Administrator/DeliveredOrders.cshtml");
+            return View("views/profile/Administrator/DeliveredOrders.cshtml", _os.GetAllOrdersByOrderStatus("Delivered"));
         }
+
+        [HttpPost]
+
+        public async Task< IActionResult> SendOrder(int id)
+        {
+            await _os.SendOrder(id);
+            return View("/views/profile/administrator/DeliveredOrders.cshtml", _os.GetAllOrdersByOrderStatus("Delivered"));
+        }
+
         //--------------------------------------------------------------------END OF ORDERS
 
         //--------------------------------------------------------------------START OF CUSTOMER

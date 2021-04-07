@@ -69,15 +69,24 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges();
         }
 
-        public void SendOrder(Order order)
+        //public void SendOrder(int id)
+        //{
+        //    var currentOrder = deckelShopContext.Orders.FirstOrDefault(x => x.OrderId == id);
+        //    if (currentOrder != null)
+        //    {
+        //        //change orderstatus to int???
+        //        currentOrder.OrderStatus = "Delivered";
+        //    }
+        //    deckelShopContext.SaveChanges();
+        //}
+
+
+        public async Task<int> SendOrder(int id)
         {
-            var currentOrder = deckelShopContext.Orders.FirstOrDefault(x => x.OrderId == order.OrderId);
-            if (currentOrder != null)
-            {
-                //change orderstatus to int???
-                currentOrder.OrderStatus = "Shipped";
-            }
-            deckelShopContext.SaveChanges();
+            GetOrder(id).OrderStatus = "Delivered";
+            deckelShopContext.Update(GetOrder(id));
+
+            return await deckelShopContext.SaveChangesAsync();
         }
 
     }

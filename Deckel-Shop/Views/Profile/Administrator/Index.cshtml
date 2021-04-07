@@ -5,7 +5,6 @@
 }
 @model IEnumerable<Database.Models.Order>
 
-
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item ">
@@ -89,28 +88,29 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <th scope="row" id="OrderIdRow-@item.OrderId">@Html.DisplayFor(modelItem => item.OrderId)</th>
+                <tr>
+                    <th scope="row" id="OrderIdRow-@item.OrderId">@Html.DisplayFor(modelItem => item.OrderId)</th>
 
-                        <td>@Html.DisplayFor(modelItem => item.OrderDate) </td>
-                        <td>@Html.DisplayFor(modelItem => item.Customer.FirstName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderedItems.Count)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
-                        <td>
-                            <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
-                                    <i class="fas fa-info-circle"></i>
+                    <td>@Html.DisplayFor(modelItem => item.OrderDate) </td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderedItems.Count)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="info">
+                            <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                                <i class="fas fa-info-circle"></i>
 
-                                </button>
-                            </span>
+                            </button>
+                        </span>
 
-                            <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                <button type="button" id="ModalShowBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </span>
-                        <span data-toggle="tooltip" data-placement="bottom" title="deliver">
-                            <button type="button" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-editOrder" style="background-color:transparent">
+                        <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                            <button type="button" id="ModalShowBtn" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </span>
+
+                        <span  data-toggle="tooltip" data-placement="bottom" title="deliver">
+                            <button type="button" onclick="SendOrder(@item.OrderId)" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-sendOrder" style="background-color:transparent">
                                 <i class="fas fa-truck-loading"></i>
                             </button>
                         </span>
@@ -158,7 +158,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title" id="personName">Twitter, Inc</h5>
                                     <p class="card-text" id="personAddress">795 Folsom Ave, Suite 600 San Francisco, CA 94107</p>
-                                    <span id="personPhone">Phone:</span> 
+                                    <span id="personPhone">Phone:</span>
                                     <br />
                                     <br />
                                     <a href="#" class="btn btn-primary">Change</a>
@@ -206,6 +206,27 @@
                 </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
+        </div>
+    </div>
+</div>
+
+
+@*send order modal*@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-sendOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="DeckelModal modal-content">
+
+            <div class="modal-body">
+                Order successfully sent
+            </div>
+                <div class="modal-footer">
+                    <form asp-action="SendOrder">
+
+                       <button name="id" id="SendOrderBtn" value="" class="btn btn-primary" >OK</button>
+
+                    </form>
+                </div>
         </div>
     </div>
 </div>
