@@ -26,13 +26,14 @@ namespace Deckel_Shop.Controllers
 
         private Cart cart = new Cart
         {
-            Id = 27,
-            CustomerId = customer.Id,
-            CustomerName = customer.FirstName,
+            Customer = customer,
+            //Id = 27,
+            //CustomerId = customer.Id,
+            //CustomerName = customer.FirstName,
             Products = productlist
         };
 
-        [HttpGet]
+        
         public IActionResult Index()
         {
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
@@ -56,7 +57,7 @@ namespace Deckel_Shop.Controllers
         //    return View(products);
         //}
 
-        [HttpPost]
+        
         public IActionResult AddProductToCart(int id)
         {
             var product = _ss.GetProduct(id);
@@ -75,7 +76,7 @@ namespace Deckel_Shop.Controllers
                 {
                     Id = cart.Id,
                     CustomerId = cart.CustomerId,
-                    CustomerName = cart.CustomerName,
+                    Customer = cart.Customer,
                     TotalPrice = cart.TotalPrice,
                     Products = new List<Product>()
                 };
@@ -92,6 +93,7 @@ namespace Deckel_Shop.Controllers
                     {
                         Id = product.Id,
                         Name = product.Name,
+                        ImgName2 = product.ImgName2,
                         Description = product.Description,
                         Price = product.Price,
                         Amount = 1

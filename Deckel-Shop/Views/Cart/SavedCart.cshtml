@@ -20,6 +20,7 @@
                 <tr>
                     <th scope="col">Image</th>
                     <th scope="col">Product ID</th>
+                    <th scope="col" class="text-center">Name</th>
                     <th scope="col" class="text-center">Price</th>
                     <th scope="col" class="text-center">Amount</th>
                     <th scope="col" class="text-center">Qty</th>
@@ -35,7 +36,7 @@
                     totalPrice += productTotal;
                     <tr>
                         <td>
-                            <img src="@product.ImgName" />
+                            <img src="@product.ImgName2" width="150" height="150"/>
                         </td>
                         <th>@product.Id</th>
                         <td class="text-center">@product.Name</td>
@@ -62,7 +63,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    @*<td></td>*@
+                    <td></td>
                     <td></td>
                     <th class="text-center">@totalPrice SEK</th>
                 </tr>

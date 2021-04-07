@@ -12,7 +12,7 @@ namespace Deckel_Shop.Models
 
         public int CustomerId { get; set; }
 
-        public string CustomerName { get; set; }
+        public Customer Customer { get; set; }
 
         public List<Product> Products { get; set; }
 
