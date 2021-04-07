@@ -166,6 +166,12 @@ function SendOrder(id) {
     $('#SendOrderBtn').val(id);
 }
 
+function RemoveOrder(id) {
+
+    $('#DeleteOrderBtn').val(id);
+
+}
+
 function PopulateOrderModal(order) {
     var productList = document.getElementById("OrderedItemsList");
     $("#exampleModalLongTitle").html("Order id: " + order.orderId);

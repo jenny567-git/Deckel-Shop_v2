@@ -54,9 +54,19 @@ namespace Deckel_Shop.Controllers
 
         public async Task< IActionResult> SendOrder(int id)
         {
-            await _os.SendOrder(id);
-            return View("/views/profile/administrator/DeliveredOrders.cshtml", _os.GetAllOrdersByOrderStatus("Delivered"));
+            await _os.RemoveOrder(id);
+            return RedirectToAction(nameof(DeliveredOrders));
         }
+        
+        [HttpPost]
+
+        public async Task< IActionResult> RemoveOrder(int id)
+        {
+            await _os.RemoveOrder(id);
+            return RedirectToAction(nameof(Administrator));
+        }
+
+
 
         //--------------------------------------------------------------------END OF ORDERS
 

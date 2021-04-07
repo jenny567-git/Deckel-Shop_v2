@@ -5,7 +5,6 @@
 }
 @model IEnumerable<Database.Models.Order>
 
-
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item">
@@ -108,7 +107,7 @@
                                     </button>
                                 </span>
                                 <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                    <button type="button" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                                    <button onclick="RemoveOrder(@item.OrderId)" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </span>
@@ -228,7 +227,9 @@
                 Delete Order?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Yes</button>
+                <form asp-action="RemoveOrder">
+                    <button class="btn btn-danger" id="DeleteOrderBtn" name="id" value="">Yes</button>
+                </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>

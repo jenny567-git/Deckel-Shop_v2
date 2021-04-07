@@ -63,10 +63,11 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges();
         }
 
-        public void RemoveOrder(Order order)
+        public async Task<int> RemoveOrder(int id)
         {
-            deckelShopContext.Orders.Remove(order);
-            deckelShopContext.SaveChanges();
+            GetOrder(id).OrderedItems.Clear();
+            deckelShopContext.Orders.Remove(GetOrder(id));
+           return await deckelShopContext.SaveChangesAsync();
         }
 
         //public void SendOrder(int id)
