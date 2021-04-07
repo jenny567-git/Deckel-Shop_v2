@@ -48,10 +48,13 @@
                                 <div class="input-group">
                                     <input id="quantity" type="number" value="@product.Amount" class="form-control quantity-input" readonly>
                                     <div class="input-group-append ">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                                        <!-- DELETE Button -->
+                                        @*TODO: need logic to remove function*@
+                                        <button type="button" onclick="RemoveProduct(@product.Id)" class="btn btn-primary" style="background-color:transparent">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
-                                        <button type="button" id="editBtn"  class="btn btn-primary" style="background-color:transparent">
+                                        <!-- EDIT Button trigger modal -->
+                                        <button type="button" onclick="AddBackToStock(@product.Id)" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
                                             <i class="far fa-edit"></i>
                                         </button>
                                     </div>
@@ -94,3 +97,22 @@
 
 </section>
 
+@* EDIT modal*@
+<div class="modal fade" id="exampleModal-editProduct" tabindex="-1" aria-labelledby="exampleModal-AddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="DeckelModal modal-content">
+            <form asp-action="ChangeQuantity">
+                <div class="modal-body">
+                    <label for="inputAmount">Amount</label>
+                    <input name="StockAmount" type="number" class="form-control" id="inputStockAmount">
+                </div>
+                <div class="modal-footer">
+                    @*TODO: need logic to receive amount and logic to execute this function*@
+                    <button name="id" id="AddBackToStockBtn" value="" class="btn btn-danger">Yes</button>
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

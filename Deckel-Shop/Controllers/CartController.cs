@@ -105,6 +105,12 @@ namespace Deckel_Shop.Controllers
             return View("SavedCart", shopCart);
         }
 
+
+        public IActionResult ChangeQuantity()
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        
         public IActionResult Checkout()
         {
             return View();
