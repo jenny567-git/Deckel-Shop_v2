@@ -44,6 +44,7 @@
             @{
                 var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
             }
+            <vc:shopping-cart class="col-3" cart=@cart></vc:shopping-cart>
             <a asp-area="" asp-controller="Cart" asp-action="Index">
                 <i class="fas fa-shopping-cart" style="font-size: 48px; color: #c4a970;"></i>
             </a>

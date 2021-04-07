@@ -32,7 +32,7 @@ namespace Deckel_Shop
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
                 options.Cookie.Name = ".ShoppingCart.Session";
@@ -63,13 +63,13 @@ namespace Deckel_Shop
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
             
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

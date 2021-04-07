@@ -24,6 +24,7 @@ namespace Deckel_Shop.Controllers
             FirstName = "Blas De Lezo"
         };
 
+
         private Cart cart = new Cart
         {
             Id = 27,
@@ -32,10 +33,16 @@ namespace Deckel_Shop.Controllers
             Products = productlist
         };
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            if (shopCart != null)
+            {
+                productlist = shopCart.Products;
+            }
+            return View("SavedCart", shopCart);
+        }
 
         //public IActionResult kjhslkijgfhlisdfujhgidslfuhdilfuhdifubhdifugbh()
         //{
@@ -50,7 +57,7 @@ namespace Deckel_Shop.Controllers
         //    return View(products);
         //}
 
-
+        [HttpPost]
         public IActionResult AddProductToCart(int id)
         {
             var product = _ss.GetProduct(id);

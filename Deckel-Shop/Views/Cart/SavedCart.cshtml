@@ -10,7 +10,10 @@
 
 <h4>Your Shopping Cart contains the following products:</h4>
 <br />
+@if(Model != null)
+            {
 
+            
 <p><b>Cart Id:</b> @Model.Id</p>
 <p><b>Customer: </b> @Model.CustomerId - @Model.CustomerName</p>
 <p><b>Products: </b> </p>
@@ -49,7 +52,7 @@
 
     </tbody>
 </table>
-
+            }
 
 
 <p>The Shopping Cart Information was saved. You can add more products to your shopping cart <a asp-action="Index">here</a>.</p>
