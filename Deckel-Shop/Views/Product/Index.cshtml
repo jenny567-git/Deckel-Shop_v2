@@ -1,4 +1,12 @@
-﻿@model IEnumerable<Database.Models.Product>
+﻿@using Deckel_Shop.Session;
+
+@model IEnumerable<Database.Models.Product>
+
+@{
+    var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
+    var cartshop = Context.Session.Get<Cart>("cart");
+}
+
 
 <div class="row">
     <h3 class="h3">Our fine Products!</h3>
@@ -26,24 +34,27 @@
     {
         <div class="col-md-3 col-sm-6 pb-8">
             <div class="product-grid4">
-                <div class="product-image4">
-                    <a href="#">
-                        <img class="pic-1" src="@p.ImgName">
-                        <img class="pic-2" src="@p.ImgName2">
-                    </a>
-                    <ul class="social">
-                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">Hot</span>
-                </div>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">@p.Name</a></h3>
-                    <div class="price">
-                        @p.Price SEK
+                <form asp-action="AddProductToCart" asp-controller="cart">
+                    <div class="product-image4">
+                        <a href="#">
+                            <img class="pic-1" src="@p.ImgName">
+                            <img class="pic-2" src="@p.ImgName2">
+                        </a>
+                        <ul class="social">
+                            <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                        <span class="product-new-label">Hot</span>
                     </div>
-                    <a class="add-to-cart" href="">ADD TO CART</a>
-                </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">@p.Name</a></h3>
+                        <div class="price">
+                            @p.Price SEK
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="ADD TO CART" />
+                        @*<a class="add-to-cart" href="">ADD TO CART</a>*@
+                    </div>
+                </form>
             </div>
         </div>
     }
