@@ -26,7 +26,6 @@
     <tbody>
         @foreach (var product in Model)
         {
-            <form method="post" asp-controller="Home" asp-action="AddProductToCart">
                 <tr>
                     <th>
                         @product.Id
@@ -48,11 +47,12 @@
                         <input class="text-center" type="text" name="Quantity" value="1" size="2" />
                         <input type="hidden" name="Amount" value="@product.Amount" />
                     </td>
+            <form method="post" asp-controller="Home" asp-action="AddProductToCart">
                     <td>
                         <input class="btn btn-primary" type="submit" value="Add To Cart" />
                     </td>
-                </tr>
             </form>
+                </tr>
         }
     </tbody>
 </table>

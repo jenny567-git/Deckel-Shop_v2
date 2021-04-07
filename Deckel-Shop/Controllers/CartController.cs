@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Deckel_Shop.Controllers
 {
-        [Route("cart")]
+    [Route("cart")]
     public class CartController : Controller
     {
         private readonly StockService _ss = new StockService();
@@ -77,7 +77,7 @@ namespace Deckel_Shop.Controllers
 
             if (shopCart.Products.Exists(p => p.Id == product.Id))
             {
-                shopCart.Products.First(p => p.Id == product.Id).Amount += product.Amount;
+                ++shopCart.Products.First(p => p.Id == product.Id).Amount;
             }
             else
             {
@@ -88,8 +88,8 @@ namespace Deckel_Shop.Controllers
                         Name = product.Name,
                         Description = product.Description,
                         Price = product.Price,
-                        Amount = product.Amount
-                    });
+                        Amount = 1
+                    }) ;
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
