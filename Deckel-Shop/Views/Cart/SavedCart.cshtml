@@ -36,7 +36,7 @@
                     totalPrice += productTotal;
                     <tr>
                         <td class="text-right">
-                            <img src="@product.ImgName2" width="150" height="150"/>
+                            <img src="@product.ImgName2" width="150" height="150" />
                         </td>
                         <th class="text-center">@product.Id</th>
                         <td class="text-center">@product.Name</td>
@@ -46,10 +46,13 @@
                             <div class="col-md-6 quantity m-auto">
                                 @*<label for="quantity">Quantity:</label>*@
                                 <div class="input-group">
-                                    <input id="quantity" type="number" value="@product.Amount" class="form-control quantity-input">
+                                    <input id="quantity" type="number" value="@product.Amount" class="form-control quantity-input" readonly>
                                     <div class="input-group-append ">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
                                             <i class="far fa-trash-alt"></i>
+                                        </button>
+                                        <button type="button" id="editBtn"  class="btn btn-primary" style="background-color:transparent">
+                                            <i class="far fa-edit"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -73,7 +76,7 @@
     }
 
     <hr />
-    
+
 
     <div class="col-md-6 col-lg-4 m-auto">
         @*<div class="summary">
@@ -82,10 +85,10 @@
             <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
             <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
             <div class="summary-item"><span class="text">Total</span><span class="price"></span></div>*@
-           
-            <a asp-controller="cart" asp-action="checkout" class="btn btn-primary btn-lg btn-block">Checkout</a>
+
+        <a asp-controller="cart" asp-action="checkout" class="btn btn-primary btn-lg btn-block">Checkout</a>
         @*</div>
-    </div>*@
+            </div>*@
     </div>
 
 
