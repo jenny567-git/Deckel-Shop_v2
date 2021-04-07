@@ -199,6 +199,10 @@ function RemoveOrder(id) {
 }
 
 
+function AddToCart(id) {
+    $('#AddToCartBtn').val(id);
+}
+
 function PopulateOrderModal(order) {
     var productList = document.getElementById("OrderedItemsList");
     $("#exampleModalLongTitle").html("Order id: " + order.orderId);
