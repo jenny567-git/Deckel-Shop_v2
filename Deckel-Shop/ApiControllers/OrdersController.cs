@@ -40,6 +40,16 @@ namespace Deckel_Shop.ApiControllers
             
             return customer;
         }
+        
+        [Route("stockDetails")]
+        [HttpPost]
+        public Product stockDetails(InputData data)
+        {
+            var ss = new StockService();
+            var product = ss.GetProduct(data.Id);
+            
+            return product;
+        }
 
     }
 

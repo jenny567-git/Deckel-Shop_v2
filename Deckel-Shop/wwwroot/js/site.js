@@ -9,24 +9,37 @@ const navSlide = () => {
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
 
+    function ResetAnimation(listItem) {
+        listItem.style.animation = 'none';
+        listItem.offsetHeight; /* trigger reflow */
+        listItem.style.animation = null;
+    }
+
     burger.addEventListener('click', () => {
         //toggle nav
         nav.classList.toggle('nav-active');
 
         //Animate Links
         navLinks.forEach((link, index) => {
-            if (link.style.animation) {
-                //link.style.animation = '';
-            } else {
+            // Fires only the first time. Animation is set by class
+            if (link.style.animation == '') {
+                ResetAnimation(link);
                 link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                // Fires when side nav has been closed at least once
+            } else if (link.style.animation === '0s ease 0s 1 normal forwards running navLinkFade') {
+                ResetAnimation(link);
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                // Fires when opening side nav
+            } else {
+                ResetAnimation(link);
+                link.style.animation = '0s ease 0s 1 normal forwards running navLinkFade';
             }
         });
+       
         //Burger animation
         burger.classList.toggle('toggle');
 
     });
-
-
 }
 
 navSlide();
@@ -64,7 +77,7 @@ function showSlides(n) {
     }
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
-} 
+}
 
 //Admin -> Edit customer -> Show password
 function showPassword() {
@@ -113,7 +126,7 @@ function GetModalInfo(id, modalType) {
         $.ajax({
             type: "POST",
             url: "/api/Orders/" + modalType,
-            data: Id, 
+            data: Id,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { // response = order info
@@ -122,6 +135,9 @@ function GetModalInfo(id, modalType) {
                     PopulateOrderModal(response);
                 } else if (modalType === 'customerDetails') {
                     PopulateCustomerModal(response)
+                }
+                else if (modalType === 'stockDetails') {
+                    PopulateStockModal(response)
                 }
                 else {
                     console.log("Error: Could not find modalType!");
@@ -148,6 +164,16 @@ function PopulateCustomerModal(customer) {
     $('input[id="detailsZip"]').val(customer.zipCode);
 
     console.log(customer.firstName);
+
+}
+
+function PopulateStockModal(product) {
+    $('input[name="detailsProductID"]').val(product.id);
+    $('input[name="detailsProductName"]').val(product.name);
+    $('input[name="detailsAmount"]').val(product.amount);
+    $('input[name="detailsPrice"]').val(product.price);
+    
+    console.log(product.name);
 
 }
 

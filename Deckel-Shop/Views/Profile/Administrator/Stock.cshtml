@@ -101,7 +101,7 @@
                         </td>
                         <td>
                             <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
+                                <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
                                     <i class="fas fa-info-circle"></i>
                                 </button>
                             </span>
@@ -220,22 +220,22 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="ProductID">Product ID</label>
-                            <input type="text" class="form-control" id="inputCustomerID" disabled />
+                            <input type="text" class="form-control" id="detailsProductID" name="detailsProductID" disabled />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputProductName">Product Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" disabled>
+                            <input type="text" class="form-control" id="detailsProductName" name="detailsProductName" disabled>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Amount</label>
-                            <input type="text" class="form-control" id="inputLastName" disabled>
+                            <input type="text" class="form-control" id="detailsAmount" name="detailsAmount" disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Price</label>
-                            <input type="email" class="form-control" id="inputEmail4" disabled>
+                            <input type="email" class="form-control" id="detailsPrice" name="detailsPrice" disabled>
                         </div>
                     </div>
                     <div class="form-group col-md-10">

@@ -30,9 +30,9 @@ namespace Deckel_Shop.Services
 
         
 
-        public IEnumerable<Product> GetProduct(int id)
+        public Product GetProduct(int id)
         {
-            return deckelShopContext.Products.Where(p => p.Id == id).AsEnumerable();
+            return deckelShopContext.Products.FirstOrDefault(p => p.Id == id);
         }
 
         public void AddProduct(Product product)
