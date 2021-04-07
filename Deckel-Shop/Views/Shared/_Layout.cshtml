@@ -1,4 +1,6 @@
-﻿@using Deckel_Shop.Session;
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,31 +25,53 @@
                     <img id="img_logo" alt="Logo" src="@Url.Content("~/Image/Deckel-Shop-Logo4.png")" />
                 </a>
             </div>
-            <ul class="nav-links">
-                <li class="navAnim">
-                    <a asp-area="" asp-controller="Profile" asp-action="administrator">Admin</a>
-                </li>
-                <li class="navAnim">
-                    <a asp-area="" asp-controller="Product" asp-action="index">Shop</a>
-                </li>
-                <li class="navAnim">
-                    <a asp-area="" asp-controller="Home" asp-action="About">About</a>
-                </li>
-                <li class="navAnim">
-                    <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                </li>
-            </ul>
-            <div id="nav-log" class="" style="position: absolute; top:25%; right:25%; width:100px;  text-align:right;">
-                <partial name="_LoginPartial" />
+            <table>
+                <ul class="nav-links">
+                    <li class="navAnim">
+                        <a asp-area="" asp-controller="Profile" asp-action="administrator">Admin</a>
+                    </li>
+                    <li class="navAnim">
+                        <a asp-area="" asp-controller="Product" asp-action="index">Shop</a>
+                    </li>
+                    <li class="navAnim">
+                        <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+                    </li>
+                    <li class="navAnim">
+                        <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                    </li>
+                </ul>
+            </table>
+            <div>
+                <ul class="nav-items">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Profile" asp-action="Index" title="Manage">User: @User.Identity.Name!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    }
+                </ul>
             </div>
-            <div class="col-1"></div>
-            @{
-                var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
-            }
-            <vc:shopping-cart class="col-3" cart=@cart></vc:shopping-cart>
-            <a asp-area="" asp-controller="Cart" asp-action="Index">
-                <i class="fas fa-shopping-cart" style="font-size: 48px; color: #c4a970;"></i>
-            </a>
+            <div style="float:right">
+                <div>
+                    <a asp-controller="cart" asp-action="index">
+                        <span class="fas fa-shopping-cart cartman" style="font-size: 30px; color: #c4a970;" data-type="floating"></span>
+                    </a>
+                </div>
+            </div>
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
