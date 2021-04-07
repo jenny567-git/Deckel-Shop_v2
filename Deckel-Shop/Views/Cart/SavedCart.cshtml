@@ -26,16 +26,16 @@
         </tr>
     </thead>
     <tbody>
-        @*@{ var totalPrice = 0.0M; }
+        @{ var totalPrice = 0.0M; }
         @foreach (var product in Model.Products)
         {
-            var productTotal = product.Price * product.Quantity;
+            var productTotal = product.Price * product.Amount;
             totalPrice += productTotal;
             <tr>
                 <th>@product.Id</th>
                 <td>@product.Name</td>
                 <td class="text-center">@product.Price</td>
-                <td class="text-center">@product.Quantity</td>
+                <td class="text-center">@product.Amount</td>
                 <td class="text-center">@productTotal</td>
             </tr>
         }
@@ -45,7 +45,7 @@
             <td></td>
             <td></td>
             <th class="text-center">@totalPrice</th>
-        </tr>*@
+        </tr>
 
     </tbody>
 </table>

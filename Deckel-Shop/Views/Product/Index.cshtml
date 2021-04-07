@@ -34,7 +34,6 @@
     {
         <div class="col-md-3 col-sm-6 pb-8">
             <div class="product-grid4">
-                <form asp-action="AddProductToCart" asp-controller="cart">
                     <div class="product-image4">
                         <a href="#">
                             <img class="pic-1" src="@p.ImgName">
@@ -51,10 +50,14 @@
                         <div class="price">
                             @p.Price SEK
                         </div>
-                        <input class="btn btn-primary" type="submit" value="ADD TO CART" />
+                <form asp-action="AddProductToCart" asp-controller="cart">
+                        <button class="btn btn-light" value="@p.Id" name="id">
+                            <i class="fas fa-shopping-cart" style="color: #c4a970;"></i>
+                        </button>
+                </form>
+                        @*<input class="btn btn-primary" type="submit" value="ADD TO CART" id="AddToCartBtn" onclick="AddToCart(@p.Id)" />*@
                         @*<a class="add-to-cart" href="">ADD TO CART</a>*@
                     </div>
-                </form>
             </div>
         </div>
     }

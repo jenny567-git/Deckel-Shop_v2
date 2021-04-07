@@ -1,5 +1,6 @@
 ﻿using Database.Models;
 using Deckel_Shop.Models;
+using Deckel_Shop.Services;
 using Deckel_Shop.Session;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,7 +13,9 @@ namespace Deckel_Shop.Controllers
         [Route("cart")]
     public class CartController : Controller
     {
-        private static List<Product> products = new List<Product>();
+        private readonly StockService _ss = new StockService();
+
+        private static List<Product> productlist = new List<Product>();
 
         //TEST OBJECTS: Customer, Products, Cart
         private static Customer customer = new Customer
@@ -26,27 +29,33 @@ namespace Deckel_Shop.Controllers
             Id = 27,
             CustomerId = customer.Id,
             CustomerName = customer.FirstName,
-            Products = products
+            Products = productlist
         };
 
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //public IActionResult kjhslkijgfhlisdfujhgidslfuhdilfuhdifubhdifugbh()
+        //{
+
+        //    var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+        //    if (shopCart != null)
+        //    {
+        //        products = shopCart.Products;
+        //    }
+
+        //    return View(products);
+        //}
 
 
-        public IActionResult kjhslkijgfhlisdfujhgidslfuhdilfuhdifubhdifugbh()
+        public IActionResult AddProductToCart(int id)
         {
+            var product = _ss.GetProduct(id);
+            productlist = _ss.GetAllAvailableProducts().ToList();
 
-            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-
-            if (shopCart != null)
-            {
-                products = shopCart.Products;
-            }
-
-            return View(products);
-        }
-
-
-        public IActionResult AddProductToCart(Product product)
-        {
             if (!ModelState.IsValid)
             {
                 RedirectToAction("views/product/index.cshtml");
@@ -89,37 +98,31 @@ namespace Deckel_Shop.Controllers
         }
 
 
-        public IActionResult Info()
-        {
-            return View();
-        }
+        //public IActionResult Session()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        RedirectToAction("Index");
+        //    }
+
+        //    Cart shoppingCart = null;
+
+        //    shoppingCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+        //    return View(shoppingCart);
+        //}
 
 
-        public IActionResult Session()
-        {
-            if (!ModelState.IsValid)
-            {
-                RedirectToAction("Index");
-            }
+        //public IActionResult AddVarsToSession(int age, string gender)
+        //{
+        //    if (age != 0 && !string.IsNullOrEmpty(gender))
+        //    {
+        //        HttpContext.Session.Set("age", age);
+        //        HttpContext.Session.Set("gender", gender);
+        //    }
 
-            Cart shoppingCart = null;
-
-            shoppingCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-
-            return View(shoppingCart);
-        }
-
-
-        public IActionResult AddVarsToSession(int age, string gender)
-        {
-            if (age != 0 && !string.IsNullOrEmpty(gender))
-            {
-                HttpContext.Session.Set("age", age);
-                HttpContext.Session.Set("gender", gender);
-            }
-
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -130,20 +133,17 @@ namespace Deckel_Shop.Controllers
 
     }
 }
-        
 
 
 
 
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
 
-        //public IActionResult Checkout()
-        //{
-        //    return View();
-        //}
+
+
+//public IActionResult Checkout()
+//{
+//    return View();
+//}
 //    }
 //}
