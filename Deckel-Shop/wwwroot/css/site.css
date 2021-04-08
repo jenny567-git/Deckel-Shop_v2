@@ -104,8 +104,12 @@ nav {
     color: #c4a970;
 }
 
-.dropdown-menu{
-    background-color: #4c4c4c;
+.dropdown-menu {
+    background-color: #3b3b3b;
+}
+
+.dropdown-item {
+    color: #d9c291;
 }
 
     .nav-links li {
