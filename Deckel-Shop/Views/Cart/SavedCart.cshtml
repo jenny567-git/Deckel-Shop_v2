@@ -18,12 +18,11 @@
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">Product ID</th>
+                    <th scope="col" class="text-center">Image</th>
+                    <th scope="col" class="text-center">Product ID</th>
+                    <th scope="col" class="text-center">Name</th>
                     <th scope="col" class="text-center">Price</th>
-                    <th scope="col" class="text-center">Amount</th>
                     <th scope="col" class="text-center">Qty</th>
-                    @*<th></th>*@
                     <th class="text-center">Total Price</th>
                 </tr>
             </thead>
@@ -34,22 +33,29 @@
                     var productTotal = product.Price * product.Amount;
                     totalPrice += productTotal;
                     <tr>
-                        <td>
-                            <img src="@product.ImgName" />
+                        <td class="text-right">
+                            <img src="@product.ImgName2" width="150" height="150" />
                         </td>
-                        <th>@product.Id</th>
+                        <th class="text-center">@product.Id</th>
                         <td class="text-center">@product.Name</td>
                         <td class="text-center">@product.Price</td>
                         @*<td class="text-center">@product.Amount</td>*@
                         <td class="text-center">
-                            <div class="col-md-6 quantity m-auto">
+                            <div class="col-md-8 quantity m-auto">
                                 @*<label for="quantity">Quantity:</label>*@
                                 <div class="input-group">
-                                    <input id="quantity" type="number" value="@product.Amount" class="form-control quantity-input">
+                                    <input id="amount" type="number" value="@product.Amount" name="amount" class="form-control quantity-input" readonly>
                                     <div class="input-group-append ">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
-                                            <i class="far fa-trash-alt"></i>
+                                        <!-- EDIT Button trigger modal -->
+                                        <button type="button" onclick="AddBackToStock(@product.Id)" name="id" value="@product.Id" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
+                                            <i class="far fa-edit"></i>
                                         </button>
+                                        <!-- DELETE Button -->
+                                        <form asp-action="RemoveProduct">
+                                            <button value="@product.Id" name="id" class="btn btn-primary" style="background-color:transparent">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +68,6 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    @*<td></td>*@
                     <td></td>
                     <th class="text-center">@totalPrice SEK</th>
                 </tr>
@@ -70,23 +75,38 @@
             </tbody>
         </table>
     }
+    else
+    {
+        <h2 class="pb-5 pt-5">Empty. Go and do some shopping!</h2>
+
+    }
 
     <hr />
-    
+
 
     <div class="col-md-6 col-lg-4 m-auto">
-        @*<div class="summary">
-            <h3>Summary</h3>
-            <div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
-            <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
-            <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
-            <div class="summary-item"><span class="text">Total</span><span class="price"></span></div>*@
-           
-            <a asp-controller="cart" asp-action="checkout" class="btn btn-primary btn-lg btn-block">Checkout</a>
-        @*</div>
-    </div>*@
+        <a asp-controller="cart" asp-action="checkout" class="btn btn-primary btn-lg btn-block">Checkout</a>
     </div>
 
 
 </section>
 
+@* EDIT modal*@
+<div class="modal fade" id="exampleModal-editProduct" tabindex="-1" aria-labelledby="exampleModal-AddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="DeckelModal modal-content">
+            <form asp-action="ChangeQuantity">
+                <div class="modal-body">
+                    <label for="inputAmount">Amount</label>
+                    <input name="amount" type="number" class="form-control" id="inputAmount">
+                </div>
+                <div class="modal-footer">
+                    @*TODO: need logic to receive amount and logic to execute this function*@
+                    <button name="id" id="AddBackToStockBtn" value="" class="btn btn-danger">Yes</button>
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

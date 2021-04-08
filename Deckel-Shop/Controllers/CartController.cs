@@ -26,22 +26,9 @@ namespace Deckel_Shop.Controllers
 
         private Cart cart = new Cart
         {
-            Id = 27,
-            CustomerId = customer.Id,
-            CustomerName = customer.FirstName,
+            Customer = customer,
             Products = productlist
         };
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-            if (shopCart != null)
-            {
-                productlist = shopCart.Products;
-            }
-            return View("SavedCart", shopCart);
-        }
 
         //public IActionResult kjhslkijgfhlisdfujhgidslfuhdilfuhdifubhdifugbh()
         //{
@@ -56,7 +43,16 @@ namespace Deckel_Shop.Controllers
         //    return View(products);
         //}
 
-        [HttpPost]
+        public IActionResult Index()
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            if (shopCart != null)
+            {
+                productlist = shopCart.Products;
+            }
+            return View("SavedCart", shopCart);
+        }
+                
         public IActionResult AddProductToCart(int id)
         {
             var product = _ss.GetProduct(id);
@@ -75,7 +71,7 @@ namespace Deckel_Shop.Controllers
                 {
                     Id = cart.Id,
                     CustomerId = cart.CustomerId,
-                    CustomerName = cart.CustomerName,
+                    Customer = cart.Customer,
                     TotalPrice = cart.TotalPrice,
                     Products = new List<Product>()
                 };
@@ -92,6 +88,7 @@ namespace Deckel_Shop.Controllers
                     {
                         Id = product.Id,
                         Name = product.Name,
+                        ImgName2 = product.ImgName2,
                         Description = product.Description,
                         Price = product.Price,
                         Amount = 1
@@ -103,6 +100,26 @@ namespace Deckel_Shop.Controllers
             return View("SavedCart", shopCart);
         }
 
+        public IActionResult RemoveProduct(int id)
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            //var product = shopCart.Products.Single(p => p.Id == id);
+            shopCart.Products.RemoveAll(p => p.Id == id);
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ChangeQuantity(int id, int amount)
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            var product = shopCart.Products.Find(p => p.Id == id);
+            product.Amount = amount;
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+            //shopCart.Products.Update(product);
+
+            return RedirectToAction(nameof(Index));
+        }
+        
         public IActionResult Checkout()
         {
             return View();
@@ -147,16 +164,3 @@ namespace Deckel_Shop.Controllers
     }
 }
 
-
-
-
-
-
-
-
-//public IActionResult Checkout()
-//{
-//    return View();
-//}
-//    }
-//}
