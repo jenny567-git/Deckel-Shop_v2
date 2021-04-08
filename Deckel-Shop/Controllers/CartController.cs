@@ -153,8 +153,8 @@ namespace Deckel_Shop.Controllers
                    foreach (var product in cart.Products)
                     {
                         OrderedItem orderedItem = new OrderedItem();
-                        orderedItem.Product = product;
-                        
+                        //orderedItem.Product = product;
+                        orderedItem.ProductId = product.Id;
                         orderedItem.Amount = product.Amount;
                         order.OrderedItems.Add(orderedItem);
                         
