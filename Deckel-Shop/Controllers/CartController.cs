@@ -52,7 +52,7 @@ namespace Deckel_Shop.Controllers
             }
             return View("SavedCart", shopCart);
         }
-                
+
         public IActionResult AddProductToCart(int id)
         {
             var product = _ss.GetProduct(id);
@@ -79,7 +79,12 @@ namespace Deckel_Shop.Controllers
 
             if (shopCart.Products.Exists(p => p.Id == product.Id))
             {
+                var itemInCart = shopCart.Products.FirstOrDefault(p => p.Id == product.Id);
+                if(_ss.GetProduct(id).Amount > itemInCart.Amount)
+                {
                 ++shopCart.Products.First(p => p.Id == product.Id).Amount;
+                }
+                
             }
             else
             {
@@ -92,7 +97,7 @@ namespace Deckel_Shop.Controllers
                         Description = product.Description,
                         Price = product.Price,
                         Amount = 1
-                    }) ;
+                    });
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
@@ -113,13 +118,18 @@ namespace Deckel_Shop.Controllers
         {
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
             var product = shopCart.Products.Find(p => p.Id == id);
-            product.Amount = amount;
+            if (_ss.GetProduct(id).Amount >= amount)
+            {
+                product.Amount = amount;
+
+            }
+
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
             //shopCart.Products.Update(product);
 
             return RedirectToAction(nameof(Index));
         }
-        
+
         public IActionResult Checkout()
         {
             return View();
