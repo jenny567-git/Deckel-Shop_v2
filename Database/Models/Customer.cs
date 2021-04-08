@@ -21,6 +21,7 @@ namespace Database.Models
         public string ZipCode { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string Country { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }

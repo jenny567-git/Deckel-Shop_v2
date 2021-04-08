@@ -3,8 +3,11 @@ using Deckel_Shop.Models;
 using Deckel_Shop.Services;
 using Deckel_Shop.Session;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +18,8 @@ namespace Deckel_Shop.Controllers
         private readonly StockService _ss = new StockService();
 
         private static List<Product> productlist = new List<Product>();
+
+        private readonly OrderService orderService = new OrderService();
 
         //TEST OBJECTS: Customer, Products, Cart
         private static Customer customer = new Customer
@@ -55,6 +60,7 @@ namespace Deckel_Shop.Controllers
                 
         public IActionResult AddProductToCart(int id)
         {
+            
             var product = _ss.GetProduct(id);
             productlist = _ss.GetAllAvailableProducts().ToList();
 
@@ -92,12 +98,13 @@ namespace Deckel_Shop.Controllers
                         Description = product.Description,
                         Price = product.Price,
                         Amount = 1
-                    }) ;
+                    });
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
 
             return View("SavedCart", shopCart);
+
         }
 
         public IActionResult RemoveProduct(int id)
@@ -122,45 +129,77 @@ namespace Deckel_Shop.Controllers
         
         public IActionResult Checkout()
         {
+            
             return View();
         }
 
+        
+
+        [HttpPost]
+        public ActionResult AddOrder([Bind] Customer detail)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Order order = new Order();
+                    order.Customer = detail;
+                    var cart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+                    orderService.AddOrder(order);
+                    
+                }
 
 
-
-        //public IActionResult Session()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        RedirectToAction("Index");
-        //    }
-
-        //    Cart shoppingCart = null;
-
-        //    shoppingCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-
-        //    return View(shoppingCart);
-        //}
-
-
-        //public IActionResult AddVarsToSession(int age, string gender)
-        //{
-        //    if (age != 0 && !string.IsNullOrEmpty(gender))
-        //    {
-        //        HttpContext.Session.Set("age", age);
-        //        HttpContext.Session.Set("gender", gender);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
-
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return View();
+        }
     }
+
+
+
+
+    //public IActionResult Session()
+    //{
+    //    if (!ModelState.IsValid)
+    //    {
+    //        RedirectToAction("Index");
+    //    }
+
+    //    Cart shoppingCart = null;
+
+    //    shoppingCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+    //    return View(shoppingCart);
+    //}
+
+
+    //public IActionResult AddVarsToSession(int age, string gender)
+    //{
+    //    if (age != 0 && !string.IsNullOrEmpty(gender))
+    //    {
+    //        HttpContext.Session.Set("age", age);
+    //        HttpContext.Session.Set("gender", gender);
+    //    }
+
+    //    return RedirectToAction("Index");
+    //}
+
+
+    //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    //public IActionResult Error()
+    //{
+    //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    //}
+
+
 }
+
+    
+    
+
 
