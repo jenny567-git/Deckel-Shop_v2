@@ -1,5 +1,4 @@
 ﻿using Database.Models;
-using Database.Models;
 using Deckel_Shop.Models;
 using Deckel_Shop.Services;
 using Deckel_Shop.Session;
@@ -19,6 +18,8 @@ namespace Deckel_Shop.Controllers
         private readonly StockService _ss = new StockService();
 
         private static List<Product> productlist = new List<Product>();
+
+        private readonly OrderService orderService = new OrderService();
 
         //TEST OBJECTS: Customer, Products, Cart
         private static Customer customer = new Customer
@@ -63,6 +64,7 @@ namespace Deckel_Shop.Controllers
         [HttpPost]
         public IActionResult AddProductToCart(int id)
         {
+            
             var product = _ss.GetProduct(id);
             productlist = _ss.GetAllAvailableProducts().ToList();
 
@@ -99,117 +101,91 @@ namespace Deckel_Shop.Controllers
                         Description = product.Description,
                         Price = product.Price,
                         Amount = 1
-                    }) ;
+                    });
             }
 
-        private SqlConnection con;
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
 
-        private void connection()
-        {
-            string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
-            con = new SqlConnection(constr);
+            return View("SavedCart", shopCart);
 
         }
 
+
+        public IActionResult Checkout()
+        {
+            
+            return View();
+        }
+
+        
+
         [HttpPost]
-        public ActionResult AddOrder(Customer detail, OrderedItem order)
+        public ActionResult AddOrder([Bind] Customer detail)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (AddOrderBool(detail, order))
-                    {
-                        ViewBag.Message = "Order added successfully";
-                    }
+                    Order order = new Order();
+                    order.Customer = detail;
+                    var cart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+                    orderService.AddOrder(order);
+                    
                 }
 
-                return View();
+
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["msg"] = ex.Message;
             }
-        }
-
-        public bool AddOrderBool(Customer obj, OrderedItem obj1)
-        {
-
-            connection();
-            SqlCommand com = new SqlCommand("AddOrderDetail", con);
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@FirstName", obj.FirstName);
-            com.Parameters.AddWithValue("@LastName", obj.LastName);
-            com.Parameters.AddWithValue("@Email", obj.Email);
-            com.Parameters.AddWithValue("@Country", obj.Country);
-            com.Parameters.AddWithValue("@City", obj.City);
-            com.Parameters.AddWithValue("@Address", obj.Street);
-            com.Parameters.AddWithValue("@ZipCode", obj.ZipCode);
-            com.Parameters.AddWithValue("@OrderId", obj1.OrderId);
-            com.Parameters.AddWithValue("@ProductId", obj1.ProductId);
-            com.Parameters.AddWithValue("@Amount", obj1.Amount);
-            con.Open();
-            int i = com.ExecuteNonQuery();
-            con.Close();
-            if (i >= 1)
-            {
-
-                return true;
-
-            }
-            else
-            {
-
-                return false;
-            }
-        }
-        public IActionResult Checkout()
-        {
             return View();
         }
-
-
-
-
-        //public IActionResult Session()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        RedirectToAction("Index");
-        //    }
-
-        //    Cart shoppingCart = null;
-
-        //    shoppingCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-
-        //    return View(shoppingCart);
-        //}
-
-
-        //public IActionResult AddVarsToSession(int age, string gender)
-        //{
-        //    if (age != 0 && !string.IsNullOrEmpty(gender))
-        //    {
-        //        HttpContext.Session.Set("age", age);
-        //        HttpContext.Session.Set("gender", gender);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
-
-
     }
 
-    
-    
+
+
+
+    //public IActionResult Session()
+    //{
+    //    if (!ModelState.IsValid)
+    //    {
+    //        RedirectToAction("Index");
+    //    }
+
+    //    Cart shoppingCart = null;
+
+    //    shoppingCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+    //    return View(shoppingCart);
+    //}
+
+
+    //public IActionResult AddVarsToSession(int age, string gender)
+    //{
+    //    if (age != 0 && !string.IsNullOrEmpty(gender))
+    //    {
+    //        HttpContext.Session.Set("age", age);
+    //        HttpContext.Session.Set("gender", gender);
+    //    }
+
+    //    return RedirectToAction("Index");
+    //}
+
+
+    //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    //public IActionResult Error()
+    //{
+    //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    //}
+
+
 }
+
+    
+    
+
 
 
 
