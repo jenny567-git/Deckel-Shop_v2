@@ -176,6 +176,17 @@ function PopulateStockModal(product) {
 
 }
 
+function ChangeRoleToCustomer(id, userName) {
+    $('#changeUserRoleId').val(id);
+    $('#changeRoleDiv').html("Do you really want to change the role of " + userName + "  to the customer role?");
+}
+
+
+function ChangeRoleToAdmin(id, userName) {
+    $('#changeUserRoleId').val(id);
+    $('#changeRoleDiv').html("Do you really want to to change the role of " + userName + "  to the admin role?");
+}
+
 function RemoveProduct(id) {
 
     $('#DeleteBtn').val(id);
