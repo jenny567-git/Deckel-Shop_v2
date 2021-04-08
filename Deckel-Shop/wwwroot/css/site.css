@@ -17,11 +17,11 @@ for details on configuring this project to bundle and minify static web assets. 
         box-shadow: 0 0 0 0.2rem rgb(153 225 228) !important;
     }
 
-.DeckelModal {
+/*.DeckelModal {
     background-color: #f2f2f2;
-    box-shadow: 0 4.2px 2.2px rgba(0, 0, 0, 0.02), 0 8.6px 5.3px rgba(0, 0, 0, 0.025), 0 14px 10px rgba(0, 0, 0, 0.028), 0 21.9px 17.9px rgba(0, 0, 0, 0.032), 0 37.6px 33.4px rgba(0, 0, 0, 0.038), 0 80px 80px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 3.4px 2.7px rgba(0, 0, 0, 0.044), 0 8.7px 6.9px rgba(0, 0, 0, 0.068), 0 17.7px 14.2px rgba(0, 0, 0, 0.087), 0 36.5px 29.2px rgba(0, 0, 0, 0.106), 0 100px 80px rgba(0, 0, 0, 0.15);
 }
-
+*/
 /*ul.catBlock {
     display: table;
 }
@@ -66,7 +66,7 @@ nav {
     background-color: #2f2f2f;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 30px;
-    box-shadow: -22px 22px 20px #aaaaaa, 22px -22px 20px #ffffff;
+    box-shadow: 0 6.8px 2.7px rgba(0, 0, 0, 0.072), 0 12.9px 6.9px rgba(0, 0, 0, 0.106), 0 19.2px 14.2px rgba(0, 0, 0, 0.123), 0 28.3px 29.2px rgba(0, 0, 0, 0.133), 0 61px 80px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 3;
     /*margin: 0 auto;
