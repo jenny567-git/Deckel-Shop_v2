@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Database.Models.Product>;
 
-
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item ">
@@ -207,8 +206,9 @@
         <div class="DeckelModal modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                <span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form>
@@ -269,7 +269,7 @@
             </div>
             <div class="modal-footer">
                 <form asp-action="RemoveProduct">
-                      <button name="id" id="DeleteBtn" value="" class="btn btn-danger">JAJAMEEEEN</button>
+                    <button name="id" id="DeleteBtn" value="" class="btn btn-danger">JAJAMEEEEN</button>
                 </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
