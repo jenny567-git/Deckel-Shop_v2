@@ -95,12 +95,17 @@ nav {
     list-style: none;
 }
 
+
+.nav-items .btn {
+    font-size: 14px;
+}
+
 #navbarDropdownMenuLink {
     color: #c4a970;
 }
 
-.nav-items .btn {
-    font-size: 14px;
+.dropdown-menu{
+    background-color: #4c4c4c;
 }
 
     .nav-links li {
