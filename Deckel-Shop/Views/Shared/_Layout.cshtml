@@ -44,8 +44,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user"></i>
-                                <span class="clearfix d-none d-sm-inline-block">Account</span>
+                                <i class="far fa-user fa-3x"></i>
+                                <span class="clearfix d-none d-sm-inline-block"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 @if (SignInManager.IsSignedIn(User))
@@ -65,11 +65,9 @@
                     </ul>
                 </div>
             <div style="float:right">
-                <div>
                     <a asp-controller="cart" asp-action="index">
                         <span class="fas fa-shopping-cart cartman" style="font-size: 30px; color: #c4a970;" data-type="floating"></span>
                     </a>
-                </div>
             </div>
             <div class="burger">
                 <div class="line1"></div>
