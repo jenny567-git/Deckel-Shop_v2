@@ -110,15 +110,18 @@ namespace Deckel_Shop.Controllers
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
             //var product = shopCart.Products.Single(p => p.Id == id);
             shopCart.Products.RemoveAll(p => p.Id == id);
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult ChangeQuantity(int id)
+        public IActionResult ChangeQuantity(int id, int amount)
         {
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
             var product = shopCart.Products.Find(p => p.Id == id);
+            product.Amount = amount;
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
             //shopCart.Products.Update(product);
-            
+
             return RedirectToAction(nameof(Index));
         }
         

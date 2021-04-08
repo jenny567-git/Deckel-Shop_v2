@@ -43,23 +43,25 @@
                         <td class="text-center">@product.Price</td>
                         @*<td class="text-center">@product.Amount</td>*@
                         <td class="text-center">
-                            <div class="col-md-6 quantity m-auto">
+                            <div class="col-md-8 quantity m-auto">
                                 @*<label for="quantity">Quantity:</label>*@
                                 <div class="input-group">
-                                    <input id="quantity" type="number" value="@product.Amount" class="form-control quantity-input" readonly>
-                                    <div class="input-group-append ">
-                                        <!-- DELETE Button -->
-                                        @*TODO: need logic to remove function*@
-                                        <form asp-action="RemoveProduct">
-                                            <button value="@product.Id" name="id" class="btn btn-primary" style="background-color:transparent">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                    
+                                        <input id="amount" type="number" value="@product.Amount" name="amount" class="form-control quantity-input" readonly>
+                                        <div class="input-group-append ">
                                             <!-- EDIT Button trigger modal -->
-                                            <button type="button" onclick="AddBackToStock(@product.Id)" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
+                                            <button type="button" onclick="AddBackToStock(@product.Id)" name="id" value="@product.Id" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
                                                 <i class="far fa-edit"></i>
                                             </button>
-                                    </div>
+                                    
+                                    <!-- DELETE Button -->
+                                    @*TODO: need logic to remove function*@
+                                    <form asp-action="RemoveProduct">
+                                        <button value="@product.Id" name="id" class="btn btn-primary" style="background-color:transparent">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                        </div>
                                 </div>
                             </div>
                         </td>
@@ -78,11 +80,12 @@
 
             </tbody>
         </table>
-    } else
-            {
-                <h2 class="pb-5 pt-5">Empty. Go and do some shopping!</h2>
-               
-            }
+    }
+    else
+    {
+        <h2 class="pb-5 pt-5">Empty. Go and do some shopping!</h2>
+
+    }
 
     <hr />
 
@@ -110,7 +113,7 @@
             <form asp-action="ChangeQuantity">
                 <div class="modal-body">
                     <label for="inputAmount">Amount</label>
-                    <input name="StockAmount" type="number" class="form-control" id="inputStockAmount">
+                    <input name="amount" type="number" class="form-control" id="inputAmount">
                 </div>
                 <div class="modal-footer">
                     @*TODO: need logic to receive amount and logic to execute this function*@
