@@ -2,9 +2,11 @@
 using Deckel_Shop.Models;
 using Deckel_Shop.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,11 +17,14 @@ namespace Deckel_Shop.Controllers
         private readonly CustomerService _cs;
         private readonly StockService _ss;
         private readonly OrderService _os;
-        public ProfileController()
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public ProfileController(UserManager<IdentityUser> um)
         {
             _cs = new CustomerService();
             _ss = new StockService();
             _os = new OrderService();
+            _userManager = um;
         }
 
         [Authorize]
@@ -27,14 +32,43 @@ namespace Deckel_Shop.Controllers
         {
             if (User.IsInRole("Administrator"))
             {
-                return View("views/profile/administrator/index.cshtml");
+                return View("views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
             }
-            
+
             return View("views/profile/Customer/OrderHistory.cshtml");
         }
 
+        public IActionResult Users()
+        {
+
+            return View("views/profile/Administrator/Users.cshtml");
+        }
+
+        public async Task<IActionResult> ChangeUserRole(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (await _userManager.IsInRoleAsync(user, "Customer"))
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Customer");
+                await _userManager.AddToRoleAsync(user, "Administrator");
+            }
+            else if (await _userManager.IsInRoleAsync(user, "Administrator"))
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Administrator");
+                await _userManager.AddToRoleAsync(user, "Customer");
+            }
+            else
+            {
+                Debug.WriteLine("Error: Could not associate a user with a role");
+            }
+
+            return View("views/profile/Administrator/Users.cshtml");
+        }
+
+
         //--------------------------------------------------------------------START OF ORDERS
-        
+
         //PEDNING ORDERS
         public IActionResult Administrator()
         {
@@ -122,7 +156,7 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult Admin_customerOrderHistory(int id)
         {
-            
+
             return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(id));
 
         }
@@ -139,7 +173,7 @@ namespace Deckel_Shop.Controllers
                     return View("views/profile/administrator/Stock.cshtml", _ss.GetAllRemovedProducts());
                 default:
                     return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
-                 
+
             }
         }
 
@@ -158,17 +192,17 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult AddProductBackToStock(int id, int StockAmount)
         {
-            _ss.AddBackToStock(id,StockAmount);
+            _ss.AddBackToStock(id, StockAmount);
             return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
         }
-    
+
 
         [HttpPost]
 
         public IActionResult RemoveProduct(int id)
         {
             _ss.RemoveProduct(id);
-            return View("views/profile/administrator/Stock.cshtml",_ss.GetAllProducts());
+            return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
         }
 
         //--------------------------------------------------------------------END OF PRODUCTS
