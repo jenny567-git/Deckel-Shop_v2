@@ -148,6 +148,10 @@ nav a:hover:before {
     color: #c4a970 !important;
 }
 
+a.text-dark:focus, a.text-dark:hover {
+    color: #d6be88 !important;
+}
+
 nav .nav-link {
 }
 
