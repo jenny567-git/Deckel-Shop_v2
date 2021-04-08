@@ -22,9 +22,7 @@
                     <th scope="col" class="text-center">Product ID</th>
                     <th scope="col" class="text-center">Name</th>
                     <th scope="col" class="text-center">Price</th>
-                    @*<th scope="col" class="text-center">Amount</th>*@
                     <th scope="col" class="text-center">Qty</th>
-                    @*<th></th>*@
                     <th class="text-center">Total Price</th>
                 </tr>
             </thead>
@@ -46,22 +44,19 @@
                             <div class="col-md-8 quantity m-auto">
                                 @*<label for="quantity">Quantity:</label>*@
                                 <div class="input-group">
-                                    
-                                        <input id="amount" type="number" value="@product.Amount" name="amount" class="form-control quantity-input" readonly>
-                                        <div class="input-group-append ">
-                                            <!-- EDIT Button trigger modal -->
-                                            <button type="button" onclick="AddBackToStock(@product.Id)" name="id" value="@product.Id" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
-                                                <i class="far fa-edit"></i>
-                                            </button>
-                                    
-                                    <!-- DELETE Button -->
-                                    @*TODO: need logic to remove function*@
-                                    <form asp-action="RemoveProduct">
-                                        <button value="@product.Id" name="id" class="btn btn-primary" style="background-color:transparent">
-                                            <i class="far fa-trash-alt"></i>
+                                    <input id="amount" type="number" value="@product.Amount" name="amount" class="form-control quantity-input" readonly>
+                                    <div class="input-group-append ">
+                                        <!-- EDIT Button trigger modal -->
+                                        <button type="button" onclick="AddBackToStock(@product.Id)" name="id" value="@product.Id" id="editBtn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-editProduct" style="background-color:transparent">
+                                            <i class="far fa-edit"></i>
                                         </button>
-                                    </form>
-                                        </div>
+                                        <!-- DELETE Button -->
+                                        <form asp-action="RemoveProduct">
+                                            <button value="@product.Id" name="id" class="btn btn-primary" style="background-color:transparent">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </td>
@@ -73,7 +68,6 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    @*<td></td>*@
                     <td></td>
                     <th class="text-center">@totalPrice SEK</th>
                 </tr>
@@ -91,16 +85,7 @@
 
 
     <div class="col-md-6 col-lg-4 m-auto">
-        @*<div class="summary">
-            <h3>Summary</h3>
-            <div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
-            <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
-            <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
-            <div class="summary-item"><span class="text">Total</span><span class="price"></span></div>*@
-
         <a asp-controller="cart" asp-action="checkout" class="btn btn-primary btn-lg btn-block">Checkout</a>
-        @*</div>
-            </div>*@
     </div>
 
 

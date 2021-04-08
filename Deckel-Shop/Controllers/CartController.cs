@@ -27,22 +27,8 @@ namespace Deckel_Shop.Controllers
         private Cart cart = new Cart
         {
             Customer = customer,
-            //Id = 27,
-            //CustomerId = customer.Id,
-            //CustomerName = customer.FirstName,
             Products = productlist
         };
-
-        
-        public IActionResult Index()
-        {
-            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-            if (shopCart != null)
-            {
-                productlist = shopCart.Products;
-            }
-            return View("SavedCart", shopCart);
-        }
 
         //public IActionResult kjhslkijgfhlisdfujhgidslfuhdilfuhdifubhdifugbh()
         //{
@@ -57,7 +43,16 @@ namespace Deckel_Shop.Controllers
         //    return View(products);
         //}
 
-        
+        public IActionResult Index()
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            if (shopCart != null)
+            {
+                productlist = shopCart.Products;
+            }
+            return View("SavedCart", shopCart);
+        }
+                
         public IActionResult AddProductToCart(int id)
         {
             var product = _ss.GetProduct(id);
@@ -169,16 +164,3 @@ namespace Deckel_Shop.Controllers
     }
 }
 
-
-
-
-
-
-
-
-//public IActionResult Checkout()
-//{
-//    return View();
-//}
-//    }
-//}
