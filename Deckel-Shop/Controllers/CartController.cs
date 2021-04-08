@@ -143,8 +143,24 @@ namespace Deckel_Shop.Controllers
                 if (ModelState.IsValid)
                 {
                     Order order = new Order();
-                    order.Customer = detail;
+                    
+                    order.CustomerId = 3;
+                    order.OrderStatus = "Pending";
+                    order.OrderDate = DateTime.Now;
+                    order.ShippingDate = DateTime.Now;
+                   
                     var cart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+                   foreach (var product in cart.Products)
+                    {
+                        OrderedItem orderedItem = new OrderedItem();
+                        orderedItem.Product = product;
+                        
+                        orderedItem.Amount = product.Amount;
+                        order.OrderedItems.Add(orderedItem);
+                        
+                    }
+                    
+                    order.OrderTotal = (decimal)cart.TotalPrice;
 
                     orderService.AddOrder(order);
                     
@@ -156,7 +172,7 @@ namespace Deckel_Shop.Controllers
             {
                 TempData["msg"] = ex.Message;
             }
-            return View();
+            return RedirectToAction(nameof(Index), "home");
         }
     }
 
