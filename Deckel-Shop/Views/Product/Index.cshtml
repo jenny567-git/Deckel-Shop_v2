@@ -46,11 +46,18 @@
                         <div class="price">
                             @p.Price SEK
                         </div>
-                <form asp-action="AddProductToCart" asp-controller="cart">
-                        <button class="btn btn" value="@p.Id" name="id">
-                            <a class="add-to-cart" >ADD TO CART</a>
-                        </button>
-                </form>
+                        <form asp-action="AddProductToCart" asp-controller="cart">
+                            @if (p.Amount > 0)
+                            {
+                                <button class="btn btn" value="@p.Id" name="id">
+                                    <a class="add-to-cart">ADD TO CART</a>
+                                </button>
+                            }
+                            else
+                            {
+                                <label class="add-to-cart">OUT OF STOCK</label>
+                            }
+                        </form>
                         @*<input class="btn btn-primary" type="submit" value="ADD TO CART" id="AddToCartBtn" onclick="AddToCart(@p.Id)" />*@
                         @*<a class="add-to-cart" href="">ADD TO CART</a>*@
                     </div>
