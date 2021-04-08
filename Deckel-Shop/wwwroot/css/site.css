@@ -84,10 +84,8 @@ nav {
     list-style: none;
 }
 
-
-.nav-items{
-    display:flex;
-    background-color: #4e4e4e;
+.nav-items {
+    display: flex;
     list-style: none;
 }
 
@@ -117,7 +115,7 @@ nav {
 
 nav a:before {
     content: "";
-    border-bottom: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(187 174 147);
     position: absolute;
     bottom: 0px;
     left: 0px;
