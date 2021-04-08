@@ -143,11 +143,13 @@ namespace Deckel_Shop.Controllers
                 if (ModelState.IsValid)
                 {
                     Order order = new Order();
-                    
-                    order.CustomerId = 3;
+
+                    order.Customer = detail;
+                    order.CustomerId = detail.Id;
                     order.OrderStatus = "Pending";
                     order.OrderDate = DateTime.Now;
                     order.ShippingDate = DateTime.Now;
+                    order.Customer.Phone = "123123";
                    
                     var cart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
                    foreach (var product in cart.Products)
