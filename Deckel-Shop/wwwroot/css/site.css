@@ -86,11 +86,13 @@ nav {
 .nav-links {
     display: flex;
     justify-content: space-around;
+    margin-left:20vh;
     width: 30%;
     list-style: none;
 }
 
 .nav-items {
+    align-items:center;
     display: flex;
     list-style: none;
 }
