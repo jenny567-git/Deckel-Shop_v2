@@ -182,14 +182,13 @@ nav .nav-link {
     overflow: hidden;
 }
 
-.footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+footer {
+   background-color: #c6c6c6;
 }
 
+footer a{
+ color: #ffffff;
+}
 
 @media screen and (max-width: 1024px) {
     .nav-links {
@@ -486,7 +485,7 @@ nav .nav-link {
         }
 
             .product-grid4 .title a:hover {
-                color: #1b6ec2
+                color: rgb(187 174 147)
             }
 
     .product-grid4 .price {
@@ -526,7 +525,7 @@ nav .nav-link {
     }
 
     .product-grid4 .add-to-cart:hover {
-        background-color: #4e4e4e;
+        background-color: #858383;
         box-shadow: 0 0 10px rgba(0,0,0,.5)
     }
 
