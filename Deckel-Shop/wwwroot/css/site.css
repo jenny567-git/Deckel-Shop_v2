@@ -32,6 +32,10 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /***New css**/
 
+.RemoveUnderline::before{
+    border-bottom: 0px;
+}
+
 nav ul{
     margin-bottom: 0px;
 }

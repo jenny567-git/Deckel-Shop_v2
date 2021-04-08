@@ -21,7 +21,7 @@
     <header>
         <nav>
             <div class="logo">
-                <a asp-area="" asp-controller="Home" asp-action="index">
+                <a asp-area="" asp-controller="Home" asp-action="index" class="RemoveUnderline">
                     <img id="img_logo" alt="Logo" src="@Url.Content("~/Image/Deckel-Shop-Logo4.png")" />
                 </a>
             </div>
@@ -65,7 +65,7 @@
                     </ul>
                 </div>
             <div style="float:right">
-                    <a asp-controller="cart" asp-action="index">
+                    <a asp-controller="cart" asp-action="index" class="RemoveUnderline">
                         <span class="fas fa-shopping-cart cartman" style="font-size: 30px; color: #c4a970;" data-type="floating"></span>
                     </a>
             </div>
