@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Deckel_Shop.Session
+
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -64,11 +66,18 @@
                         </li>
                     </ul>
                 </div>
-            <div style="float:right">
-                    <a asp-controller="cart" asp-action="index" class="RemoveUnderline">
-                        <span class="fas fa-shopping-cart cartman" style="font-size: 30px; color: #c4a970;" data-type="floating"></span>
-                    </a>
-            </div>
+                <div style="float:right">
+                    @{
+                        var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
+                    }
+                    @if (cart != null)
+                    {
+                        <span class="badge bg-light rounded-pill">@cart.Products.Count()</span>
+                    }
+                        <a asp-controller="cart" asp-action="index" class="RemoveUnderline">
+                            <span class="fas fa-shopping-cart cartman" style="font-size: 30px; color: #c4a970;" data-type="floating"></span>
+                        </a>
+                </div>
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
