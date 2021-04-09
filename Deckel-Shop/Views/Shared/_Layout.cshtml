@@ -20,6 +20,9 @@
 
 </head>
 <body>
+    @{
+        var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
+    }
     <header>
         <nav>
             <div class="logo">
@@ -68,16 +71,39 @@
                     </li>
                     <li>
 
-                        @{
-                            var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
-                        }
-                        @if (cart != null)
-                        {
-                            <span class="badge bg-light rounded-pill">@cart.Products.Count()</span>
-                        }
-                        <a asp-controller="cart" asp-action="index" class="RemoveUnderline">
-                            <span class="fas fa-shopping-cart cartman" style="font-size: 36px; color: #c4a970;" data-type="floating"></span>
+
+                        <a class="nav-link dropdown-toggle RemoveUnderline" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            @if (cart != null)
+                            {
+                                <span class="badge bg-light rounded-pill">@cart.Products.Count()</span>
+                            }
+                            <i class="fas fa-shopping-cart cartman" style="font-size: 36px; color: #c4a970;" data-type="floating"></i>
+                            <span class="clearfix d-none d-sm-inline-block"></span>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            @if (cart != null)
+                            {
+                                foreach (var item in cart.Products)
+                                {
+                                    <span class="nav-link text-dark">@item.Name x @item.Amount</span>
+                                }
+                            }
+                            <a asp-controller="cart" asp-action="index" class="RemoveUnderline">
+                                <span class="nav-link text-dark text-center mt-2" style="font-size: 36px;">Go to cart</span>
+                            </a>
+                        </div>
+
+                        @*@{
+                                cart = SessionHelper.Get<Cart>(Context.Session, "cart");
+                            }
+                            @if (cart != null)
+                            {
+                                <span class="badge bg-light rounded-pill">@cart.Products.Count()</span>
+                            }
+                            <a asp-controller="cart" asp-action="index" class="RemoveUnderline">
+                                <span class="fas fa-shopping-cart cartman" style="font-size: 36px; color: #c4a970;" data-type="floating"></span>
+                            </a>*@
                     </li>
                 </ul>
             </div>
