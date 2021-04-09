@@ -163,7 +163,7 @@ function PopulateStockModal(product) {
     $('input[id="ProductCategory"]').val(product.category);
     $('input[id="ProductStatus"]').val(product.status);
     $('textarea[id="ProductDescription"]').val(product.description);
-    $('input[id="upload1"]').val(product.imageName);
+    $('input[id="uploadFile1"]').val(product.imageName);
     $('input[id="upload2"]').val(product.imageName2);
 
     console.log(customer.firstName);
@@ -311,24 +311,42 @@ function enableStockForm() {
    
 }
 
+//function readURL(input) {
+//    if (input.files && input.files[0]) {
+        
+//        var reader = new FileReader();
+
+//        reader.onload = function (e) {
+//            $('#imageResult')
+//                .attr('src', e.target.result);
+//        };
+//        reader.readAsDataURL(input.files[0]);
+//    }
+//}
+//$(function () {
+//    $('#upload').on('change', function () {
+//        readURL(input);
+//    });
+//});
 
 
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
+function readURL1(input1) {
+    if (input1.files && input1.files[0]) {
         var reader = new FileReader();
         
+        console.log(input1.files[0].name)
+     
         reader.onload = function (e) {
-            $('#imageResult')
+            $('#imageResult1')
                 .attr('src', e.target.result);
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(input1.files[0]);
     }
 }
 
 $(function () {
     $('#upload1').on('change', function () {
-        readURL(input);
+        readURL1(input1);
     });
 });
 
@@ -353,21 +371,35 @@ $(function () {
 /*  ==========================================
     SHOW UPLOADED IMAGE NAME
 * ========================================== */
-var input = document.getElementById('upload1');
-var infoArea = document.getElementById('upload-label1');
+//var inputFile = document.getElementById('uploadFile');
+//var input = document.getElementById('upload');
+//var infoArea = document.getElementById('upload-label');
+
+var inputFile1 = document.getElementById('uploadFile1');
+var input1 = document.getElementById('upload1');
+var infoArea1 = document.getElementById('upload-label1');
+
+var inputFile2 = document.getElementById("uploadFile2");
 var input2 = document.getElementById('upload2');
 var infoArea2 = document.getElementById('upload-label2');
-
 
 function showFileName(event) {
     var input = event.srcElement;
     var fileName = input.files[0].name;
     infoArea.textContent = 'File name: ' + fileName;
 } 
-function showFileName2(event) {
+
+function showFileName1(event) {
+  
     var input = event.srcElement;
     var fileName = input.files[0].name;
+    inputFile1.value = "/Image/" + fileName;
+    infoArea1.textContent = 'File name: '+  fileName;
+} 
+function showFileName2(event) {
+    var input = event.srcElement;
+    var fileName =  input.files[0].name;
     infoArea2.textContent = 'File name: ' + fileName; 
 }
-input.addEventListener('change', showFileName);
+input1.addEventListener('change', showFileName1);
 input2.addEventListener('change', showFileName2);

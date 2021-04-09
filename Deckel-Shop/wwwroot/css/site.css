@@ -538,6 +538,9 @@ nav .nav-link {
     margin-left: auto;
 }
 
+#upload {
+    opacity: 0;
+}
 
 #upload1 {
     opacity: 0;
@@ -546,6 +549,18 @@ nav .nav-link {
     opacity: 0;
 }
 
+#uploadFile1 {
+    opacity: 0;
+}
+
+
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
 
 #upload-label1 {
     position: absolute;

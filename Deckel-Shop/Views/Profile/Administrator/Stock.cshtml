@@ -164,36 +164,118 @@
                             <input name="Price" type="text" class="form-control" id="inputPrice">
                         </div>
                     </div>
-                    @*uploading image*@
-                    <div>
-                        <label for="inputZip">Image</label>
-                        <div class="container mt-5">
-                            <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-8">
-                                <div method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label><strong>Upload Files</strong></label>
-                                        <div class="custom-file">
-                                            <input type="file" name="ImgName" multiple class="custom-file-input form-control" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" name="upload" value="upload" id="upload" class="btn btn-block btn-dark"><i class="fa fa-fw fa-upload"></i> Upload</button>
-                                    </div>
-                                </div>
-                            </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Category</label>
+                            <input name="Category" value="" type="text" class="form-control" id="ProductCategory" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Status</label>
+                            <input name="Status" value="" type="text" class="form-control" id="ProductStatus" >
                         </div>
                     </div>
-                    @*end of form*@
+                    <div class=" form-group col-md-12 ">
+                        <label for="inputPrice">Description</label>
+                        <textarea class="form-control" name="Description" value="" id="ProductDescription" ></textarea>
+                    </div>
+                    <div class="container py-5">
+
+                        <label>Image 1</label>
+                        <div class="row ">
+                            <div class="col-md-10 mx-auto">
+                                <!-- Upload image input-->
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input name="ImgName" value="" id="upload" type="file" onchange="readURL(this);" class="form-control border-0 ">
+                                    <label id="upload-label" for="upload" class="text-muted">Choose file</label>
+                                </div>
+                            </div>
+
+                            <!-- Uploaded image area-->
+                            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="container py-5">
+                        <label>Image 2</label>
+                        <div class="row ">
+                            <div class="col-md-10 mx-auto">
+
+                                <!-- Upload image input-->
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
+                                    <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
+                                    <label id="upload-label2" for="upload" class="text-muted">Choose file</label>
+                                </div>
+                            </div>
+
+                            <!-- Uploaded image area-->
+                            <div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                        </div>
+                    </div>
+
+                    <!-- Uploaded image area-->
+                    <div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                    <!--<div class="container py-5">
+
+                        NEEDS TO BE FIXED
+
+
+                        <label>Image 1</label>
+                        <div class="row ">
+                            <div class="col-md-10 mx-auto">-->
+                                <!-- Upload image input-->
+                                <!--<div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input name="ImgName" value="" id="upload" type="file" onchange="readURL(this);" class="form-control border-0 ">
+                                    <label id="upload-label" for="upload" class="text-muted">Choose file</label>
+                                </div>
+                            </div>-->
+
+                            <!-- Uploaded image area-->
+                            <!--<div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="container py-5">
+                        <label>Image 2</label>
+                        <div class="row ">
+                            <div class="col-md-10 mx-auto">-->
+
+                                <!-- Upload image input-->
+                                <!--<div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
+                                    <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
+                                    <label id="upload-label2" for="upload" class="text-muted">Choose file</label>
+                                </div>
+                            </div>-->
+
+                            <!-- Uploaded image area-->
+                            <!--<div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                        </div>
+                    </div>-->
+
+                    <!-- Uploaded image area-->
+                    <!--<div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>-->
+
+
+
+
                     <div class="modal-footer">
                         <input type="submit" value="save" class="btn btn-primary" />
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
+                    @*end of form*@
                 </form>
             </div>
-
         </div>
+
     </div>
+</div>
 </div>
 
 <!--Detail Modal -->
@@ -253,34 +335,31 @@
                     </div>
 
                     <div class="container py-5">
-
-
                         <label>Image 1</label>
                         <div class="row ">
                             <div class="col-md-10 mx-auto">
-
                                 <!-- Upload image input-->
                                 <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input name="ImgName" value="" id="upload1" type="file" onchange="readURL(this);" class="form-control border-0 " disabled>
+                                    <input id="upload1" type="file" onchange="readURL1(this);" class="form-control border-0 text-muted" disabled />
+                                    <input id="uploadFile1" name="ImgName" value="" type="text" class="form-control border-0 " disabled />
                                     <label id="upload-label1" for="upload1" class="text-muted">Choose file</label>
                                 </div>
                             </div>
 
                             <!-- Uploaded image area-->
-                            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                            <div class="image-area mt-4"><img id="imageResult1" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
 
                         </div>
                     </div>
                     <div class="container py-5">
-
-
                         <label>Image 2</label>
                         <div class="row ">
                             <div class="col-md-10 mx-auto">
 
                                 <!-- Upload image input-->
                                 <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input name="ImgName2" value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
+                                    <input value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
+                                    <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
                                     <label id="upload-label2" for="upload" class="text-muted">Choose file</label>
                                 </div>
                             </div>
