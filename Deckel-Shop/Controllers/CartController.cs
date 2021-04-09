@@ -102,7 +102,7 @@ namespace Deckel_Shop.Controllers
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
 
-            return View("SavedCart", shopCart);
+            return RedirectToAction(nameof(Index), "product");
         }
 
         public IActionResult RemoveProduct(int id)
