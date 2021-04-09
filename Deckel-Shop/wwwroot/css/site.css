@@ -539,12 +539,22 @@ nav .nav-link {
 }
 
 
-#upload {
+#upload1 {
+    opacity: 0;
+}
+#upload2 {
     opacity: 0;
 }
 
 
-#upload-label {
+#upload-label1 {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+#upload-label2 {
     position: absolute;
     top: 50%;
     left: 1rem;
@@ -577,17 +587,11 @@ nav .nav-link {
         position: relative;
     }
 
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
 
 
 
-row .img-fluid {
+
+.img-fluid {
     max-width: 50%;
     height: auto;
 }

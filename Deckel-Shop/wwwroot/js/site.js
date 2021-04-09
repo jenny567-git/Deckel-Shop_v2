@@ -310,3 +310,64 @@ function enableStockForm() {
     saveStockBtn.disabled = false;
    
 }
+
+
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload1').on('change', function () {
+        readURL(input);
+    });
+});
+
+function readURL2(input2) {
+    if (input2.files && input2.files[0]) {
+        var reader2 = new FileReader();
+
+        reader2.onload = function (e) {
+            $('#imageResult2')
+                .attr('src', e.target.result);
+        };
+        reader2.readAsDataURL(input2.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload2').on('change', function () {
+        readURL2(input2);
+    });
+});
+
+/*  ==========================================
+    SHOW UPLOADED IMAGE NAME
+* ========================================== */
+var input = document.getElementById('upload1');
+var infoArea = document.getElementById('upload-label1');
+var input2 = document.getElementById('upload2');
+var infoArea2 = document.getElementById('upload-label2');
+
+
+function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = 'File name: ' + fileName;
+} 
+function showFileName2(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea2.textContent = 'File name: ' + fileName;
+}
+input.addEventListener('change', showFileName);
+input2.addEventListener('change', showFileName2);
