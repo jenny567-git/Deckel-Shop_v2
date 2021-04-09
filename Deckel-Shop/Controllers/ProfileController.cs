@@ -54,7 +54,7 @@ namespace Deckel_Shop.Controllers
 
         public async Task< IActionResult> SendOrder(int id)
         {
-            await _os.RemoveOrder(id);
+            await _os.SendOrder(id);
             return RedirectToAction(nameof(DeliveredOrders));
         }
         
@@ -161,7 +161,18 @@ namespace Deckel_Shop.Controllers
             _ss.AddBackToStock(id,StockAmount);
             return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
         }
-    
+
+        [HttpPost]
+
+        public async Task <IActionResult> EditProduct([FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                await _ss.EditProduct(product);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
 
         [HttpPost]
 

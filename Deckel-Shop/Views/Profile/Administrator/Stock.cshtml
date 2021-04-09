@@ -1,6 +1,4 @@
 ﻿@model IEnumerable<Database.Models.Product>;
-
-
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item ">
@@ -101,7 +99,7 @@
                         </td>
                         <td>
                             <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
+                                <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-StockDetails" style="background-color:transparent">
                                     <i class="fas fa-info-circle"></i>
                                 </button>
                             </span>
@@ -199,20 +197,21 @@
 </div>
 
 <!--Detail Modal -->
-<div class="modal fade" id="exampleModal-details" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal-StockDetails" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="DeckelModal modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                <span aria-hidden="true">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form>
+        <form asp-action="EditProduct" id="stockForm">
+            <div class="DeckelModal modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    <span aria-hidden="true">&times;</span>
+                </div>
+
+                <div class="modal-body">
                     @*start of form*@
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
+                            <button type="button" id="editBtn" onclick="enableStockForm()" class="btn btn-light" style="background-color:transparent">
                                 <i class="far fa-edit"></i>Edit
                             </button>
                         </div>
@@ -220,35 +219,92 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="ProductID">Product ID</label>
-                            <input type="text" class="form-control" id="inputCustomerID" disabled />
+                            <input name="Id" value="" type="text" class="form-control" id="ProductId" disabled />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputProductName">Product Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" disabled>
+                            <input name="Name" value="" type="text" class="form-control" id="ProductName" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Amount</label>
-                            <input type="text" class="form-control" id="inputLastName" disabled>
+                            <input name="Amount" value="" type="text" class="form-control" id="ProductAmount" disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Price</label>
-                            <input type="email" class="form-control" id="inputEmail4" disabled>
+                            <input name="Price" value="" type="number" class="form-control" id="ProductPrice" disabled>
                         </div>
                     </div>
-                    <div class="form-group col-md-10">
-                        <label for="inputPrice">Image</label>
-                        <img src="..." alt="..." class="img-thumbnail">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Category</label>
+                            <input name="Category" value="" type="text" class="form-control" id="ProductCategory" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Status</label>
+                            <input name="Status" value="" type="text" class="form-control" id="ProductStatus" disabled>
+                        </div>
                     </div>
-                    @*end of form*@
-                </form>
+                    <div class=" form-group col-md-12 ">
+                        <label for="inputPrice">Description</label>
+                        <textarea class="form-control" name="Description" value="" id="ProductDescription"></textarea>
+                    </div>
+
+                    <div class="container py-5">
+
+
+                        <label>Image 1</label>
+                        <div class="row ">
+                            <div class="col-md-10 mx-auto">
+
+                                <!-- Upload image input-->
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0 " disabled>
+                                    <label id="upload-label" for="upload" class="text-muted">Choose file</label>
+                                </div>
+                            </div>
+
+                            <!-- Uploaded image area-->
+                            <p class="font-italic text-black-50 text-center">The image uploaded will be rendered inside the box below.</p>
+                            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                        </div>
+                    </div>
+                    <div class="container py-5">
+
+
+                        <label>Image 2</label>
+                        <div class="row ">
+                            <div class="col-md-10 mx-auto">
+
+                                <!-- Upload image input-->
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input id="upload2" type="file" onchange="readURL(this);" class="upload form-control border-0 " disabled>
+                                    <label id="upload-label" for="upload" class="text-muted">Choose file</label>
+                                </div>
+                            </div>
+
+                            <!-- Uploaded image area-->
+                            <p class="font-italic text-black-50 text-center">The image uploaded will be rendered inside the box below.</p>
+                            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="saveStockBtn" class="btn btn-primary" disabled>Save</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
+
+            @*end of form*@
+
+        </form>
+
+
     </div>
 </div>
 
@@ -266,7 +322,7 @@
             </div>
             <div class="modal-footer">
                 <form asp-action="RemoveProduct">
-                      <button name="id" id="DeleteBtn" value="" class="btn btn-danger">JAJAMEEEEN</button>
+                    <button name="id" id="DeleteBtn" value="" class="btn btn-danger">JAJAMEEEEN</button>
                 </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>

@@ -30,9 +30,9 @@ namespace Deckel_Shop.Services
 
         
 
-        public IEnumerable<Product> GetProduct(int id)
+        public Product GetProduct(int id)
         {
-            return deckelShopContext.Products.Where(p => p.Id == id).AsEnumerable();
+            return deckelShopContext.Products.FirstOrDefault(p => p.Id == id);
         }
 
         public void AddProduct(Product product)
@@ -56,14 +56,13 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges();
         }
 
-        public void EditProduct(Product product)
+        public async Task <int> EditProduct(Product product)
         {
-            var currentProduct = deckelShopContext.Products.FirstOrDefault(x => x.Id == product.Id);
-            if (currentProduct != null)
-            {
-                currentProduct = product;
-            }
+            var currentProduct = GetProduct(product.Id);
+            
+            deckelShopContext.Update(GetProduct(product.Id));
             deckelShopContext.SaveChanges();
+            return await deckelShopContext.SaveChangesAsync();
         }
 
 

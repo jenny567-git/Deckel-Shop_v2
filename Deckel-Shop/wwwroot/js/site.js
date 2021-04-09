@@ -120,8 +120,12 @@ function GetModalInfo(id, modalType) {
                 //alert("Hello: " + response.id);
                 if (modalType === 'orderDetails') {
                     PopulateOrderModal(response);
-                } else if (modalType === 'customerDetails') {
+                }
+                else if (modalType === 'customerDetails') {
                     PopulateCustomerModal(response)
+                }
+                else if (modalType === 'stockDetails') {
+                    PopulateStockModal(response)
                 }
                 else {
                     console.log("Error: Could not find modalType!");
@@ -146,6 +150,21 @@ function PopulateCustomerModal(customer) {
     $('input[id="detailsStreet"]').val(customer.street);
     $('input[id="detailsCity"]').val(customer.city);
     $('input[id="detailsZip"]').val(customer.zipCode);
+
+    console.log(customer.firstName);
+
+}
+
+function PopulateStockModal(product) {
+    $('input[id="ProductId"]').val(product.id);
+    $('input[id="ProductName"]').val(product.name);
+    $('input[id="ProductAmount"]').val(product.amount);
+    $('input[id="ProductPrice"]').val(product.price);
+    $('input[id="ProductCategory"]').val(product.category);
+    $('input[id="ProductStatus"]').val(product.status);
+    $('textarea[id="ProductDescription"]').val(product.description);
+    $('input[id="upload"]').val(product.imageName);
+    $('input[id="upload2"]').val(product.imageName2);
 
     console.log(customer.firstName);
 
@@ -251,6 +270,19 @@ window.addEventListener('load', function () {
 
     })
 
+    $('#saveStockBtn').on('hidden.bs.modal', function () {
+        var form = document.getElementById("stockForm");
+        var elements = form.elements;
+        for (var i = 0, len = elements.length; i < len; ++i) {
+            
+            elements[i].disabled = true;
+        }
+        saveBtnForEditCustomer.disabled = true;
+        editBtn.disabled = false;
+        CancleBtn.disabled = false;
+
+    })
+
 
 });
 
@@ -265,5 +297,16 @@ function enableForm() {
         elements[i].disabled = false;
     }
     saveBtnForEditCustomer.disabled = false;
+   
+}
+
+function enableStockForm() {
+    var form = document.getElementById("stockForm");
+    var elements = form.elements;
+    for (var i = 0, len = elements.length; i < len; ++i) {
+        
+        elements[i].disabled = false;
+    }
+    saveStockBtn.disabled = false;
    
 }
