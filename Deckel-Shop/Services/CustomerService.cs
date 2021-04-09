@@ -16,6 +16,18 @@ namespace Deckel_Shop.Services
             deckelShopContext = new DeckelShopContext();
         }
 
+        public int GetCustomerId(string email)
+        {
+            var customer = deckelShopContext.Customers.FirstOrDefault(c => c.Email.Contains(email));
+
+            if (customer == null)
+            {
+                return 0;
+            }
+
+            return customer.Id;
+        }
+
         public IEnumerable<Customer> GetAllCustomers()
         {
             return deckelShopContext.Customers.AsEnumerable();

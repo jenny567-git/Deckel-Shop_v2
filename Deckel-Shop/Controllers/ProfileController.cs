@@ -35,7 +35,7 @@ namespace Deckel_Shop.Controllers
                 return View("views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
             }
 
-            return View("views/profile/Customer/OrderHistory.cshtml");
+            return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(_cs.GetCustomerId(User.Identity.Name)));
         }
 
         public IActionResult Users()
@@ -76,7 +76,7 @@ namespace Deckel_Shop.Controllers
             //OrderService os = new OrderService();
 
 
-            return View("/views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Not Delivered"));
+            return View("/views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
         }
 
         public IActionResult DeliveredOrders()
@@ -88,7 +88,7 @@ namespace Deckel_Shop.Controllers
 
         public async Task< IActionResult> SendOrder(int id)
         {
-            await _os.RemoveOrder(id);
+            await _os.SendOrder(id);
             return RedirectToAction(nameof(DeliveredOrders));
         }
         

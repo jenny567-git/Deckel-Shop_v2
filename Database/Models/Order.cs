@@ -24,5 +24,6 @@ namespace Database.Models
         public virtual Customer Customer { get; set; }
         [JsonIgnore]
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
+        
     }
 }
