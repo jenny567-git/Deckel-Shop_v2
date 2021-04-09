@@ -170,7 +170,7 @@ namespace Deckel_Shop.Controllers
             {
                 await _ss.EditProduct(product);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Stock));
         }
 
 
