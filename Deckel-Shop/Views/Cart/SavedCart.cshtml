@@ -3,6 +3,16 @@
 @model Cart;
 
 @{
+    if (TempData["Msg"] != null)
+    {
+    <div style="background-color:#c4a970">
+        @TempData["msg"]
+    </div>
+    }
+}
+
+
+@{
     ViewData["Title"] = "Saved Shopping Cart";
 
     var cart = SessionHelper.Get<Cart>(Context.Session, "cart");

@@ -115,6 +115,7 @@ namespace Deckel_Shop.Controllers
             //var product = shopCart.Products.Single(p => p.Id == id);
             shopCart.Products.RemoveAll(p => p.Id == id);
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+            TempData["msg"] = "Item has been delete from cart";
             return RedirectToAction(nameof(Index));
         }
 
@@ -125,12 +126,16 @@ namespace Deckel_Shop.Controllers
             if (_ss.GetProduct(id).Amount >= amount)
             {
                 product.Amount = amount;
-
+                TempData["msg"] = "Quantity has been updated.";
+            }
+            else
+            {
+                TempData["msg"] = "Unable to update quantity due to low stock";
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
             //shopCart.Products.Update(product);
-
+            
             return RedirectToAction(nameof(Index));
         }
 

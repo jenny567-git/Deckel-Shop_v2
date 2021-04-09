@@ -4,7 +4,7 @@
 
 @{
     var cart = SessionHelper.Get<Cart>(Context.Session, "cart");
-    var cartshop = Context.Session.Get<Cart>("cart");
+
 }
 
 
@@ -33,20 +33,34 @@
     {
         <div class="col-md-3 col-sm-6 pb-8">
             <div class="product-grid4">
-                    <div class="product-image4">
-                        <a href="#">
-                            <img class="pic-1" src="@p.ImgName">
-                            <img class="pic-2" src="@p.ImgName2">
-                        </a>
-                        <span class="product-new-label">Hot</span>
+                <div class="product-image4">
+                    <a href="#">
+                        <img class="pic-1" src="@p.ImgName">
+                        <img class="pic-2" src="@p.ImgName2">
+                    </a>
+                    <span class="product-new-label">Hot</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">@p.Name</a></h3>
+                    <div class="price">
+                        @p.Price SEK
                     </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#">@p.Name</a></h3>
-                        <div class="price">
-                            @p.Price SEK
-                        </div>
-                        <form asp-action="AddProductToCart" asp-controller="cart">
-                            @if (p.Amount > 0)
+                    <form asp-action="AddProductToCart" asp-controller="cart">
+                        @if (p.Amount > 0)
+                        {
+                            if (cart == null)
+                            {
+                                <button class="btn btn" value="@p.Id" name="id">
+                                    <a class="add-to-cart">ADD TO CART</a>
+                                </button>
+                            }
+                            else if (cart != null && !cart.Products.Exists(cartItem => cartItem.Id == p.Id))
+                            {
+                                <button class="btn btn" value="@p.Id" name="id">
+                                    <a class="add-to-cart">ADD TO CART</a>
+                                </button>
+                            }
+                            else if (p.Amount > cart.Products.FirstOrDefault(cartItem => cartItem.Id == p.Id).Amount)
                             {
                                 <button class="btn btn" value="@p.Id" name="id">
                                     <a class="add-to-cart">ADD TO CART</a>
@@ -56,10 +70,15 @@
                             {
                                 <label class="add-to-cart">OUT OF STOCK</label>
                             }
-                        </form>
-                        @*<input class="btn btn-primary" type="submit" value="ADD TO CART" id="AddToCartBtn" onclick="AddToCart(@p.Id)" />*@
-                        @*<a class="add-to-cart" href="">ADD TO CART</a>*@
-                    </div>
+                        }
+                        else
+                        {
+                            <label class="add-to-cart">OUT OF STOCK</label>
+                        }
+                    </form>
+                    @*<input class="btn btn-primary" type="submit" value="ADD TO CART" id="AddToCartBtn" onclick="AddToCart(@p.Id)" />*@
+                    @*<a class="add-to-cart" href="">ADD TO CART</a>*@
+                </div>
             </div>
         </div>
     }
