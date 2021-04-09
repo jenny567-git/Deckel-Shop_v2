@@ -164,7 +164,7 @@ function PopulateStockModal(product) {
     $('input[id="ProductStatus"]').val(product.status);
     $('textarea[id="ProductDescription"]').val(product.description);
     $('input[id="uploadFile1"]').val(product.imageName);
-    $('input[id="upload2"]').val(product.imageName2);
+    $('input[id="uploadFile2"]').val(product.imageName2);
 
     console.log(customer.firstName);
 
@@ -398,7 +398,8 @@ function showFileName1(event) {
 } 
 function showFileName2(event) {
     var input = event.srcElement;
-    var fileName =  input.files[0].name;
+    var fileName = input.files[0].name;
+    inputFile2.value = "/Image/" + fileName;
     infoArea2.textContent = 'File name: ' + fileName; 
 }
 input1.addEventListener('change', showFileName1);
