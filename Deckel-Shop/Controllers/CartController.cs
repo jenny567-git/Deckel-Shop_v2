@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,10 +17,11 @@ namespace Deckel_Shop.Controllers
     public class CartController : Controller
     {
         private readonly StockService _ss = new StockService();
+        private readonly OrderService orderService = new OrderService();
+        private readonly CustomerService _cs = new CustomerService();
 
         private static List<Product> productlist = new List<Product>();
 
-        private readonly OrderService orderService = new OrderService();
 
         //TEST OBJECTS: Customer, Products, Cart
         private static Customer customer = new Customer
@@ -57,10 +59,10 @@ namespace Deckel_Shop.Controllers
             }
             return View("SavedCart", shopCart);
         }
-                
+
         public IActionResult AddProductToCart(int id)
         {
-            
+
             var product = _ss.GetProduct(id);
             productlist = _ss.GetAllAvailableProducts().ToList();
 
@@ -126,17 +128,25 @@ namespace Deckel_Shop.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        
-        public IActionResult Checkout()
+
+        public IActionResult Checkout(decimal totalPrice)
         {
-            
-            return View();
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            shopCart.TotalPrice = totalPrice;
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+
+            CheckoutViewModel vm = new CheckoutViewModel();
+            vm.Products = shopCart.Products;
+            vm.TotalPrice = shopCart.TotalPrice;
+            vm.Customer = shopCart.Customer;
+
+            return View(vm);
         }
 
-        
+
 
         [HttpPost]
-        public ActionResult AddOrder([Bind] Customer detail)
+        public ActionResult AddOrder([Bind] CheckoutViewModel vm)
         {
             try
             {
@@ -144,28 +154,31 @@ namespace Deckel_Shop.Controllers
                 {
                     Order order = new Order();
 
-                    order.Customer = detail;
-                    order.CustomerId = detail.Id;
+                    order.CustomerId = _cs.GetCustomerId(vm.Customer.Email);
+                    if (order.CustomerId == 0)
+                    {
+                        order.Customer = vm.Customer;
+                    }
+
                     order.OrderStatus = "Pending";
                     order.OrderDate = DateTime.Now;
-                    order.ShippingDate = DateTime.Now;
-                    order.Customer.Phone = "123123";
-                   
+                    order.ShippingDate = DateTime.UnixEpoch;
+
                     var cart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-                   foreach (var product in cart.Products)
+                    foreach (var product in cart.Products)
                     {
                         OrderedItem orderedItem = new OrderedItem();
-                        //orderedItem.Product = product;
                         orderedItem.ProductId = product.Id;
                         orderedItem.Amount = product.Amount;
                         order.OrderedItems.Add(orderedItem);
-                        
+
                     }
-                    
-                    order.OrderTotal = (decimal)cart.TotalPrice;
+
+                    Debug.WriteLine(cart.TotalPrice);
+                    order.OrderTotal = cart.TotalPrice;
 
                     orderService.AddOrder(order);
-                    
+
                 }
 
 
@@ -217,7 +230,7 @@ namespace Deckel_Shop.Controllers
 
 }
 
-    
-    
+
+
 
 

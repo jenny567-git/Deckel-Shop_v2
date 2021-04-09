@@ -33,8 +33,7 @@ namespace Deckel_Shop.Services
         }
         public IEnumerable<Order> GetAllOrdersBySelectedCustomer(int id)
         {
-            return deckelShopContext.Orders.Where(o => o.Customer.Id == id).Include(c => c.Customer).AsEnumerable();
-
+            return deckelShopContext.Orders.Where(o => o.CustomerId == id);
         }
 
         public Order GetOrder(int id)
