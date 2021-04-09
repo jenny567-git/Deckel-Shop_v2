@@ -117,21 +117,21 @@
                 <div class="modal-content">
 
 
-                    <form class="needs-validation" novalidate method="post">
+                    <form action="https://formsubmit.co/deckelshop@gmail.com" class="needs-validation" novalidate method="post">
 
                         <div class="form-text">
                             <div class="form-row">
                                 <label name="firstName" class="form-label">First name</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required name="First Name">
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
-                           
+
 
                             <div class="form-row">
                                 <label for="lastName" class="form-label">Last name</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required name="Last Name">
                                 <div class="invalid-feedback">
                                     Valid last name is required.
                                 </div>
@@ -140,7 +140,7 @@
 
                         <div class="form-row">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" name="Email">
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
@@ -148,7 +148,7 @@
 
                         <div class="form-row">
                             <label for="phoneNumber" class="form-label">Phone number</label>
-                            <input type="number" class="form-control" id="phonenumber" placeholder="">
+                            <input type="number" class="form-control" id="phonenumber" placeholder="" name="Phonenumber">
                             <div class="invalid-feedback">
                                 Please enter a valid phone number
                             </div>
@@ -164,24 +164,25 @@
 
                         <div class="form-row">
                             <div class="col-md-6 mr-auto">
-                                <form action="/action_page.php">
+                              
                                     <label for="upload" class="form-label">Upload your resume</label>
-                                    <input type="file" id="myFile" name="filename" m>
+                                    <input type="file" name="attachment" accept="image/png, image/jpeg">
                                     <label for="upload" class="form-label"></label>
-                                </form>
+                              
                             </div>
                         </div>
                         <hr class="my-4">
-
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                           
+                        </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
+           
 
         </div>
     </div>
