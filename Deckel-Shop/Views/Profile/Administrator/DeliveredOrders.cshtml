@@ -69,6 +69,7 @@
                 <tr>
                     <th scope="col">ORDER#</th>
                     <th scope="col">ORDER DATE</th>
+                    <th scope="col">SHIPPING DATE</th>
                     <th scope="col">CUSTOMER NAME</th>
                     <th scope="col">Order Status</th>
                     <th scope="col">ORDER TOTAL</th>
@@ -84,18 +85,14 @@
                             <th scope="row">@Html.DisplayFor(modelItem => item.OrderId)</th>
 
                             <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Customer.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ShippingDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
                             <td>
                                 <span data-toggle="tooltip" data-placement="bottom" title="info">
                                     <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
                                         <i class="fas fa-info-circle"></i>
-                                    </button>
-                                </span>
-                                <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                    <button onclick="RemoveOrder(@item.OrderId)" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
-                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </span>
                             </td>

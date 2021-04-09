@@ -84,7 +84,9 @@ namespace Deckel_Shop.Services
 
         public async Task<int> SendOrder(int id)
         {
-            GetOrder(id).OrderStatus = "Delivered";
+            Order o = GetOrder(id);
+            o.OrderStatus = "Delivered";
+            o.ShippingDate = DateTime.Now;
             deckelShopContext.Update(GetOrder(id));
 
             return await deckelShopContext.SaveChangesAsync();
