@@ -256,6 +256,7 @@ function PopulateOrderModal(order) {
     $("#personAddress").html(order.customer.street + ", " + order.customer.zipCode + " " + order.customer.city);
     $("#personPhone").html(order.customer.phone);
     $("#orderCost").html(order.orderTotal);
+    $("#personEmail").html(order.customer.email);
 
     var shippingCost = 50;
     $("#total").html(order.orderTotal + shippingCost);

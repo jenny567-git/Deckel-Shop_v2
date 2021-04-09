@@ -33,8 +33,7 @@ namespace Deckel_Shop.Services
         }
         public IEnumerable<Order> GetAllOrdersBySelectedCustomer(int id)
         {
-            return deckelShopContext.Orders.Where(o => o.Customer.Id == id).Include(c => c.Customer).AsEnumerable();
-
+            return deckelShopContext.Orders.Where(o => o.CustomerId == id);
         }
 
         public Order GetOrder(int id)
@@ -61,6 +60,7 @@ namespace Deckel_Shop.Services
         {
             deckelShopContext.Orders.Add(order);
             deckelShopContext.SaveChanges();
+            int a = 0;
         }
 
         public async Task<int> RemoveOrder(int id)
@@ -84,7 +84,9 @@ namespace Deckel_Shop.Services
 
         public async Task<int> SendOrder(int id)
         {
-            GetOrder(id).OrderStatus = "Delivered";
+            Order o = GetOrder(id);
+            o.OrderStatus = "Delivered";
+            o.ShippingDate = DateTime.Now;
             deckelShopContext.Update(GetOrder(id));
 
             return await deckelShopContext.SaveChangesAsync();
