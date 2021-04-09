@@ -48,6 +48,17 @@ namespace Deckel_Shop.Services
             product.Amount = amount;
             deckelShopContext.SaveChanges();
         }
+        public void UpdateStock(int id, int amount)
+        {
+            var product = deckelShopContext.Products.SingleOrDefault(p => p.Id == id);
+            product.Amount += amount;
+            deckelShopContext.SaveChanges();
+        }
+        public int GetStockStatusByProductId(int id)
+        {
+            var product = deckelShopContext.Products.SingleOrDefault(p => p.Id == id);
+            return product.Amount;
+        }
 
         public void RemoveProduct(int id)
         {
