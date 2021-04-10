@@ -1,4 +1,5 @@
 using Deckel_Shop.Data;
+using Deckel_Shop.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,7 +48,7 @@ namespace Deckel_Shop
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-         
+            services.AddSignalR();
 
 
             services.AddControllersWithViews();
@@ -82,6 +83,8 @@ namespace Deckel_Shop
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapHub<DeckelHub>("/deckelhub");
             });
         }
     }
