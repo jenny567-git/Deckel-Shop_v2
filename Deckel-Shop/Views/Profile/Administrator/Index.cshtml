@@ -5,6 +5,8 @@
 }
 @model IEnumerable<Database.Models.Order>
 
+    <script src="~/js/Admin.js"></script>
+
 @*nav bar*@
 <ul class="nav nav-tabs nav-tabs">
     <li class="nav-item ">
@@ -151,8 +153,3 @@
         </div>
     </div>
 </div>
-
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-    <script src="~/js/Admin.js"></script>
