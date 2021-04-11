@@ -22,6 +22,17 @@ for details on configuring this project to bundle and minify static web assets. 
     box-shadow: 0 3.4px 2.7px rgba(0, 0, 0, 0.044), 0 8.7px 6.9px rgba(0, 0, 0, 0.068), 0 17.7px 14.2px rgba(0, 0, 0, 0.087), 0 36.5px 29.2px rgba(0, 0, 0, 0.106), 0 100px 80px rgba(0, 0, 0, 0.15);
 }
 
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+a {
+    color: #ad8649;
+    text-decoration: none;
+    background-color: transparent;
+}
+
 /*ul.catBlock {
     display: table;
 }
@@ -99,7 +110,7 @@ nav {
 
 
 .nav-items .btn {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #navbarDropdownMenuLink {
