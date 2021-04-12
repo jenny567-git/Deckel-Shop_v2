@@ -126,7 +126,7 @@ nav {
 }
 
 .dropdown-item {
-    color: #d9c291;
+    color: #c4a970;
 }
 
     .nav-links li {
@@ -167,12 +167,6 @@ a.text-dark:focus, a.text-dark:hover {
     color: #d6be88 !important;
 }
 
-nav .nav-link {
-}
-
-.row{
-}
-
 .burger {
     display: none;
     cursor: pointer;
@@ -181,7 +175,7 @@ nav .nav-link {
     .burger div {
         width: 25px;
         height: 2px;
-        background-color: #a78e5a;
+        background-color: #e9cf97;
         margin: 5px;
         transition: all 0.3s ease;
     }
@@ -363,6 +357,7 @@ footer a:hover{
     border-radius: 5px;
     overflow: hidden;
     z-index: 1;
+    margin-bottom: 20px;
     transition: all .3s ease 0s
 }
 
@@ -484,8 +479,8 @@ footer a:hover{
         }
 
     .product-grid4 .product-discount-label, .product-grid4 .product-new-label {
-        color: #fff;
-        background-color: #ad8649;
+        color: #e9cf97;
+        background-color: #3b3b3b;
         font-size: 13px;
         font-weight: 800;
         text-transform: uppercase;
@@ -550,9 +545,10 @@ footer a:hover{
 
     .product-grid4 .add-to-cart {
         border: 1px solid #e5e5e5;
+        background-color: #3b3b3b;
         display: inline-block;
         padding: 10px 20px;
-        color: #888;
+        color: #e9cf97;
         font-weight: 600;
         font-size: 14px;
         border-radius: 4px;
@@ -565,10 +561,21 @@ footer a:hover{
         color: #fff
     }
 
+        .product-grid4:hover .add-to-cart:disabled {
+            border: 1px solid transparent;
+            background: #909090;
+            color: #fff
+        }
+
     .product-grid4 .add-to-cart:hover {
-        background-color: #858383;
+        background-color: #b99152;
         box-shadow: 0 0 10px rgba(0,0,0,.5)
     }
+
+        .product-grid4 .add-to-cart:hover:disabled {
+            background-color: #9a9a9a;
+            box-shadow: 0 0 10px rgba(0,0,0,.5)
+        }
 
 @media only screen and (max-width:990px) {
     .product-grid4 {

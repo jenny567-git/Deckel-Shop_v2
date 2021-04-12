@@ -20,22 +20,22 @@ namespace Deckel_Shop.Controllers
         private readonly OrderService orderService = new OrderService();
         private readonly CustomerService _cs = new CustomerService();
 
-        private static List<Product> productlist = new List<Product>();
+        //private static List<Product> productlist = new List<Product>();
 
 
-        //TEST OBJECTS: Customer, Products, Cart
-        private static Customer customer = new Customer
-        {
-            Id = 1,
-            FirstName = "Blas De Lezo"
-        };
+        ////TEST OBJECTS: Customer, Products, Cart
+        //private static Customer customer = new Customer
+        //{
+        //    Id = 1,
+        //    FirstName = "Blas De Lezo"
+        //};
 
 
-        private Cart cart = new Cart
-        {
-            Customer = customer,
-            Products = productlist
-        };
+        //private Cart cart = new Cart
+        //{
+        //    //Customer = customer,
+        //    Products = productlist
+        //};
 
         //public IActionResult kjhslkijgfhlisdfujhgidslfuhdilfuhdifubhdifugbh()
         //{
@@ -53,17 +53,17 @@ namespace Deckel_Shop.Controllers
         public IActionResult Index()
         {
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-            if (shopCart != null)
-            {
-                productlist = shopCart.Products;
-            }
+            //if (shopCart != null)
+            //{
+            //    productlist = shopCart.Products;
+            //}
             return View("SavedCart", shopCart);
         }
 
         public IActionResult AddProductToCart(int id)
         {
             var productInStock = _ss.GetProduct(id);
-            productlist = _ss.GetAllAvailableProducts().ToList();
+            //productlist = _ss.GetAllAvailableProducts().ToList();
 
             if (!ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace Deckel_Shop.Controllers
                 //    TotalPrice = cart.TotalPrice,
                 //    Products = new List<Product>()
                 //};
-                shopCart = cart;
+                shopCart = new Cart();
             }
 
             if (shopCart.Products.Exists(p => p.Id == productInStock.Id))
