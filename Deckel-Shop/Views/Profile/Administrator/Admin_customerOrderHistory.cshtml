@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Database.Models.Order>
 @{
-    ViewData["Title"] = "Customer#01 Order History";
+    ViewData["Title"] = "Customers' Order History";
 }
 
 <script src="~/js/Admin.js"></script>
@@ -19,20 +19,20 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-2">
+    @*<div class="col-sm-2">
         <div class="d-flex">
             <div class="dropdown mr-1">
                 <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
                     Status
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                    <a class="dropdown-item" value="1" href="#">Invoiced</a>
+                    <a class="dropdown-item" value="1" href="#">Pending</a>
                     <a class="dropdown-item" value="2" href="#">Delivered</a>
                     <a class="dropdown-item" value="3" href="#">Cancelled</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     
 </div>
 
@@ -80,7 +80,18 @@
                         @order.OrderDate
                     </td>
                     <td>
-                        @order.OrderStatus
+                        @if (order.OrderStatus == "Delivered")
+                        {
+                            <p style="color: forestgreen">@order.OrderStatus</p>
+                        }
+                        else if (order.OrderStatus == "Cancelled")
+                        {
+                            <p style="color: red">@order.OrderStatus</p>
+                        }
+                        else
+                        {
+                            <p>@order.OrderStatus</p>
+                        }
                     </td>
                     <td>
                         @order.ShippingDate
