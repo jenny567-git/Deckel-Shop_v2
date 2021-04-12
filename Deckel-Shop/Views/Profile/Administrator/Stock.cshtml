@@ -157,127 +157,212 @@
         </div>
     </div>
 
-    <!--Add Product Modal -->
-    <div class="modal fade" id="exampleModal-Product" tabindex="-1" aria-labelledby="exampleModalProduct-Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="DeckelModal modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form asp-action="AddProduct">
-                        @*start of form*@
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputStockID">Product ID</label>
-                                <input type="text" class="form-control" id="inputProductID">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputName">Product Name</label>
-                                <input name="Name" type="text" class="form-control" id="inputName">
-                            </div>
-                        </div>
-                        <div class="form-row">
-
-
-                            <div class="form-group col-md-6">
-                                <label for="inputAmount">Amount</label>
-                                <input name="Amount" type="text" class="form-control" id="inputAmount">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPrice">Price</label>
-                                <input name="Price" type="text" class="form-control" id="inputPrice">
-                            </div>
-                        </div>
-                        @*uploading image*@
-                        <div>
-                            <label for="inputZip">Image</label>
-                            <div class="container mt-5">
-                                <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-8">
-                                    <div method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label><strong>Upload Files</strong></label>
-                                            <div class="custom-file">
-                                                <input type="file" name="ImgName" multiple class="custom-file-input form-control" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" name="upload" value="upload" id="upload" class="btn btn-block btn-dark"><i class="fa fa-fw fa-upload"></i> Upload</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @*end of form*@
-                        <div class="modal-footer">
-                            <input type="submit" value="save" class="btn btn-primary" />
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-<!--Detail Modal -->
-<div class="modal fade" id="exampleModal-details" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
+<!--Add Product Modal -->
+<div class="modal fade" id="exampleModal-Product" tabindex="-1" aria-labelledby="exampleModalProduct-Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <form asp-action="AddProduct">
+                <div class="modal-body">
                     @*start of form*@
-                    <div class="form-row">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputStockID">Product ID</label>
+                            <input type="text" class="form-control" id="inputProductID" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Product Name</label>
+                            <input name="Name" type="text" class="form-control" id="inputName">
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Amount</label>
+                            <input name="Amount" type="text" class="form-control" id="inputAmount">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Price</label>
+                            <input name="Price" type="text" class="form-control" id="inputPrice">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Category</label>
+                            <input name="Category" value="" type="text" class="form-control" id="ProductCategory">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Status</label>
+                            <input name="Status" value="" type="text" class="form-control" id="ProductStatus">
+                        </div>
+                    </div>
+                    <div class=" form-group col-md-12 ">
+                        <label for="inputPrice">Description</label>
+                        <textarea class="form-control" name="Description" value="" id="ProductDescription"></textarea>
+                    </div>
+                    <div class="container py-5">
+                        <div class="row ">
+                            <label>Image 1</label>
+                            <div class="col-md-10 mx-auto">
+                                <!-- Upload image input-->
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-labelAdd1" for="uploadAdd1" class="text-muted">Choose file</label>
+                                    <input id="uploadAdd1" type="file" onchange="readURLAdd1(this);" class="form-control border-0 text-muted" />
+                                    <input id="uploadFileAdd1" name="ImgName" value="" type="text" class="form-control border-0 " />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <label>Image 2</label>
+                            <div class="col-md-10 mx-auto">
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-labelAdd2" for="uploadAdd2" class="text-muted">Choose file</label>
+                                    <input value="" id="uploadAdd2" type="file" onchange="readURLAdd2(this);" class="form-control border-0 ">
+                                    <input id="uploadFileAdd2" name="ImgName2" value="" type="text" class="form-control border-0 " />
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Uploaded image area-->
+                        <div class="col-md-12 col-sm-6 ">
+                            <div class="product-grid4">
+                                <div class="product-image4">
+                                    <a href="#">
+                                        <img id="imageResultAdd1" class="pic-1" src="#">
+                                        <img id="imageResultAdd2" class="pic-2" src="#">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" value="save" class="btn btn-primary" />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+                @*end of form*@
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<!--Detail Modal -->
+<div class="modal fade" id="exampleModal-StockDetails" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form asp-action="EditProduct" id="stockForm">
+            <div class="DeckelModal modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    <span aria-hidden="true">&times;</span>
+                </div>
+
+                <div class="modal-body">
+                    @*start of form*@
+                    <div class="row">
                         <div class="col-md-12 text-right">
-                            <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
+                            <button type="button" id="editBtn" onclick="enableStockForm()" class="btn btn-light" style="background-color:transparent">
                                 <i class="far fa-edit"></i>Edit
                             </button>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="form-group col-md-6">
                             <label for="ProductID">Product ID</label>
-                            <input type="text" class="form-control" id="detailsProductID" name="detailsProductID" disabled />
+                            <input name="Id" value="" type="text" class="form-control" id="ProductId" disabled />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputProductName">Product Name</label>
-                            <input type="text" class="form-control" id="detailsProductName" name="detailsProductName" disabled>
+                            <input name="Name" value="" type="text" class="form-control" id="ProductName" disabled>
                         </div>
                     </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputAmount">Amount</label>
-                                <input type="text" class="form-control" id="detailsAmount" name="detailsAmount" disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPrice">Price</label>
-                                <input type="email" class="form-control" id="detailsPrice" name="detailsPrice" disabled>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Amount</label>
+                            <input name="Amount" value="" type="text" class="form-control" id="ProductAmount" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Price</label>
+                            <input name="Price" value="" type="number" class="form-control" id="ProductPrice" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAmount">Category</label>
+                            <input name="Category" value="" type="text" class="form-control" id="ProductCategory" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPrice">Status</label>
+                            <input name="Status" value="" type="text" class="form-control" id="ProductStatus" disabled>
+                        </div>
+                    </div>
+                    <div class=" form-group col-md-12 ">
+                        <label for="inputPrice">Description</label>
+                        <textarea class="form-control" name="Description" value="" id="ProductDescription" disabled></textarea>
+                    </div>
+
+                    <div class="container py-5">
+                        <div class="row ">
+                            <label>Image 1</label>
+                            <div class="col-md-10 mx-auto">
+                                <!-- Upload image input-->
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-label1" for="upload1" class="text-muted">Choose file</label>
+                                    <input id="upload1" type="file" onchange="readURL1(this);" class="form-control border-0 text-muted" disabled />
+                                    <input id="uploadFile1" name="ImgName" value="" type="text" class="form-control border-0 " disabled />
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-10">
-                            <label for="inputPrice">Image</label>
-                            <img src="..." alt="..." class="img-thumbnail">
+                        <div class="row ">
+                            <label>Image 2</label>
+                            <div class="col-md-10 mx-auto">
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-label2" for="upload2" class="text-muted">Choose file</label>
+                                    <input value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
+                                    <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
+                                </div>
+                            </div>
                         </div>
-                        @*end of form*@
-                    </form>
+
+                        <!-- Uploaded image area-->
+                        <div class="col-md-12 col-sm-6 ">
+                            <div class="product-grid4">
+                                <div class="product-image4">
+                                    <a href="#">
+                                        <img id="imageResult1" class="pic-1" src="#">
+                                        <img id="imageResult2" class="pic-2" src="#">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveStockBtn" class="btn btn-primary" disabled>Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
+
+                @*end of form*@
+
+        </form>
+
+
     </div>
+</div>
 
 <!--Delete Modal -->
 <div class="modal fade" id="exampleModal-delete" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">

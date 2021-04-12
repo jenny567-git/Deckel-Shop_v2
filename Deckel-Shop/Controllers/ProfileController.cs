@@ -220,7 +220,7 @@ namespace Deckel_Shop.Controllers
             if (ModelState.IsValid)
             {
                 _ss.AddProduct(product);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Stock));
             }
             return View();
         }
@@ -231,6 +231,17 @@ namespace Deckel_Shop.Controllers
         {
             _ss.AddBackToStock(id, StockAmount);
             return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
+        }
+
+        [HttpPost]
+
+        public async Task <IActionResult> EditProduct([FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                await _ss.EditProduct(product);
+            }
+            return RedirectToAction(nameof(Stock));
         }
 
 

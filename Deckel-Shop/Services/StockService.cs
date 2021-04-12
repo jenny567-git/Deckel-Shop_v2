@@ -57,6 +57,7 @@ namespace Deckel_Shop.Services
 
         public void AddProduct(Product product)
         {
+
             deckelShopContext.Products.Add(product);
             deckelShopContext.SaveChanges(); 
         }
@@ -87,14 +88,13 @@ namespace Deckel_Shop.Services
             deckelShopContext.SaveChanges();
         }
 
-        public void EditProduct(Product product)
+        public async Task <int> EditProduct(Product product)
         {
-            var currentProduct = deckelShopContext.Products.FirstOrDefault(x => x.Id == product.Id);
-            if (currentProduct != null)
-            {
-                currentProduct = product;
-            }
-            deckelShopContext.SaveChanges();
+            //var currentProduct = GetProduct(product.Id);
+            
+            deckelShopContext.Update(product);
+            //deckelShopContext.SaveChanges();
+            return await deckelShopContext.SaveChangesAsync();
         }
 
 
