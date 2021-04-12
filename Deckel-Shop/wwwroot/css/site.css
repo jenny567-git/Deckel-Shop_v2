@@ -33,6 +33,10 @@ a {
     background-color: transparent;
 }
 
+.AdminNav li a{
+    font-size: 16px !important;
+}
+
 /*ul.catBlock {
     display: table;
 }
