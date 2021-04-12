@@ -126,7 +126,7 @@ nav {
 }
 
 .dropdown-item {
-    color: #c4a970;
+    color: #e9cf97;
 }
 
     .nav-links li {
@@ -165,12 +165,6 @@ nav a:hover:before {
 
 a.text-dark:focus, a.text-dark:hover {
     color: #d6be88 !important;
-}
-
-nav .nav-link {
-}
-
-.row{
 }
 
 .burger {
