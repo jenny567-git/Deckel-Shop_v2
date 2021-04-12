@@ -197,6 +197,7 @@ namespace Deckel_Shop.Controllers
                     orderService.AddOrder(order);
                     StockService stockService = new StockService();
                     stockService.UpdateStockWhenPlacingOrder(order);
+                    HttpContext.Session.Clear();
 
                 }
 
