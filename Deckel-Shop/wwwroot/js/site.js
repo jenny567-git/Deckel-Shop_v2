@@ -176,8 +176,9 @@ function PopulateStockModal(product) {
     $('input[id="ProductCategory"]').val(product.category);
     $('input[id="ProductStatus"]').val(product.status);
     $('textarea[id="ProductDescription"]').val(product.description);
-    $('input[id="uploadFile1"]').val(product.imageName);
-    $('input[id="uploadFile2"]').val(product.imageName2);
+    $('input[id="uploadFile1"]').val(product.imgName);
+    $('input[id="uploadFile2"]').val(product.imgName2);
+    
 }
 
 function ChangeRoleToCustomer(id, userName) {
