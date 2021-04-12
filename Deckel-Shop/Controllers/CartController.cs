@@ -62,56 +62,58 @@ namespace Deckel_Shop.Controllers
 
         public IActionResult AddProductToCart(int id)
         {
-
-            var product = _ss.GetProduct(id);
+            var productInStock = _ss.GetProduct(id);
             productlist = _ss.GetAllAvailableProducts().ToList();
 
             if (!ModelState.IsValid)
             {
-                RedirectToAction("views/product/index.cshtml");
+                return RedirectToAction(nameof(Index), "product");
             }
 
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
 
             if (shopCart == null)
             {
-                shopCart = new Cart
-                {
-                    Id = cart.Id,
-                    CustomerId = cart.CustomerId,
-                    Customer = cart.Customer,
-                    TotalPrice = cart.TotalPrice,
-                    Products = new List<Product>()
-                };
+                //shopCart = new Cart
+                //{
+                //    Id = cart.Id,
+                //    CustomerId = cart.CustomerId,
+                //    Customer = cart.Customer,
+                //    TotalPrice = cart.TotalPrice,
+                //    Products = new List<Product>()
+                //};
+                shopCart = cart;
             }
 
-            if (shopCart.Products.Exists(p => p.Id == product.Id))
+            if (shopCart.Products.Exists(p => p.Id == productInStock.Id))
             {
-                var itemInCart = shopCart.Products.FirstOrDefault(p => p.Id == product.Id);
-                if(_ss.GetProduct(id).Amount > itemInCart.Amount)
+                var itemInCart = shopCart.Products.FirstOrDefault(p => p.Id == productInStock.Id);
+                if(productInStock.Amount > itemInCart.Amount)
                 {
-                ++shopCart.Products.First(p => p.Id == product.Id).Amount;
+                ++itemInCart.Amount;
                 }
                 
             }
             else
             {
-                shopCart.Products.Add(
+                shopCart.Products.Add(                    
                     new Product
                     {
-                        Id = product.Id,
-                        Name = product.Name,
-                        ImgName2 = product.ImgName2,
-                        Description = product.Description,
-                        Price = product.Price,
-                        Amount = 1
+                        Id = productInStock.Id,
+                        Name = productInStock.Name,
+                        ImgName = productInStock.ImgName,
+                        ImgName2 = productInStock.ImgName2,
+                        Description = productInStock.Description,
+                        Price = productInStock.Price,
+                        Amount = 1,
+                        Category = productInStock.Category,
+                        Status = productInStock.Status
                     });
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
 
-            return View("SavedCart", shopCart);
-
+            return RedirectToAction(nameof(Index), "product");
         }
 
         public IActionResult RemoveProduct(int id)
@@ -120,6 +122,7 @@ namespace Deckel_Shop.Controllers
             //var product = shopCart.Products.Single(p => p.Id == id);
             shopCart.Products.RemoveAll(p => p.Id == id);
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+            TempData["msg"] = "Item has been delete from cart";
             return RedirectToAction(nameof(Index));
         }
 
@@ -130,12 +133,16 @@ namespace Deckel_Shop.Controllers
             if (_ss.GetProduct(id).Amount >= amount)
             {
                 product.Amount = amount;
-
+                TempData["msg"] = "Quantity has been updated.";
+            }
+            else
+            {
+                TempData["msg"] = "Unable to update quantity due to low stock";
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
             //shopCart.Products.Update(product);
-
+            
             return RedirectToAction(nameof(Index));
         }
 
