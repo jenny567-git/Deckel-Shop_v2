@@ -132,24 +132,24 @@
                             
                             <td>
                                 <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                    <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
+                                    <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#StockDetails" style="background-color:transparent">
                                         <i class="fas fa-info-circle"></i>
                                     </button>
                                 </span>
                                 @if (p.Status == "Available")
                                 {
-                    <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                        <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </span> }
+                                    <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                                        <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </span> }
                                     else
                                     {
-                    <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
-                        <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
-                            <i class="far fa-plus-square"></i>
-                        </button>
-                    </span>}
+                                        <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
+                                            <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
+                                                <i class="far fa-plus-square"></i>
+                                            </button>
+                                        </span>}
                             </td>
                         </tr>
 
@@ -262,7 +262,7 @@
 
 
 <!--Detail Modal -->
-<div class="modal fade" id="exampleModal-StockDetails" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
+<div class="modal fade" id="StockDetails" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <form asp-action="EditProduct" id="stockForm">
             <div class="DeckelModal modal-content">
@@ -295,7 +295,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Amount</label>
-                            <input name="Amount" value="" type="text" class="form-control" id="ProductAmount" disabled>
+                            <input name="Amount" value="" type="text" class="form-control" id="ProductAmount" disabled> 
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Price</label>
@@ -360,7 +360,7 @@
                 </div>
 
                 @*end of form*@
-
+            </div>
         </form>
 
 
