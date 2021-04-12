@@ -94,22 +94,39 @@
                 <tbody class="tableSearch">
                     @foreach (var p in Model)
                     {
-                        <tr>
-                            <td>
-                                @p.Id
+                    <tr>
+                        <td>
+                            @p.Id
+                        </td>
+                        <td>
+                            @p.Name
+                        </td>
+                        <td>
+                            @p.Amount
+                        </td>
+                        <td>
+                            @p.Price
+                        </td>
+                        
+                            @if (p.Status == "Available")
+                            {
+                            <td style="color:forestgreen">
+                                @p.Status
                             </td>
-                            <td>
-                                @p.Name
+                        }
+                        else if (p.Status == "Removed")
+                        {
+                            <td style="color:red">
+                                @p.Status
                             </td>
-                            <td>
-                                @p.Amount
-                            </td>
-                            <td>
-                                @p.Price
-                            </td>
+                        }
+                        else
+                        {
                             <td>
                                 @p.Status
                             </td>
+                        }
+                            
                             <td>
                                 <span data-toggle="tooltip" data-placement="bottom" title="info">
                                     <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-details" style="background-color:transparent">
@@ -118,20 +135,18 @@
                                 </span>
                                 @if (p.Status == "Available")
                                 {
-                                    <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                        <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
-                                        <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
-                                            <i class="far fa-plus-square"></i>
-                                        </button>
-                                    </span>
-                                }
+                    <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                        <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </span> }
+                                    else
+                                    {
+                    <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
+                        <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
+                            <i class="far fa-plus-square"></i>
+                        </button>
+                    </span>}
                             </td>
                         </tr>
 
