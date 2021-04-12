@@ -31,6 +31,12 @@ namespace Deckel_Shop.Services
                 throw new NotImplementedException();
             }
         }
+        
+        public IEnumerable<Order> GetAllOrdersByOrderStatusNotPending()
+        {
+                return deckelShopContext.Orders.Where(o => o.OrderStatus != "Pending").Include(c => c.Customer).AsEnumerable();
+            
+        }
         public IEnumerable<Order> GetAllOrdersBySelectedCustomer(int id)
         {
             return deckelShopContext.Orders.Where(o => o.CustomerId == id);
@@ -65,8 +71,10 @@ namespace Deckel_Shop.Services
 
         public async Task<int> RemoveOrder(int id)
         {
-            GetOrder(id).OrderedItems.Clear();
-            deckelShopContext.Orders.Remove(GetOrder(id));
+            //GetOrder(id).OrderedItems.Clear();
+            var order = GetOrder(id);
+            order.OrderStatus = "Cancelled";
+            deckelShopContext.Orders.Update(order);
            return await deckelShopContext.SaveChangesAsync();
         }
 
