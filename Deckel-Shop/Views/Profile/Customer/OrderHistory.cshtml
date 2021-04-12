@@ -52,38 +52,49 @@
             @foreach (var order in Model)
             {
 
-                <tr>
-                    <td>
-                        @order.OrderId
-                    </td>
-                    <td>
-                        @order.OrderDate
-                    </td>
-                    <td>
-                        @order.OrderStatus
-                    </td>
-                    <td>
-                        @if (order.ShippingDate == DateTime.UnixEpoch)
-                        {
-                            <p>Not shipped</p>
-                        }
-                        else
-                        {
-                            @order.ShippingDate
-                        }
+            <tr>
+                <td>
+                    @order.OrderId
+                </td>
+                <td>
+                    @order.OrderDate
+                </td>
+                <td>
+                    @if (order.OrderStatus == "Delivered")
+                    {
+                        <p style="color: forestgreen">@order.OrderStatus</p>
+                    }
+                    else if (order.OrderStatus == "Cancelled")
+                    {
+                        <p style="color: red">@order.OrderStatus</p>
+                    }
+                    else
+                    {
+                        <p>@order.OrderStatus</p>
+                    }
+                </td>
+                <td>
+                    @if (order.ShippingDate == DateTime.UnixEpoch)
+                    {
+                        <p>Not shipped</p>
+                    }
+                    else
+                    {
+                        @order.ShippingDate
+                    }
 
-                    </td>
-                    <td>
-                        @order.OrderTotal SEK
-                    </td>
-                    <td>
-                        <span data-toggle="tooltip" data-placement="bottom" title="info">
-                            <button type="button" onclick="GetModalInfo(@order.OrderId, 'orderDetails')" id="infoModalBtn-@order.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
-                                <i class="fas fa-info-circle"></i>
-                            </button>
-                        </span>
-                    </td>
-                </tr>
+                </td>
+                <td>
+                    @order.OrderTotal SEK
+                </td>
+                <td>
+                    <span data-toggle="tooltip" data-placement="bottom" title="info">
+                        <button type="button" onclick="GetModalInfo(@order.OrderId, 'orderDetails')" id="infoModalBtn-@order.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </span>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
