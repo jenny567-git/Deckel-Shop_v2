@@ -100,7 +100,7 @@
                                         <i class="fas fa-info-circle"></i>
                                     </button>
                                 </span>
-                                
+
                                 @*---------------------------------------------------------------------------------*@
                                 <!-- DELETE Button trigger modal -->
                                 <span data-toggle="tooltip" data-placement="bottom" title="delete">
@@ -169,7 +169,7 @@
                             <input name="Phone" type="text" class="form-control" id="inputState">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="inputAddress">Address</label>
                         <input name="Street" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
@@ -208,14 +208,14 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Customer info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form asp-action="EditCustomer" id="customerForm">
                     @*start of form*@
-                    
-                   
+
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="inputCustomerID">Customer ID</label>
@@ -225,7 +225,7 @@
                             <button type="button" id="editBtn" onclick="enableForm()" class="btn btn-light" style="background-color:transparent">
                                 <i class="far fa-edit"></i>Edit
                             </button>
-                        </div> 
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -262,13 +262,13 @@
                             <input type="text" name="ZipCode" class="form-control" id="detailsZip" disabled>
                         </div>
                     </div>
-                @*end of form*@
+                    @*end of form*@
 
 
-                <div class="modal-footer">
-                    <input type="submit" value="Save changes" id="saveBtnForEditCustomer" class="btn btn-danger" disabled />
-                    <button id="CancleBtn" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Save changes" id="saveBtnForEditCustomer" class="btn btn-danger" disabled />
+                        <button id="CancleBtn" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -280,11 +280,11 @@
 <div class="modal fade" id="exampleModal-delete" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="DeckelModal modal-content">
-            @*<div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>*@
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
                 Delete customer?
             </div>

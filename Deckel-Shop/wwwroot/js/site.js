@@ -79,15 +79,15 @@ function showSlides(n) {
     dots[slideIndex - 1].className += " active";
 }
 
-//Admin -> Edit customer -> Show password
-function showPassword() {
-    var x = document.getElementById("inputPassword");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-};
+////Admin -> Edit customer -> Show password
+//function showPassword() {
+//    var x = document.getElementById("inputPassword");
+//    if (x.type === "password") {
+//        x.type = "text";
+//    } else {
+//        x.type = "password";
+//    }
+//};
 
 //Admin -> all search bar
 $(document).ready(function () {
@@ -99,15 +99,6 @@ $(document).ready(function () {
     });
 });
 
-////Admin -> Customer order history -> table search (Filter table)
-//$(document).ready(function () {
-//    $("#tableSearch").on("keyup", function () {
-//        var value = $(this).val().toLowerCase();
-//        $("#customerOrderHistoryTable tr").filter(function () {
-//            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//        });
-//    });
-//});
 
 // tooltip function
 $(function () {
@@ -120,7 +111,6 @@ function GetModalInfo(id, modalType) {
     // Api call
     $(function () {
         console.log("testing function" + id + " " + modalType);
-        //var person = '{Name: "' + $("#txtName").val() + '" }';
         var Id = '{"Id": "' + id + '"}';
         console.log(Id);
         $.ajax({
@@ -130,7 +120,6 @@ function GetModalInfo(id, modalType) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { // response = order info
-                //alert("Hello: " + response.id);
                 if (modalType === 'orderDetails') {
                     PopulateOrderModal(response);
                 }
@@ -269,12 +258,10 @@ function PopulateOrderModal(order) {
 
 // Wait for window to load
 window.addEventListener('load', function () {
-    //console.log('All assets are loaded')
-    // When clicking the modal button
+ 
     $("#ModalShowBtn").click(function () {
         event.preventDefault();
-        //console.log($("#orderIdRow").html());
-        // Set value of the delete button. Value is sent to controller
+       
         $('#DeleteBtn').val($("#orderIdRow").html());
     });
 

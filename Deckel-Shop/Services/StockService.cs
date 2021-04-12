@@ -90,10 +90,8 @@ namespace Deckel_Shop.Services
 
         public async Task <int> EditProduct(Product product)
         {
-            //var currentProduct = GetProduct(product.Id);
             
             deckelShopContext.Update(product);
-            //deckelShopContext.SaveChanges();
             return await deckelShopContext.SaveChangesAsync();
         }
 

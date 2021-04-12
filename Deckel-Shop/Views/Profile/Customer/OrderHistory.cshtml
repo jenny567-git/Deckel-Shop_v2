@@ -5,24 +5,17 @@
 <h2>Order History</h2>
 <h4>@UserManager.GetUserAsync(User).Result.UserName</h4>
 
-@*<h3>Name of customer</h3>*@
 
 
 @model IEnumerable<Database.Models.Order>
 
 <ul class="nav nav-tabs">
-    @*<li class="nav-item">
-            <a class="nav-link" asp-action="Index">Profile</a>
-        </li>*@
     <li class="nav-item">
         <a class="nav-link active" asp-action="Index">Order History</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="~/Identity/Account/Manage/">Manage account</a>
     </li>
-    @*<li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>*@
 </ul>
 
 

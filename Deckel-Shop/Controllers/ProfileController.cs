@@ -67,14 +67,8 @@ namespace Deckel_Shop.Controllers
         }
 
 
-        //--------------------------------------------------------------------START OF ORDERS
-
-        //PEDNING ORDERS
         public IActionResult Administrator()
         {
-
-            //OrderService os = new OrderService();
-
 
             return View("/views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
         }
@@ -110,18 +104,11 @@ namespace Deckel_Shop.Controllers
         {
             _ss.UpdateStockWhenCancelledOrder(id);
             await _os.RemoveOrder(id);
-            //_ss.UpdateStock(id, _ss.GetStockStatusByProductId(id));
             return RedirectToAction(nameof(Administrator));
         }
 
-
-
-        //--------------------------------------------------------------------END OF ORDERS
-
-        //--------------------------------------------------------------------START OF CUSTOMER
         public IActionResult Admin_customerList()
         {
-            //var listOfCustomers = _cs.GetAllCustomers();
             return View("/views/profile/administrator/Admin_customerList.cshtml", _cs.GetAllCustomers());
         }
 
@@ -174,9 +161,6 @@ namespace Deckel_Shop.Controllers
             return View("/views/profile/administrator/Admin_customerOrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(id));
 
         }
-        //--------------------------------------------------------------------END OF CUSTOMER
-
-        //--------------------------------------------------------------------START OF PRODUCTS
         public IActionResult Stock(string filter)
         {
             var sort = _ss.GetAllProducts();
@@ -253,6 +237,5 @@ namespace Deckel_Shop.Controllers
             return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
         }
 
-        //--------------------------------------------------------------------END OF PRODUCTS
     }
 }

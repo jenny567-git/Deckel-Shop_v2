@@ -49,11 +49,9 @@ namespace Deckel_Shop.Services
 
             CustomerService cs = new CustomerService();
 
-            //Customer cust = cs.GetCustomer(custid);
 
             Order order = new Order();
 
-            //var viewModel = CreateOrderViewModel(order, cust, order.OrderedItems.ToList());
 
 
             order = deckelShopContext.Orders.Include(c => c.Customer).Include(o => o.OrderedItems).ThenInclude(p => p.Product).SingleOrDefault(o => o.OrderId == id);
@@ -71,23 +69,11 @@ namespace Deckel_Shop.Services
 
         public async Task<int> RemoveOrder(int id)
         {
-            //GetOrder(id).OrderedItems.Clear();
             var order = GetOrder(id);
             order.OrderStatus = "Cancelled";
             deckelShopContext.Orders.Update(order);
            return await deckelShopContext.SaveChangesAsync();
         }
-
-        //public void SendOrder(int id)
-        //{
-        //    var currentOrder = deckelShopContext.Orders.FirstOrDefault(x => x.OrderId == id);
-        //    if (currentOrder != null)
-        //    {
-        //        //change orderstatus to int???
-        //        currentOrder.OrderStatus = "Delivered";
-        //    }
-        //    deckelShopContext.SaveChanges();
-        //}
 
 
         public async Task<int> SendOrder(int id)

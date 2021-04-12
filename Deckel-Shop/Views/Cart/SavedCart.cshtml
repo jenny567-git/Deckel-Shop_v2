@@ -49,10 +49,8 @@
                         <th class="text-center">@product.Id</th>
                         <td class="text-center">@product.Name</td>
                         <td class="text-center">@product.Price</td>
-                        @*<td class="text-center">@product.Amount</td>*@
                         <td class="text-center">
                             <div class="col-md-8 quantity m-auto">
-                                @*<label for="quantity">Quantity:</label>*@
                                 <div class="input-group">
                                     <input id="amount" type="number" value="@product.Amount" name="amount" class="form-control quantity-input" readonly>
                                     <div class="input-group-append ">
@@ -119,7 +117,6 @@
                     <input name="amount" type="number" class="form-control" id="inputAmount">
                 </div>
                 <div class="modal-footer">
-                    @*TODO: need logic to receive amount and logic to execute this function*@
                     <button name="id" id="AddBackToStockBtn" value="" class="btn btn-danger">Yes</button>
 
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
