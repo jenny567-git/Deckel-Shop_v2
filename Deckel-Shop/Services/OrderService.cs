@@ -31,6 +31,12 @@ namespace Deckel_Shop.Services
                 throw new NotImplementedException();
             }
         }
+        
+        public IEnumerable<Order> GetAllOrdersByOrderStatusNotPending()
+        {
+                return deckelShopContext.Orders.Where(o => o.OrderStatus != "Pending").Include(c => c.Customer).AsEnumerable();
+            
+        }
         public IEnumerable<Order> GetAllOrdersBySelectedCustomer(int id)
         {
             return deckelShopContext.Orders.Where(o => o.CustomerId == id);

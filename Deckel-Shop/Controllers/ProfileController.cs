@@ -79,9 +79,21 @@ namespace Deckel_Shop.Controllers
             return View("/views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
         }
 
-        public IActionResult DeliveredOrders()
+        public IActionResult DeliveredOrders(string? filter)
         {
-            return View("views/profile/Administrator/DeliveredOrders.cshtml", _os.GetAllOrdersByOrderStatus("Delivered"));
+            var list = _os.GetAllOrdersByOrderStatusNotPending();
+            switch (filter)
+            {
+                case "delivered":
+                    list = _os.GetAllOrdersByOrderStatus("Delivered");
+                    break;
+                case "cancelled":
+                    list = _os.GetAllOrdersByOrderStatus("Cancelled");
+                    break;
+                default:
+                    break;
+            }
+            return View("views/profile/Administrator/DeliveredOrders.cshtml", list);
         }
 
         [HttpPost]
