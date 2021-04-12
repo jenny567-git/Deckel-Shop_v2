@@ -65,8 +65,10 @@ namespace Deckel_Shop.Services
 
         public async Task<int> RemoveOrder(int id)
         {
-            GetOrder(id).OrderedItems.Clear();
-            deckelShopContext.Orders.Remove(GetOrder(id));
+            //GetOrder(id).OrderedItems.Clear();
+            var order = GetOrder(id);
+            order.OrderStatus = "Cancelled";
+            deckelShopContext.Orders.Update(order);
            return await deckelShopContext.SaveChangesAsync();
         }
 
