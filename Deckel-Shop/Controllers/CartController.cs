@@ -88,15 +88,15 @@ namespace Deckel_Shop.Controllers
             if (shopCart.Products.Exists(p => p.Id == productInStock.Id))
             {
                 var itemInCart = shopCart.Products.FirstOrDefault(p => p.Id == productInStock.Id);
-                if(productInStock.Amount > itemInCart.Amount)
+                if (productInStock.Amount > itemInCart.Amount)
                 {
-                ++itemInCart.Amount;
+                    ++itemInCart.Amount;
                 }
-                
+
             }
             else
             {
-                shopCart.Products.Add(                    
+                shopCart.Products.Add(
                     new Product
                     {
                         Id = productInStock.Id,
@@ -142,7 +142,7 @@ namespace Deckel_Shop.Controllers
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
             //shopCart.Products.Update(product);
-            
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -199,7 +199,7 @@ namespace Deckel_Shop.Controllers
                     StockService stockService = new StockService();
                     stockService.UpdateStockWhenPlacingOrder(order);
                     HttpContext.Session.Clear();
-
+                    
                 }
 
 
@@ -208,7 +208,12 @@ namespace Deckel_Shop.Controllers
             {
                 TempData["msg"] = ex.Message;
             }
-            return RedirectToAction(nameof(Index), "home");
+            return RedirectToAction(nameof(OrderConfirmation));
+        }
+
+        public IActionResult OrderConfirmation()
+        {
+            return View();
         }
     }
 
