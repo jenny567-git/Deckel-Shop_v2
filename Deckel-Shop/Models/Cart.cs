@@ -17,5 +17,11 @@ namespace Deckel_Shop.Models
         public List<Product> Products { get; set; }
 
         public decimal TotalPrice { get; set; }
+
+        public Cart()
+        {
+            Products = new List<Product>();
+        }
     }
+
 }
