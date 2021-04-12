@@ -96,8 +96,9 @@ namespace Deckel_Shop.Controllers
 
         public async Task< IActionResult> RemoveOrder(int id)
         {
+            _ss.UpdateStockWhenCancelledOrder(id);
             await _os.RemoveOrder(id);
-            _ss.UpdateStock(id, _ss.GetStockStatusByProductId(id));
+            //_ss.UpdateStock(id, _ss.GetStockStatusByProductId(id));
             return RedirectToAction(nameof(Administrator));
         }
 

@@ -9,9 +9,12 @@ namespace Deckel_Shop.Services
     public class StockService
     {
         private readonly DeckelShopContext deckelShopContext;
+        private readonly OrderService _os;
+
         public StockService()
         {
             deckelShopContext = new DeckelShopContext();
+            _os = new OrderService();
         }
 
         public IEnumerable<Product> GetAllProducts()
@@ -28,7 +31,24 @@ namespace Deckel_Shop.Services
             return deckelShopContext.Products.Where(p => p.Status == "Removed").AsEnumerable();
         }
 
-        
+        public void UpdateStockWhenCancelledOrder(int orderId)
+        {
+            var order = _os.GetOrder(orderId);
+            foreach (var item in order.OrderedItems)
+            {
+                deckelShopContext.Products.SingleOrDefault(p => p.Id == item.ProductId).Amount += item.Amount;
+            }
+            deckelShopContext.SaveChanges();
+        }
+
+        public void UpdateStockWhenPlacingOrder(Order order)
+        {
+            foreach (var item in order.OrderedItems)
+            {
+                deckelShopContext.Products.SingleOrDefault(p => p.Id == item.ProductId).Amount -= item.Amount;
+            }
+            deckelShopContext.SaveChanges();
+        }
 
         public Product GetProduct(int id)
         {

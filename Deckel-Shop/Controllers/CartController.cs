@@ -195,6 +195,8 @@ namespace Deckel_Shop.Controllers
                     order.OrderTotal = cart.TotalPrice;
 
                     orderService.AddOrder(order);
+                    StockService stockService = new StockService();
+                    stockService.UpdateStockWhenPlacingOrder(order);
 
                 }
 
