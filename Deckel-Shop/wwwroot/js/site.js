@@ -297,17 +297,17 @@ window.addEventListener('load', function () {
 
     })
 
-    $('#saveStockBtn').on('hidden.bs.modal', function () {
+    $('#StockDetails').on('hidden.bs.modal', function () {
         var form = document.getElementById("stockForm");
         var elements = form.elements;
         for (var i = 0, len = elements.length; i < len; ++i) {
             
             elements[i].disabled = true;
         }
-        saveBtnForEditCustomer.disabled = true;
-        editBtn.disabled = false;
-        CancleBtn.disabled = false;
-
+        saveStockBtn.disabled = true;
+        editStockBtn.disabled = false;
+        cancelStockBtn.disabled = false;
+        CloseStockBtn.disabled = false;
     })
 
 
@@ -335,6 +335,7 @@ function enableStockForm() {
         elements[i].disabled = false;
     }
     saveStockBtn.disabled = false;
+    CloseStockBtn.disabled = false;
    
 }
 // add an imgae to stock details modal
