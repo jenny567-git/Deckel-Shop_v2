@@ -2,8 +2,8 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<h1>Order History</h1>
-<h3>@UserManager.GetUserAsync(User).Result.UserName</h3>
+<h2>Order History</h2>
+<h4>@UserManager.GetUserAsync(User).Result.UserName</h4>
 
 @*<h3>Name of customer</h3>*@
 
@@ -15,7 +15,7 @@
             <a class="nav-link" asp-action="Index">Profile</a>
         </li>*@
     <li class="nav-item">
-        <a class="nav-link active" asp-action="CustomerOrderHistory">Order History</a>
+        <a class="nav-link active" asp-action="Index">Order History</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="~/Identity/Account/Manage/">Manage account</a>
@@ -65,7 +65,7 @@
                     <td>
                         @if (order.ShippingDate == DateTime.UnixEpoch)
                         {
-                        <p>Not shipped</p>
+                            <p>Not shipped</p>
                         }
                         else
                         {
