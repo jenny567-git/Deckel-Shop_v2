@@ -267,6 +267,7 @@
         <form asp-action="EditProduct" id="stockForm">
             <div class="DeckelModal modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -276,7 +277,7 @@
                     @*start of form*@
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <button type="button" id="editBtn" onclick="enableStockForm()" class="btn btn-light" style="background-color:transparent">
+                            <button type="button" id="editStockBtn" onclick="enableStockForm()" class="btn btn-light" style="background-color:transparent">
                                 <i class="far fa-edit"></i>Edit
                             </button>
                         </div>
@@ -355,7 +356,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="saveStockBtn" class="btn btn-primary" disabled>Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button id="cancelStockBtn" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
 

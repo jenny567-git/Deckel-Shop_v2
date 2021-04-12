@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -50,6 +52,7 @@ namespace Deckel_Shop
 
             services.AddSignalR();
 
+            services.AddLocalization();
 
             services.AddControllersWithViews();
         }
@@ -75,7 +78,17 @@ namespace Deckel_Shop
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
+            var supportedCultures = new[]{
+                 new CultureInfo("sv-SE")
+                };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("sv-SE"),
+                SupportedCultures = supportedCultures,
+                FallBackToParentCultures = false
+            });
 
             app.UseEndpoints(endpoints =>
             {
