@@ -133,7 +133,8 @@ function GetModalInfo(id, modalType) {
                 //alert("Hello: " + response.id);
                 if (modalType === 'orderDetails') {
                     PopulateOrderModal(response);
-                } else if (modalType === 'customerDetails') {
+                }
+                else if (modalType === 'customerDetails') {
                     PopulateCustomerModal(response)
                 }
                 else if (modalType === 'stockDetails') {
@@ -168,12 +169,17 @@ function PopulateCustomerModal(customer) {
 }
 
 function PopulateStockModal(product) {
-    $('input[name="detailsProductID"]').val(product.id);
-    $('input[name="detailsProductName"]').val(product.name);
-    $('input[name="detailsAmount"]').val(product.amount);
-    $('input[name="detailsPrice"]').val(product.price);
-    
-    console.log(product.name);
+    $('input[id="ProductId"]').val(product.id);
+    $('input[id="ProductName"]').val(product.name);
+    $('input[id="ProductAmount"]').val(product.amount);
+    $('input[id="ProductPrice"]').val(product.price);
+    $('input[id="ProductCategory"]').val(product.category);
+    $('input[id="ProductStatus"]').val(product.status);
+    $('textarea[id="ProductDescription"]').val(product.description);
+    $('input[id="uploadFile1"]').val(product.imageName);
+    $('input[id="uploadFile2"]').val(product.imageName2);
+
+    console.log(customer.firstName);
 
 }
 
@@ -293,6 +299,19 @@ window.addEventListener('load', function () {
 
     })
 
+    $('#saveStockBtn').on('hidden.bs.modal', function () {
+        var form = document.getElementById("stockForm");
+        var elements = form.elements;
+        for (var i = 0, len = elements.length; i < len; ++i) {
+            
+            elements[i].disabled = true;
+        }
+        saveBtnForEditCustomer.disabled = true;
+        editBtn.disabled = false;
+        CancleBtn.disabled = false;
+
+    })
+
 
 });
 
@@ -309,3 +328,151 @@ function enableForm() {
     saveBtnForEditCustomer.disabled = false;
    
 }
+
+function enableStockForm() {
+    var form = document.getElementById("stockForm");
+    var elements = form.elements;
+    for (var i = 0, len = elements.length; i < len; ++i) {
+        
+        elements[i].disabled = false;
+    }
+    saveStockBtn.disabled = false;
+   
+}
+// add an imgae to stock details modal
+
+function readURL1(input1) {
+    if (input1.files && input1.files[0]) {
+        var reader = new FileReader();
+        
+        console.log(input1.files[0].name)
+     
+        reader.onload = function (e) {
+            $('#imageResult1')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input1.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload1').on('change', function () {
+        readURL1(input1);
+    });
+});
+
+function readURL2(input2) {
+    if (input2.files && input2.files[0]) {
+        var reader2 = new FileReader();
+
+        reader2.onload = function (e) {
+            $('#imageResult2')
+                .attr('src', e.target.result);
+        };
+        reader2.readAsDataURL(input2.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload2').on('change', function () {
+        readURL2(input2);
+    });
+});
+
+// add an imgae to add a new product modal
+
+function readURLAdd1(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        console.log(input.files[0].name)
+
+        reader.onload = function (e) {
+            $('#imageResultAdd1')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#uploadAdd1').on('change', function () {
+        readURL1(input1);
+    });
+});
+
+
+function readURLAdd2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        console.log(input.files[0].name)
+
+        reader.onload = function (e) {
+            $('#imageResultAdd2')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#uploadAdd2').on('change', function () {
+        readURL1(input1);
+    });
+});
+
+/*  ==========================================
+    SHOW UPLOADED IMAGE NAME
+* ========================================== */
+// detail stock modal
+var inputFile1 = document.getElementById('uploadFile1');
+var input1 = document.getElementById('upload1');
+var infoArea1 = document.getElementById('upload-label1');
+
+var inputFile2 = document.getElementById("uploadFile2");
+var input2 = document.getElementById('upload2');
+var infoArea2 = document.getElementById('upload-label2');
+
+
+function showFileName1(event) {
+
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    inputFile1.value = "/Image/" + fileName;
+    infoArea1.textContent = 'File name: ' + fileName;
+}
+function showFileName2(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    inputFile2.value = "/Image/" + fileName;
+    infoArea2.textContent = 'File name: ' + fileName;
+}
+input1.addEventListener('change', showFileName1);
+input2.addEventListener('change', showFileName2);
+
+// add a product modal
+var inputFileAdd1 = document.getElementById('uploadFileAdd1');
+var inputAdd1 = document.getElementById('uploadAdd1');
+var infoAreaAdd1 = document.getElementById('upload-labelAdd1');
+
+var inputFileAdd2 = document.getElementById("uploadFileAdd2");
+var inputAdd2 = document.getElementById('uploadAdd2');
+var infoAreaAdd2 = document.getElementById('upload-labelAdd2');
+
+function showFileNameAdd1(event) {
+
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    inputFileAdd1.value = "/Image/" + fileName;
+    infoAreaAdd1.textContent = 'File name: ' + fileName;
+}
+function showFileNameAdd2(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    inputFileAdd2.value = "/Image/" + fileName;
+    infoAreaAdd2.textContent = 'File name: ' + fileName;
+}
+inputAdd1.addEventListener('change', showFileNameAdd1);
+inputAdd2.addEventListener('change', showFileNameAdd2);
+
