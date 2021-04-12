@@ -155,7 +155,8 @@ namespace Deckel_Shop.Controllers
             CheckoutViewModel vm = new CheckoutViewModel();
             vm.Products = shopCart.Products;
             vm.TotalPrice = shopCart.TotalPrice;
-            vm.Customer = shopCart.Customer;
+
+            vm.Customer = (shopCart.Customer == null) ? new Customer() : shopCart.Customer;
 
             return View(vm);
         }
