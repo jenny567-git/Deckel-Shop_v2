@@ -106,6 +106,15 @@ namespace Deckel_Shop.Controllers
             await _os.RemoveOrder(id);
             return RedirectToAction(nameof(Administrator));
         }
+        [HttpPost]
+        public async Task<IActionResult> CustomerRemoveOrder(int id)
+        {
+            _ss.UpdateStockWhenCancelledOrder(id);
+            await _os.RemoveOrder(id);
+            return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(_cs.GetCustomerId(User.Identity.Name)));
+            //  return Redirect("Customer/index");
+
+        }
 
         public IActionResult Admin_customerList()
         {

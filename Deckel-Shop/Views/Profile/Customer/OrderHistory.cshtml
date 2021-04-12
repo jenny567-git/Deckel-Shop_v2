@@ -45,52 +45,80 @@
             @foreach (var order in Model)
             {
 
-            <tr>
-                <td>
-                    @order.OrderId
-                </td>
-                <td>
-                    @order.OrderDate
-                </td>
-                <td>
-                    @if (order.OrderStatus == "Delivered")
-                    {
-                        <p style="color: forestgreen">@order.OrderStatus</p>
-                    }
-                    else if (order.OrderStatus == "Cancelled")
-                    {
-                        <p style="color: red">@order.OrderStatus</p>
-                    }
-                    else
-                    {
-                        <p>@order.OrderStatus</p>
-                    }
-                </td>
-                <td>
-                    @if (order.ShippingDate == DateTime.UnixEpoch)
-                    {
-                        <p>Not shipped</p>
-                    }
-                    else
-                    {
-                        @order.ShippingDate
-                    }
+                <tr>
+                    <td>
+                        @order.OrderId
+                    </td>
+                    <td>
+                        @order.OrderDate
+                    </td>
+                    <td>
+                        @if (order.OrderStatus == "Delivered")
+                        {
+                            <p style="color: forestgreen">@order.OrderStatus</p>
+                        }
+                        else if (order.OrderStatus == "Cancelled")
+                        {
+                            <p style="color: red">@order.OrderStatus</p>
+                        }
+                        else
+                        {
+                            <p>@order.OrderStatus</p>
+                        }
+                    </td>
+                    <td>
+                        @if (order.ShippingDate == DateTime.UnixEpoch)
+                        {
+                            <p>Not shipped</p>
+                        }
+                        else
+                        {
+                            @order.ShippingDate
+                        }
 
-                </td>
-                <td>
-                    @order.OrderTotal SEK
-                </td>
-                <td>
-                    <span data-toggle="tooltip" data-placement="bottom" title="info">
-                        <button type="button" onclick="GetModalInfo(@order.OrderId, 'orderDetails')" id="infoModalBtn-@order.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </span>
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        @order.OrderTotal SEK
+                    </td>
+                    <td>
+
+                        <span data-toggle="tooltip" data-placement="bottom" title="info">
+                            <button type="button" onclick="GetModalInfo(@order.OrderId, 'orderDetails')" id="infoModalBtn-@order.OrderId" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </span>
+                        @if (order.OrderStatus == "Pending")
+                        {
+                            <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                                <button onclick="RemoveOrder(@order.OrderId)" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModal-deleteOrder" style="background-color:transparent">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </span>
+                        }
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
 
 <partial name="~/Views/Shared/_OrderDetailModal.cshtml" />
+
+
+@*delete order modal*@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-deleteOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="DeckelModal modal-content">
+            <div class="modal-body">
+                Do you wan't to cancel your order?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="CustomerRemoveOrder">
+                    <button class="btn btn-danger" id="DeleteOrderBtn" name="id" value="">Yes</button>
+                </form>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
