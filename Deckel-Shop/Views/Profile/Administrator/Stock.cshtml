@@ -139,13 +139,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form asp-action="AddProduct">
+            <form asp-action="AddProduct">
+                <div class="modal-body">
                     @*start of form*@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="inputStockID">Product ID</label>
-                            <input type="text" class="form-control" id="inputProductID">
+                            <input type="text" class="form-control" id="inputProductID" disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputName">Product Name</label>
@@ -168,76 +168,67 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Category</label>
-                            <input name="Category" value="" type="text" class="form-control" id="ProductCategory" >
+                            <input name="Category" value="" type="text" class="form-control" id="ProductCategory">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Status</label>
-                            <input name="Status" value="" type="text" class="form-control" id="ProductStatus" >
+                            <input name="Status" value="" type="text" class="form-control" id="ProductStatus">
                         </div>
                     </div>
                     <div class=" form-group col-md-12 ">
                         <label for="inputPrice">Description</label>
-                        <textarea class="form-control" name="Description" value="" id="ProductDescription" ></textarea>
+                        <textarea class="form-control" name="Description" value="" id="ProductDescription"></textarea>
                     </div>
-                        
-                    <!--<div class="container py-5">
-
-                        NEEDS TO BE FIXED
-
-
-                        <label>Image 1</label>
-                        <div class="row ">
-                            <div class="col-md-10 mx-auto">-->
-                                <!-- Upload image input-->
-                                <!--<div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input name="ImgName" value="" id="upload" type="file" onchange="readURL(this);" class="form-control border-0 ">
-                                    <label id="upload-label" for="upload" class="text-muted">Choose file</label>
-                                </div>
-                            </div>-->
-
-                            <!-- Uploaded image area-->
-                            <!--<div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-
-                        </div>
-                    </div>
-
                     <div class="container py-5">
-                        <label>Image 2</label>
                         <div class="row ">
-                            <div class="col-md-10 mx-auto">-->
-
+                            <label>Image 1</label>
+                            <div class="col-md-10 mx-auto">
                                 <!-- Upload image input-->
-                                <!--<div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
-                                    <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
-                                    <label id="upload-label2" for="upload" class="text-muted">Choose file</label>
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-labelAdd1" for="uploadAdd1" class="text-muted">Choose file</label>
+                                    <input id="uploadAdd1" type="file" onchange="readURLAdd1(this);" class="form-control border-0 text-muted" />
+                                    <input id="uploadFileAdd1" name="ImgName" value="" type="text" class="form-control border-0 " />
                                 </div>
-                            </div>-->
+                            </div>
+                        </div>
 
-                            <!-- Uploaded image area-->
-                            <!--<div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        <div class="row ">
+                            <label>Image 2</label>
+                            <div class="col-md-10 mx-auto">
+                                <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-labelAdd2" for="uploadAdd2" class="text-muted">Choose file</label>
+                                    <input value="" id="uploadAdd2" type="file" onchange="readURLAdd2(this);" class="form-control border-0 ">
+                                    <input id="uploadFileAdd2" name="ImgName2" value="" type="text" class="form-control border-0 " />
+                                </div>
+                            </div>
 
                         </div>
-                    </div>-->
-
-                    <!-- Uploaded image area-->
-                    <!--<div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>-->
-
-
-
-
-                    <div class="modal-footer">
-                        <input type="submit" value="save" class="btn btn-primary" />
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <!-- Uploaded image area-->
+                        <div class="col-md-12 col-sm-6 ">
+                            <div class="product-grid4">
+                                <div class="product-image4">
+                                    <a href="#">
+                                        <img id="imageResultAdd1" class="pic-1" src="#">
+                                        <img id="imageResultAdd2" class="pic-2" src="#">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    @*end of form*@
-                </form>
-            </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" value="save" class="btn btn-primary" />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+                @*end of form*@
+
+            </form>
         </div>
 
     </div>
 </div>
-</div>
+
 
 <!--Detail Modal -->
 <div class="modal fade" id="exampleModal-StockDetails" tabindex="-1" aria-labelledby="exampleModal-detailsLabel" aria-hidden="true">
@@ -296,49 +287,48 @@
                     </div>
 
                     <div class="container py-5">
-                        <label>Image 1</label>
                         <div class="row ">
+                            <label>Image 1</label>
                             <div class="col-md-10 mx-auto">
                                 <!-- Upload image input-->
                                 <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input id="upload1" type="file"  onchange="readURL1(this);" class="form-control border-0 text-muted" disabled />
-                                    <input id="uploadFile1" name="ImgName" value="" type="text" class="form-control border-0 " disabled />
                                     <label id="upload-label1" for="upload1" class="text-muted">Choose file</label>
+                                    <input id="upload1" type="file" onchange="readURL1(this);" class="form-control border-0 text-muted" disabled />
+                                    <input id="uploadFile1" name="ImgName" value="" type="text" class="form-control border-0 " disabled />
                                 </div>
                             </div>
-
-                            <!-- Uploaded image area-->
-                            <div class="image-area mt-4"><img id="imageResult1" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-
                         </div>
-                    </div>
-                    <div class="container py-5">
-                        <label>Image 2</label>
                         <div class="row ">
+                            <label>Image 2</label>
                             <div class="col-md-10 mx-auto">
-
-                                <!-- Upload image input-->
                                 <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <label id="upload-label2" for="upload2" class="text-muted">Choose file</label>
                                     <input value="" id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
                                     <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
-                                    <label id="upload-label2" for="upload" class="text-muted">Choose file</label>
                                 </div>
                             </div>
-
-                            <!-- Uploaded image area-->
-                            <div class="image-area mt-4"><img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-
                         </div>
+
+                        <!-- Uploaded image area-->
+                        <div class="col-md-12 col-sm-6 ">
+                            <div class="product-grid4">
+                                <div class="product-image4">
+                                    <a href="#">
+                                        <img id="imageResult1" class="pic-1" src="#">
+                                        <img id="imageResult2" class="pic-2" src="#">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveStockBtn" class="btn btn-primary" disabled>Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button id="saveStockBtn" class="btn btn-primary" disabled>Save</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-
-            @*end of form*@
+                @*end of form*@
 
         </form>
 

@@ -37,6 +37,7 @@ namespace Deckel_Shop.Services
 
         public void AddProduct(Product product)
         {
+
             deckelShopContext.Products.Add(product);
             deckelShopContext.SaveChanges(); 
         }

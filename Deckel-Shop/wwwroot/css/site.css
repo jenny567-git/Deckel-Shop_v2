@@ -555,6 +555,19 @@ nav .nav-link {
 #uploadFile2 {
     opacity: 0;
 }
+#uploadAdd1 {
+    opacity: 0;
+}
+#uploadAdd2 {
+    opacity: 0;
+}
+
+#uploadFileAdd1 {
+    opacity: 0;
+}
+#uploadFileAdd2 {
+    opacity: 0;
+}
 
 
 

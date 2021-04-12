@@ -310,25 +310,7 @@ function enableStockForm() {
     saveStockBtn.disabled = false;
    
 }
-
-//function readURL(input) {
-//    if (input.files && input.files[0]) {
-        
-//        var reader = new FileReader();
-
-//        reader.onload = function (e) {
-//            $('#imageResult')
-//                .attr('src', e.target.result);
-//        };
-//        reader.readAsDataURL(input.files[0]);
-//    }
-//}
-//$(function () {
-//    $('#upload').on('change', function () {
-//        readURL(input);
-//    });
-//});
-
+// add an imgae to stock details modal
 
 function readURL1(input1) {
     if (input1.files && input1.files[0]) {
@@ -368,13 +350,53 @@ $(function () {
     });
 });
 
+// add an imgae to add a new product modal
+
+function readURLAdd1(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        console.log(input.files[0].name)
+
+        reader.onload = function (e) {
+            $('#imageResultAdd1')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#uploadAdd1').on('change', function () {
+        readURL1(input1);
+    });
+});
+
+
+function readURLAdd2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        console.log(input.files[0].name)
+
+        reader.onload = function (e) {
+            $('#imageResultAdd2')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#uploadAdd2').on('change', function () {
+        readURL1(input1);
+    });
+});
+
 /*  ==========================================
     SHOW UPLOADED IMAGE NAME
 * ========================================== */
-//var inputFile = document.getElementById('uploadFile');
-//var input = document.getElementById('upload');
-//var infoArea = document.getElementById('upload-label');
-
+// detail stock modal
 var inputFile1 = document.getElementById('uploadFile1');
 var input1 = document.getElementById('upload1');
 var infoArea1 = document.getElementById('upload-label1');
@@ -383,24 +405,45 @@ var inputFile2 = document.getElementById("uploadFile2");
 var input2 = document.getElementById('upload2');
 var infoArea2 = document.getElementById('upload-label2');
 
-function showFileName(event) {
-    var input = event.srcElement;
-    var fileName = input.files[0].name;
-    infoArea.textContent = 'File name: ' + fileName;
-} 
 
 function showFileName1(event) {
-  
+
     var input = event.srcElement;
     var fileName = input.files[0].name;
     inputFile1.value = "/Image/" + fileName;
-    infoArea1.textContent = 'File name: '+  fileName;
-} 
+    infoArea1.textContent = 'File name: ' + fileName;
+}
 function showFileName2(event) {
     var input = event.srcElement;
     var fileName = input.files[0].name;
     inputFile2.value = "/Image/" + fileName;
-    infoArea2.textContent = 'File name: ' + fileName; 
+    infoArea2.textContent = 'File name: ' + fileName;
 }
 input1.addEventListener('change', showFileName1);
 input2.addEventListener('change', showFileName2);
+
+// add a product modal
+var inputFileAdd1 = document.getElementById('uploadFileAdd1');
+var inputAdd1 = document.getElementById('uploadAdd1');
+var infoAreaAdd1 = document.getElementById('upload-labelAdd1');
+
+var inputFileAdd2 = document.getElementById("uploadFileAdd2");
+var inputAdd2 = document.getElementById('uploadAdd2');
+var infoAreaAdd2 = document.getElementById('upload-labelAdd2');
+
+function showFileNameAdd1(event) {
+
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    inputFileAdd1.value = "/Image/" + fileName;
+    infoAreaAdd1.textContent = 'File name: ' + fileName;
+}
+function showFileNameAdd2(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    inputFileAdd2.value = "/Image/" + fileName;
+    infoAreaAdd2.textContent = 'File name: ' + fileName;
+}
+inputAdd1.addEventListener('change', showFileNameAdd1);
+inputAdd2.addEventListener('change', showFileNameAdd2);
+

@@ -149,7 +149,7 @@ namespace Deckel_Shop.Controllers
             if (ModelState.IsValid)
             {
                 _ss.AddProduct(product);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Stock));
             }
             return View();
         }
