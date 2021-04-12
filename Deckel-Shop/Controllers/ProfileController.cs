@@ -164,18 +164,41 @@ namespace Deckel_Shop.Controllers
         //--------------------------------------------------------------------END OF CUSTOMER
 
         //--------------------------------------------------------------------START OF PRODUCTS
-        public IActionResult Stock(int filter)
+        public IActionResult Stock(string filter)
         {
+            var sort = _ss.GetAllProducts();
             switch (filter)
             {
-                case 1:
-                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllAvailableProducts());
-                case 2:
-                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllRemovedProducts());
+                case "avail_prod":
+                    sort = _ss.GetAllAvailableProducts();
+                    break;
+                case "removed_prod":
+                    sort = _ss.GetAllRemovedProducts();
+                    break;
+                case "name":
+                    sort = sort.OrderBy(p => p.Name);
+                    break;
+                case "name_desc":
+                    sort = sort.OrderByDescending(p => p.Name);
+                    break;
+                case "price_asc":
+                    sort = sort.OrderBy(p => p.Price);
+                    break;
+                case "price_desc":
+                    sort = sort.OrderByDescending(p => p.Price);
+                    break;
+                case "amount_desc":
+                    sort = sort.OrderBy(p => p.Amount);
+                    break;
+                case "amount_asc":
+                    sort = sort.OrderByDescending(p => p.Amount);
+                    break;
                 default:
-                    return View("views/profile/administrator/Stock.cshtml", _ss.GetAllProducts());
+                    sort = _ss.GetAllProducts();
+                    break;
 
             }
+            return View("views/profile/administrator/Stock.cshtml", sort);
         }
 
         [HttpPost]
