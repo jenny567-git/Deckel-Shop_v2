@@ -94,7 +94,14 @@
                         }
                     </td>
                     <td>
-                        @order.ShippingDate
+                        @if (order.ShippingDate == DateTime.UnixEpoch)
+                        {
+                            <p>Not shipped</p>
+                        }
+                        else
+                        {
+                            @order.ShippingDate
+                        }
                     </td>
                     <td>
                         Customer #@order.CustomerId

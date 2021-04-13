@@ -102,24 +102,20 @@
                                 }
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)</td>
-                            @if (item.OrderStatus == "Delivered")
-                            {
-                                <td style="color:forestgreen">
-                                    @item.OrderStatus
-                                </td>
-                            }
-                            else if (item.OrderStatus == "Cancelled")
-                            {
-                                <td style="color:red">
-                                    @item.OrderStatus
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    @item.OrderStatus
-                                </td>
-                            }
+                            <td>
+                                @if (item.OrderStatus == "Delivered")
+                                {
+                                    <p style="color: forestgreen">@item.OrderStatus</p>
+                                }
+                                else if (item.OrderStatus == "Cancelled")
+                                {
+                                    <p style="color: red">@item.OrderStatus</p>
+                                }
+                                else
+                                {
+                                    <p>@item.OrderStatus</p>
+                                }
+
                             <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
                             <td>
                                 <span data-toggle="tooltip" data-placement="bottom" title="info">
