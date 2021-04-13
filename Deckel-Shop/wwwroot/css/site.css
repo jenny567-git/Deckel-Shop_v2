@@ -84,7 +84,7 @@ nav {
 .nav-links {
     display: flex;
     justify-content: space-around;
-    margin-left:20vh;
+    margin-left:24vh;
     width: 30%;
     list-style: none;
 }
