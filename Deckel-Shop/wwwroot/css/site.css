@@ -9,9 +9,9 @@ for details on configuring this project to bundle and minify static web assets. 
     border-color: #6a737b !important;
 }
 
-.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem #e9cf97 !important;
-}
+    .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {
+        box-shadow: 0 0 0 .2rem #e9cf97 !important;
+    }
 
     .btn-primary.focus, .btn-primary:focus {
         box-shadow: 0 0 0 0.2rem rgb(153 225 228) !important;
@@ -27,13 +27,14 @@ for details on configuring this project to bundle and minify static web assets. 
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff;
 }
+
 a {
     color: #ad8649;
     text-decoration: none;
     background-color: transparent;
 }
 
-.AdminNav li a{
+.AdminNav li a {
     font-size: 16px !important;
 }
 
@@ -43,11 +44,11 @@ a {
     padding-right: 20px;
 }
 
-.RemoveUnderline::before{
+.RemoveUnderline::before {
     border-bottom: 0px;
 }
 
-nav ul{
+nav ul {
     margin-bottom: 0px;
 }
 
@@ -84,21 +85,21 @@ nav {
 .nav-links {
     display: flex;
     justify-content: space-around;
-    margin-left:24vh;
+    margin-left: 24vh;
     width: 30%;
     list-style: none;
 }
 
 .nav-items {
-    align-items:center;
+    align-items: center;
     display: flex;
     list-style: none;
 }
 
 
-.nav-items .btn {
-    font-size: 14px;
-}
+    .nav-items .btn {
+        font-size: 14px;
+    }
 
 #navbarDropdownMenuLink {
     color: #c4a970;
@@ -112,16 +113,16 @@ nav {
     color: #c4a970;
 }
 
-    .nav-links li {
-        list-style: none;
-    }
+.nav-links li {
+    list-style: none;
+}
 
-    .nav-links a {
-        color: #c4a970;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 20px;
-    }
+.nav-links a {
+    color: #c4a970;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
 
 .nav-item a {
     font-size: 12px;
@@ -162,24 +163,24 @@ a.text-dark:focus, a.text-dark:hover {
         transition: all 0.3s ease;
     }
 
-    /**About***/
+/**About***/
 .Aboutpage {
     margin-bottom: 50px;
 }
 
 
-    /**FAQ**/
-    .collapsible {
-        background-color: #6c757d;
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-    }
+/**FAQ**/
+.collapsible {
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
 
     .active, .collapsible:hover {
         background-color: #555;
@@ -193,16 +194,16 @@ a.text-dark:focus, a.text-dark:hover {
 footer {
     margin-top: 3vh;
     background-color: #2f2f2f;
-    color:white;
+    color: white;
 }
 
-footer a{
- color: #ffffff;
-}
+    footer a {
+        color: #ffffff;
+    }
 
-footer a:hover{
-    color:#e2c78e
-}
+        footer a:hover {
+            color: #e2c78e
+        }
 
 @media screen and (max-width: 1024px) {
     .nav-links {
@@ -231,10 +232,10 @@ footer a:hover{
         z-index: auto;
     }
 
-    
-    .nav-links li {
-        opacity: 0;
-    }
+
+        .nav-links li {
+            opacity: 0;
+        }
 
 
     .footer {
@@ -293,7 +294,7 @@ footer a:hover{
     z-index: 1;
 }
 
-.container main{
+.container main {
     min-height: 800px;
 }
 
@@ -562,6 +563,7 @@ footer a:hover{
         margin-bottom: 30px
     }
 }
+
 .form-text {
     display: block;
     margin-top: 0.25rem;
@@ -585,7 +587,6 @@ footer a:hover{
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin: 0;
-   
 }
 
 .needs-validation {
@@ -599,6 +600,7 @@ footer a:hover{
 #upload1 {
     opacity: 0;
 }
+
 #upload2 {
     opacity: 0;
 }
@@ -606,12 +608,15 @@ footer a:hover{
 #uploadFile1 {
     opacity: 0;
 }
+
 #uploadFile2 {
     opacity: 0;
 }
+
 #uploadAdd1 {
     opacity: 0;
 }
+
 #uploadAdd2 {
     opacity: 0;
 }
@@ -619,6 +624,7 @@ footer a:hover{
 #uploadFileAdd1 {
     opacity: 0;
 }
+
 #uploadFileAdd2 {
     opacity: 0;
 }
@@ -652,7 +658,7 @@ footer a:hover{
     position: relative;
 }
 
-        
+
 
     .image-area::before {
         content: 'Uploaded image result';
@@ -681,3 +687,9 @@ footer a:hover{
     height: auto;
 }
 
+
+/*-------------------------DATATABLES-----------------*/
+/*hover column effect*/
+/*td.highlight {
+    background-color: whitesmoke !important;
+}*/
