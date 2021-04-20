@@ -21,82 +21,35 @@
     </li>
 </ul>
 
-@*search bar*@
-<div>
-
-    <div class="row mt-3 pt-3 mb-3">
-        <div class="col-sm-4">
-            <div class="input-group">
-                <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc">
-                <div class="input-group-append">
-                    <button class="input-group-text"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="d-flex">
-                <div class="dropdown mr-1">
-                    <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                        Status/Sort
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                        <form asp-action="Stock">
-                            <button name="filter" class="dropdown-item" value="all_prod">All Products</button>
-                            <button name="filter" class="dropdown-item" value="avail_prod">Available Products</button>
-                            <button name="filter" class="dropdown-item" value="removed_prod">Removed Products</button>
-                            <hr class="dropdown-divider">
-                            <button name="filter" class="dropdown-item" value="name">Name: A-Z</button>
-                            <button name="filter" class="dropdown-item" value="name_desc">Name: Z-A</button>
-                            <button name="filter" class="dropdown-item" value="price_asc">Price: Lowest first</button>
-                            <button name="filter" class="dropdown-item" value="price_desc">Price: Highest first</button>
-                            <button name="filter" class="dropdown-item" value="amount_asc">Amount: Highest first</button>
-                            <button name="filter" class="dropdown-item" value="amount_desc">Amount: Lowest first</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        @*row with title and NEW:button modal*@
-
-        @*---------------------------------------------------------------------------------*@
-        <!-- NEW: Button trigger modal -->
-        <div class="col-sm-6 text-right">
-            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-Product" style="background-color:transparent">
-                <i class="far fa-plus-square"></i> Add product
-            </button>
-        </div>
+<div class="row mt-3 pt-3 mb-3">
+    @*---------------------------------------------------------------------------------*@
+    <!-- NEW: Button trigger modal -->
+    <div class="col-sm-12 text-right">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-Product" style="background-color:transparent">
+            <i class="far fa-plus-square"></i> Add product
+        </button>
     </div>
-    </div>
+</div>
 
 
+@*stock table*@
 
-    @*line break*@
-    <div class="row">
-        <div class="col">
-            <hr>
-        </div>
-    </div>
-
-
-    @*stock table*@
-
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-striped table-bordered dt-responsive display nowrap table-image">
-                <thead>
-                    <tr>
-                        <th scope="col">PRODUCT#</th>
-                        <th scope="col">PRODUCT NAME</th>
-                        <th scope="col">AMOUNT</th>
-                        <th scope="col">PRICE</th>
-                        <th scope="col">STATUS</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody class="tableSearch">
-                    @foreach (var p in Model)
-                    {
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped table-bordered dt-responsive display nowrap table-image" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">PRODUCT#</th>
+                    <th scope="col">PRODUCT NAME</th>
+                    <th scope="col">AMOUNT</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody class="tableSearch">
+                @foreach (var p in Model)
+                {
                     <tr>
                         <td>
                             @p.Id
@@ -110,9 +63,9 @@
                         <td>
                             @p.Price
                         </td>
-                        
-                            @if (p.Status == "Available")
-                            {
+
+                        @if (p.Status == "Available")
+                        {
                             <td style="color:forestgreen">
                                 @p.Status
                             </td>
@@ -129,36 +82,36 @@
                                 @p.Status
                             </td>
                         }
-                            
-                            <td>
-                                <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                    <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#StockDetails" style="background-color:transparent">
-                                        <i class="fas fa-info-circle"></i>
+
+                        <td>
+                            <span data-toggle="tooltip" data-placement="bottom" title="info">
+                                <button type="button" onclick="GetModalInfo(@p.Id, 'stockDetails')" class="btn btn-light" data-toggle="modal" data-target="#StockDetails" style="background-color:transparent">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </span>
+                            @if (p.Status == "Available")
+                            {
+                                <span data-toggle="tooltip" data-placement="bottom" title="delete">
+                                    <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
-                                </span>
-                                @if (p.Status == "Available")
-                                {
-                                    <span data-toggle="tooltip" data-placement="bottom" title="delete">
-                                        <button onclick="RemoveProduct(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-delete" style="background-color:transparent">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </span> }
-                                    else
-                                    {
-                                        <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
-                                            <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
-                                                <i class="far fa-plus-square"></i>
-                                            </button>
-                                        </span>}
-                            </td>
-                        </tr>
+                                </span> }
+                            else
+                            {
+                                <span data-toggle="tooltip" data-placement="bottom" title="Add Back To Stock">
+                                    <button onclick="AddBackToStock(@p.Id)" type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal-AddToStock" style="background-color:transparent">
+                                        <i class="far fa-plus-square"></i>
+                                    </button>
+                                </span>}
+                        </td>
+                    </tr>
 
-                    }
+                }
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>
 
 <!--Add Product Modal -->
 <div class="modal fade" id="exampleModal-Product" tabindex="-1" aria-labelledby="exampleModalProduct-Label" aria-hidden="true">
@@ -296,7 +249,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="inputAmount">Amount</label>
-                            <input name="Amount" value="" type="text" class="form-control" id="ProductAmount" disabled> 
+                            <input name="Amount" value="" type="text" class="form-control" id="ProductAmount" disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPrice">Price</label>
@@ -325,8 +278,8 @@
                                 <!-- Upload image input-->
                                 <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                     <label id="upload-label1" for="upload1" class="text-muted">Choose file</label>
-                                    <input id="upload1"  type="file" onchange="readURL1(this);" class="form-control border-0 text-muted" disabled />
-                                    <input id="uploadFile1" name="ImgName"  value="" type="text" class="form-control border-0 " disabled />
+                                    <input id="upload1" type="file" onchange="readURL1(this);" class="form-control border-0 text-muted" disabled />
+                                    <input id="uploadFile1" name="ImgName" value="" type="text" class="form-control border-0 " disabled />
                                 </div>
                             </div>
                         </div>
@@ -335,7 +288,7 @@
                             <div class="col-md-10 mx-auto">
                                 <div class=" input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                     <label id="upload-label2" for="upload2" class="text-muted">Choose file</label>
-                                    <input id="upload2"  type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
+                                    <input id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0 " disabled>
                                     <input id="uploadFile2" name="ImgName2" value="" type="text" class="form-control border-0 " disabled />
                                 </div>
                             </div>
@@ -385,18 +338,18 @@
     </div>
 </div>
 
-    @* Add back to stock modal*@
-    <div class="modal fade" id="exampleModal-AddToStock" tabindex="-1" aria-labelledby="exampleModal-AddLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="DeckelModal modal-content">
-                <form asp-action="AddProductBackToStock">
-                    <div class="modal-body">
-                        <label for="inputAmount">Amount</label>
-                        <input name="StockAmount" type="number" class="form-control" id="inputStockAmount">
-                    </div>
-                    <div class="modal-footer">
+@* Add back to stock modal*@
+<div class="modal fade" id="exampleModal-AddToStock" tabindex="-1" aria-labelledby="exampleModal-AddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="DeckelModal modal-content">
+            <form asp-action="AddProductBackToStock">
+                <div class="modal-body">
+                    <label for="inputAmount">Amount</label>
+                    <input name="StockAmount" type="number" class="form-control" id="inputStockAmount">
+                </div>
+                <div class="modal-footer">
 
-                        <button name="id" id="AddBackToStockBtn" value="" class="btn btn-danger">Save</button>
+                    <button name="id" id="AddBackToStockBtn" value="" class="btn btn-danger">Save</button>
 
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                 </div>
@@ -404,3 +357,11 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/js/datatable.js"></script>
+}

@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model IEnumerable<Database.Models.Order>
+﻿@model IEnumerable<Database.Models.Order>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css" />
@@ -30,38 +25,6 @@
     </ul>
 
 
-    @*search bar*@
-    <!--<div class="row mt-3 pt-3 mb-3">-->
-        @*<div class="col-sm-4">
-                <div class="input-group">
-                    <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc" id="tableSearch">
-                    <div class="input-group-append">
-                        <button class="input-group-text"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </div>*@
-        <!--<div class="col-sm-12 text-right">-->
-            @*<div class="d-flex">
-                <div class="dropdown mr-1">*@
-            <!--<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                Status
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                <form asp-action="DeliveredOrders">
-                    <button name="filter" class="dropdown-item" value="delivered">Delivered</button>
-                    <button name="filter" class="dropdown-item" value="cancelled">Cancelled</button>
-
-                </form>-->
-                @*</div>
-                    </div>*@
-            <!--</div>
-        </div>
-
-    </div>-->
-
-    @*-------------------------------------------------------------------------*@
-
-    @*deliverde orders table*@
 
     <div class="row pt-4">
         <div class="col-sm-12">
@@ -80,48 +43,48 @@
                 <tbody class="tableSearch">
                     @if (Model != null)
                     {
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <th scope="row">@Html.DisplayFor(modelItem => item.OrderId)</th>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <th scope="row">@Html.DisplayFor(modelItem => item.OrderId)</th>
 
-                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                <td>
+                        <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                        <td>
 
-                                    @if (item.ShippingDate == DateTime.UnixEpoch)
-                                    {
-                                        <p>Not shipped</p>
-                                    }
-                                    else
-                                    {
-                                        @item.ShippingDate
-                                    }
-                                </td>
-                                <td>@Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)</td>
-                                <td>
-                                    @if (item.OrderStatus == "Delivered")
-                                    {
-                                        <p style="color: forestgreen">@item.OrderStatus</p>
-                                    }
-                                    else if (item.OrderStatus == "Cancelled")
-                                    {
-                                        <p style="color: red">@item.OrderStatus</p>
-                                    }
-                                    else
-                                    {
-                                        <p>@item.OrderStatus</p>
-                                    }
+                            @if (item.ShippingDate == DateTime.UnixEpoch)
+                            {
+                            <p>Not shipped</p>
+                            }
+                            else
+                            {
+                            @item.ShippingDate
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)</td>
+                        <td>
+                            @if (item.OrderStatus == "Delivered")
+                            {
+                            <p style="color: forestgreen">@item.OrderStatus</p>
+                            }
+                            else if (item.OrderStatus == "Cancelled")
+                            {
+                            <p style="color: red">@item.OrderStatus</p>
+                            }
+                            else
+                            {
+                            <p>@item.OrderStatus</p>
+                            }
 
-                                <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
-                                <td>
-                                    <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                        <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
-                                            <i class="fas fa-info-circle"></i>
-                                        </button>
-                                    </span>
-                                </td>
-                            </tr>
-                        }
+                        <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
+                        <td>
+                            <span data-toggle="tooltip" data-placement="bottom" title="info">
+                                <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+                    }
                     }
 
 
@@ -152,12 +115,12 @@
     </div>
 
     @section Scripts{
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
 
-        <script src="~/js/datatable.js"></script>
+    <script src="~/js/datatable.js"></script>
     }
