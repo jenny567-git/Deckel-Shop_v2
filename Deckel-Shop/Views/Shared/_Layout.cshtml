@@ -40,9 +40,18 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li class="navAnim">
-                    <a asp-area="" asp-controller="Profile" asp-action="administrator">Admin</a>
-                </li>
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                {
+                    <li class="navAnim">
+                        <a asp-area="" asp-controller="Profile" asp-action="administrator">Admin</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="navAnim">
+                        <a asp-area="" asp-controller="Home" asp-action="News">News</a>
+                    </li>
+                }
                 <li class="navAnim">
                     <a asp-area="" asp-controller="Product" asp-action="index">Shop</a>
                 </li>

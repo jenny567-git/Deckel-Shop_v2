@@ -27,16 +27,16 @@ namespace Deckel_Shop.Controllers
             _userManager = um;
         }
 
-        [Authorize]
-        public IActionResult Index()
-        {
-            if (User.IsInRole("Administrator"))
-            {
-                return View("views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
-            }
+        //[Authorize(Roles = "Administrator")]
+        //public IActionResult Index()
+        //{
+        //    //if (User.IsInRole("Administrator"))
+        //    //{
+        //    //}
+        //        return View("views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
 
-            return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(_cs.GetCustomerId(User.Identity.Name)));
-        }
+        //    //return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(_cs.GetCustomerId(User.Identity.Name)));
+        
 
         public IActionResult Users()
         {
@@ -66,7 +66,7 @@ namespace Deckel_Shop.Controllers
             return View("views/profile/Administrator/Users.cshtml");
         }
 
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult Administrator()
         {
 
