@@ -64,7 +64,7 @@ namespace Deckel_Shop.Services
         {
             deckelShopContext.Orders.Add(order);
             deckelShopContext.SaveChanges();
-            int a = 0;
+            
         }
 
         public async Task<int> RemoveOrder(int id)

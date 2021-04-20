@@ -5,152 +5,159 @@
 }
 @model IEnumerable<Database.Models.Order>
 
-<script src="~/js/Admin.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+    <script src="~/js/Admin.js"></script>
 
-@*nav bar*@
-<ul class="nav nav-tabs nav-tabs AdminNav">
-    <li class="nav-item">
-        <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
-    </li>
-    <li class="nav-item ">
-        <a class="nav-link active" asp-action="DeliveredOrders">Completed Orders</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-action="Admin_customerList">Customer List</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-action="Users">User List</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-action="Stock">Stock</a>
-    </li>
-</ul>
+    @*nav bar*@
+    <ul class="nav nav-tabs nav-tabs AdminNav">
+        <li class="nav-item">
+            <a class="nav-link" asp- asp-action="Administrator">Pending Orders</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link active" asp-action="DeliveredOrders">Completed Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Admin_customerList">Customer List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Users">User List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Stock">Stock</a>
+        </li>
+    </ul>
 
 
-@*search bar*@
-<div class="row mt-3 pt-3 mb-3">
-    <div class="col-sm-4">
-        <div class="input-group">
-            <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc" id="tableSearch">
-            <div class="input-group-append">
-                <button class="input-group-text"><i class="fa fa-search"></i></button>
-            </div>
+    @*search bar*@
+    <!--<div class="row mt-3 pt-3 mb-3">-->
+        @*<div class="col-sm-4">
+                <div class="input-group">
+                    <input type="text" class="form-control searchbarForTable" placeholder="Search by Order#, Customer# etc" id="tableSearch">
+                    <div class="input-group-append">
+                        <button class="input-group-text"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>*@
+        <!--<div class="col-sm-12 text-right">-->
+            @*<div class="d-flex">
+                <div class="dropdown mr-1">*@
+            <!--<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                <form asp-action="DeliveredOrders">
+                    <button name="filter" class="dropdown-item" value="delivered">Delivered</button>
+                    <button name="filter" class="dropdown-item" value="cancelled">Cancelled</button>
+
+                </form>-->
+                @*</div>
+                    </div>*@
+            <!--</div>
+        </div>
+
+    </div>-->
+
+    @*-------------------------------------------------------------------------*@
+
+    @*deliverde orders table*@
+
+    <div class="row pt-4">
+        <div class="col-sm-12">
+            <table class="table table-striped table-bordered dt-responsive display nowrap" id="myTable">
+                <thead>
+                    <tr>
+                        <th scope="col">ORDER#</th>
+                        <th scope="col">ORDER DATE</th>
+                        <th scope="col">SHIPPING DATE</th>
+                        <th scope="col">CUSTOMER NAME</th>
+                        <th scope="col">ORDER STATUS</th>
+                        <th scope="col">ORDER TOTAL</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody class="tableSearch">
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@Html.DisplayFor(modelItem => item.OrderId)</th>
+
+                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                <td>
+
+                                    @if (item.ShippingDate == DateTime.UnixEpoch)
+                                    {
+                                        <p>Not shipped</p>
+                                    }
+                                    else
+                                    {
+                                        @item.ShippingDate
+                                    }
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)</td>
+                                <td>
+                                    @if (item.OrderStatus == "Delivered")
+                                    {
+                                        <p style="color: forestgreen">@item.OrderStatus</p>
+                                    }
+                                    else if (item.OrderStatus == "Cancelled")
+                                    {
+                                        <p style="color: red">@item.OrderStatus</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@item.OrderStatus</p>
+                                    }
+
+                                <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
+                                <td>
+                                    <span data-toggle="tooltip" data-placement="bottom" title="info">
+                                        <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="col-sm-2">
-        <div class="d-flex">
-            <div class="dropdown mr-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                    Status
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                    <form asp-action="DeliveredOrders">
-                        <button name="filter" class="dropdown-item" value="delivered">Delivered</button>
-                        <button name="filter" class="dropdown-item" value="cancelled">Cancelled</button>
 
+    <partial name="~/Views/Shared/_OrderDetailModal.cshtml" />
+
+    @*delete order modal*@
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal-deleteOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="DeckelModal modal-content">
+
+                <div class="modal-body">
+                    Delete Order?
+                </div>
+                <div class="modal-footer">
+                    <form asp-action="RemoveOrder">
+                        <button class="btn btn-danger" id="DeleteOrderBtn" name="id" value="">Yes</button>
                     </form>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 
-</div>
+    @section Scripts{
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
 
-@*line break*@
-<div class="row">
-    <div class="col">
-        <hr>
-    </div>
-</div>
-
-@*-------------------------------------------------------------------------*@
-
-@*deliverde orders table*@
-
-<div class="row">
-    <div class="col-sm-12">
-        <table class="table table-striped table-bordered dt-responsive display nowrap">
-            <thead>
-                <tr>
-                    <th scope="col">ORDER#</th>
-                    <th scope="col">ORDER DATE</th>
-                    <th scope="col">SHIPPING DATE</th>
-                    <th scope="col">CUSTOMER NAME</th>
-                    <th scope="col">ORDER STATUS</th>
-                    <th scope="col">ORDER TOTAL</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody class="tableSearch">
-                @if (Model != null)
-                {
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <th scope="row">@Html.DisplayFor(modelItem => item.OrderId)</th>
-
-                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                            <td>
-
-                                @if (item.ShippingDate == DateTime.UnixEpoch)
-                                {
-                                    <p>Not shipped</p>
-                                }
-                                else
-                                {
-                                    @item.ShippingDate
-                                }
-                            </td>
-                            <td>@Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)</td>
-                            <td>
-                                @if (item.OrderStatus == "Delivered")
-                                {
-                                    <p style="color: forestgreen">@item.OrderStatus</p>
-                                }
-                                else if (item.OrderStatus == "Cancelled")
-                                {
-                                    <p style="color: red">@item.OrderStatus</p>
-                                }
-                                else
-                                {
-                                    <p>@item.OrderStatus</p>
-                                }
-
-                            <td>@Html.DisplayFor(modelItem => item.OrderTotal)</td>
-                            <td>
-                                <span data-toggle="tooltip" data-placement="bottom" title="info">
-                                    <button type="button" onclick="GetModalInfo(@item.OrderId, 'orderDetails')" id="infoModalBtn-@item.OrderId" class="btn btn-ligh" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:transparent">
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                                </span>
-                            </td>
-                        </tr>
-                    }
-                }
-
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<partial name="~/Views/Shared/_OrderDetailModal.cshtml" />
-
-@*delete order modal*@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal-deleteOrder" tabindex="-1" aria-labelledby="exampleModal-deleteLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="DeckelModal modal-content">
-
-            <div class="modal-body">
-                Delete Order?
-            </div>
-            <div class="modal-footer">
-                <form asp-action="RemoveOrder">
-                    <button class="btn btn-danger" id="DeleteOrderBtn" name="id" value="">Yes</button>
-                </form>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
+        <script src="~/js/datatable.js"></script>
+    }
