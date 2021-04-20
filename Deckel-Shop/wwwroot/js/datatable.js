@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
    
-    var table = $('#myTable').DataTable({
+    var table = $('#myAdvancedTable').DataTable({
         
         language: {
             searchPanes: {
@@ -22,3 +22,6 @@
 
 });
 
+$(document).ready(function () {
+    $('#myTable').DataTable();
+});
