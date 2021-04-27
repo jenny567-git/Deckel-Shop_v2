@@ -4,6 +4,7 @@ using Deckel_Shop.Services;
 using Deckel_Shop.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,10 +18,11 @@ namespace Deckel_Shop.Controllers
     public class CartController : Controller
     {
         private readonly StockService _ss = new StockService();
-        private readonly OrderService orderService = new OrderService();
-        private readonly CustomerService _cs = new CustomerService();
+        private readonly Services.OrderService orderService = new Services.OrderService();
+        private readonly Services.CustomerService _cs = new Services.CustomerService();
 
-
+        [TempData]
+        public string TotalAmount { get; set; }
         public IActionResult Index()
         {
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
@@ -57,7 +59,7 @@ namespace Deckel_Shop.Controllers
             else
             {
                 shopCart.Products.Add(
-                    new Product
+                    new Database.Models.Product
                     {
                         Id = productInStock.Id,
                         Name = productInStock.Name,
@@ -114,7 +116,7 @@ namespace Deckel_Shop.Controllers
             vm.Products = shopCart.Products;
             vm.TotalPrice = shopCart.TotalPrice;
 
-            vm.Customer = (shopCart.Customer == null) ? new Customer() : shopCart.Customer;
+            vm.Customer = (shopCart.Customer == null) ? new Database.Models.Customer() : shopCart.Customer;
 
             return View(vm);
         }
@@ -128,7 +130,7 @@ namespace Deckel_Shop.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Order order = new Order();
+                    Database.Models.Order order = new Database.Models.Order();
 
                     order.CustomerId = _cs.GetCustomerId(vm.Customer.Email);
                     if (order.CustomerId == 0)
@@ -165,10 +167,47 @@ namespace Deckel_Shop.Controllers
             {
                 TempData["msg"] = ex.Message;
             }
-            return RedirectToAction(nameof(OrderConfirmation));
+            return RedirectToAction(nameof(Processing));
         }
 
+
+        [HttpPost]
+        public IActionResult Processing(string stripeToken, string stripeEmail)
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            var optionsCustomer = new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Name = "Robert",
+                Phone = "04-234567",
+            };
+            var serviceCustomer = new Stripe.CustomerService();
+            Stripe.Customer customer = serviceCustomer.Create(optionsCustomer);
+            var optionsCharge = new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt64(shopCart.TotalPrice),
+                Currency = "SEK",
+                Description = "selling caps",
+                Source = stripeToken,
+                ReceiptEmail = stripeEmail
+            };
+            var serviceCharge = new ChargeService();
+            Charge charge = serviceCharge.Create(optionsCharge);
+
+            if(charge.Status == "succeeded")
+            {
+                return RedirectToAction(nameof(OrderConfirmation));
+            } else
+            {
+                return RedirectToAction(nameof(Failed));
+            }
+        }
         public IActionResult OrderConfirmation()
+        {
+            return View();
+        }
+        
+        public IActionResult Failed()
         {
             return View();
         }

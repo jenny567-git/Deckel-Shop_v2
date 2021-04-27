@@ -113,7 +113,7 @@
                 <hr class="my-4">
 
                 <h4 class="mb-3">Payment</h4>
-
+               
                 <div class="my-3">
                     <div class="form-check">
                         <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
@@ -186,4 +186,29 @@
                 }
             }
         </div>
+
     </div>
+
+
+@using Microsoft.Extensions.Options
+@inject IOptions<Deckel_Shop.Data.StripeSettings> Stripe
+<div>
+    <div class="row">
+        <form asp-action="Processing" asp-controller="cart" method="post">
+            <article>
+                <label>Amount: $@Model.TotalPrice</label>
+            </article>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-keyboard="@Stripe.Value.PublishableKey"
+                    data-amount="@Model.TotalPrice"
+                    data-template-name="[Deveducate]"
+                    data-description="Flower payments"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="en"
+                    data-zip-code="true"
+                    >
+
+            </script>
+        </form>
+    </div>
+</div>
