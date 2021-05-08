@@ -124,8 +124,9 @@ namespace Deckel_Shop.Controllers
 
 
         [HttpPost]
-        public ActionResult AddOrder([Bind] CheckoutViewModel vm)
+        public ActionResult AddOrder(string stripeToken, string stripeEmail, [Bind] CheckoutViewModel vm)
         {
+            
             try
             {
                 if (ModelState.IsValid)
@@ -155,53 +156,57 @@ namespace Deckel_Shop.Controllers
                     Debug.WriteLine(cart.TotalPrice);
                     order.OrderTotal = cart.TotalPrice;
 
+
+
+                    var optionsCustomer = new CustomerCreateOptions
+                    {
+                        Email = stripeEmail,
+                        Name = order.Customer.FirstName + " " + order.Customer.LastName,
+                        Phone = order.Customer.Phone,
+                    };
+                    var serviceCustomer = new Stripe.CustomerService();
+                    Stripe.Customer customer = serviceCustomer.Create(optionsCustomer);
+                    var optionsCharge = new ChargeCreateOptions
+                    {
+                        Amount = Convert.ToInt64(cart.TotalPrice),
+                        Currency = "SEK",
+                        Description = "selling caps",
+                        Source = stripeToken,
+                        ReceiptEmail = stripeEmail
+                    };
+                    var serviceCharge = new ChargeService();
+                    Charge charge = serviceCharge.Create(optionsCharge);
+
+
+
+
+
+
                     orderService.AddOrder(order);
                     _ss.UpdateStockWhenPlacingOrder(order);
                     HttpContext.Session.Clear();
-                    
-                }
 
+                    if (charge.Status == "succeeded")
+                    {
+                        return RedirectToAction(nameof(OrderConfirmation));
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Failed));
+                    }
+                }
+                
 
             }
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
             }
-            return RedirectToAction(nameof(Processing));
+            throw new NotImplementedException();
         }
 
 
-        [HttpPost]
-        public IActionResult Processing(string stripeToken, string stripeEmail)
-        {
-            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-            var optionsCustomer = new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                Name = "Robert",
-                Phone = "04-234567",
-            };
-            var serviceCustomer = new Stripe.CustomerService();
-            Stripe.Customer customer = serviceCustomer.Create(optionsCustomer);
-            var optionsCharge = new ChargeCreateOptions
-            {
-                Amount = Convert.ToInt64(shopCart.TotalPrice),
-                Currency = "SEK",
-                Description = "selling caps",
-                Source = stripeToken,
-                ReceiptEmail = stripeEmail
-            };
-            var serviceCharge = new ChargeService();
-            Charge charge = serviceCharge.Create(optionsCharge);
-
-            if(charge.Status == "succeeded")
-            {
-                return RedirectToAction(nameof(OrderConfirmation));
-            } else
-            {
-                return RedirectToAction(nameof(Failed));
-            }
-        }
+        
         public IActionResult OrderConfirmation()
         {
             return View();
