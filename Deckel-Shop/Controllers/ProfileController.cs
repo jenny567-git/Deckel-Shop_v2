@@ -28,17 +28,17 @@ namespace Deckel_Shop.Controllers
         }
 
         //[Authorize(Roles = "Administrator")]
-        //public IActionResult Index()
-        //{
-        //    //if (User.IsInRole("Administrator"))
-        //    //{
-        //    //}
-        //        return View("views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
+        public IActionResult Index()
+        {
+            if (User.IsInRole("Administrator"))
+            {
+                return View("views/profile/administrator/index.cshtml", _os.GetAllOrdersByOrderStatus("Pending"));
+            }
 
-        //    //return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(_cs.GetCustomerId(User.Identity.Name)));
-        
+            return View("views/profile/Customer/OrderHistory.cshtml", _os.GetAllOrdersBySelectedCustomer(_cs.GetCustomerId(User.Identity.Name)));
+        }
 
-        public IActionResult Users()
+            public IActionResult Users()
         {
 
             return View("views/profile/Administrator/Users.cshtml");

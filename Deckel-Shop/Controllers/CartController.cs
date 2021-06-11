@@ -4,7 +4,7 @@ using Deckel_Shop.Services;
 using Deckel_Shop.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Stripe;
+//using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -122,16 +122,98 @@ namespace Deckel_Shop.Controllers
         }
 
 
+        //METHOD WITH NOT WORKING STRIPE
+
+        //[HttpPost]
+        //public ActionResult AddOrder(string stripeToken, string stripeEmail, [Bind] CheckoutViewModel vm)
+        //{
+
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            Database.Models.Order order = new Database.Models.Order();
+
+        //            order.CustomerId = _cs.GetCustomerId(vm.Customer.Email);
+        //            if (order.CustomerId == 0)
+        //            {
+        //                order.Customer = vm.Customer;
+        //            }
+
+        //            order.OrderStatus = "Pending";
+        //            order.OrderDate = DateTime.Now;
+        //            order.ShippingDate = DateTime.UnixEpoch;
+
+        //            var cart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+        //            foreach (var product in cart.Products)
+        //            {
+        //                OrderedItem orderedItem = new OrderedItem();
+        //                orderedItem.ProductId = product.Id;
+        //                orderedItem.Amount = product.Amount;
+        //                order.OrderedItems.Add(orderedItem);
+
+        //            }
+
+        //            Debug.WriteLine(cart.TotalPrice);
+        //            order.OrderTotal = cart.TotalPrice;
+
+
+
+        //            var optionsCustomer = new CustomerCreateOptions
+        //            {
+        //                Email = stripeEmail,
+        //                Name = order.Customer.FirstName + " " + order.Customer.LastName,
+        //                Phone = order.Customer.Phone,
+        //            };
+        //            var serviceCustomer = new Stripe.CustomerService();
+        //            Stripe.Customer customer = serviceCustomer.Create(optionsCustomer);
+        //            var optionsCharge = new ChargeCreateOptions
+        //            {
+        //                Amount = Convert.ToInt64(cart.TotalPrice),
+        //                Currency = "SEK",
+        //                Description = "selling caps",
+        //                Source = stripeToken,
+        //                ReceiptEmail = stripeEmail
+        //            };
+        //            var serviceCharge = new ChargeService();
+        //            Charge charge = serviceCharge.Create(optionsCharge);
+
+
+
+
+
+
+        //            orderService.AddOrder(order);
+        //            _ss.UpdateStockWhenPlacingOrder(order);
+        //            HttpContext.Session.Clear();
+
+        //            if (charge.Status == "succeeded")
+        //            {
+        //                return RedirectToAction(nameof(OrderConfirmation));
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction(nameof(Failed));
+        //            }
+        //        }
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["msg"] = ex.Message;
+        //    }
+        //    throw new NotImplementedException();
+        //}
 
         [HttpPost]
-        public ActionResult AddOrder(string stripeToken, string stripeEmail, [Bind] CheckoutViewModel vm)
+        public ActionResult AddOrder([Bind] CheckoutViewModel vm)
         {
-            
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Database.Models.Order order = new Database.Models.Order();
+                    Order order = new Order();
 
                     order.CustomerId = _cs.GetCustomerId(vm.Customer.Email);
                     if (order.CustomerId == 0)
@@ -156,57 +238,23 @@ namespace Deckel_Shop.Controllers
                     Debug.WriteLine(cart.TotalPrice);
                     order.OrderTotal = cart.TotalPrice;
 
-
-
-                    var optionsCustomer = new CustomerCreateOptions
-                    {
-                        Email = stripeEmail,
-                        Name = order.Customer.FirstName + " " + order.Customer.LastName,
-                        Phone = order.Customer.Phone,
-                    };
-                    var serviceCustomer = new Stripe.CustomerService();
-                    Stripe.Customer customer = serviceCustomer.Create(optionsCustomer);
-                    var optionsCharge = new ChargeCreateOptions
-                    {
-                        Amount = Convert.ToInt64(cart.TotalPrice),
-                        Currency = "SEK",
-                        Description = "selling caps",
-                        Source = stripeToken,
-                        ReceiptEmail = stripeEmail
-                    };
-                    var serviceCharge = new ChargeService();
-                    Charge charge = serviceCharge.Create(optionsCharge);
-
-
-
-
-
-
                     orderService.AddOrder(order);
                     _ss.UpdateStockWhenPlacingOrder(order);
                     HttpContext.Session.Clear();
 
-                    if (charge.Status == "succeeded")
-                    {
-                        return RedirectToAction(nameof(OrderConfirmation));
-                    }
-                    else
-                    {
-                        return RedirectToAction(nameof(Failed));
-                    }
                 }
-                
+
 
             }
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
             }
-            throw new NotImplementedException();
+            return RedirectToAction(nameof(OrderConfirmation));
         }
 
 
-        
+
         public IActionResult OrderConfirmation()
         {
             return View();
