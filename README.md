@@ -9,11 +9,11 @@ This project uses the following technologies:
 - Entity Framework Core
 - SignalR
 
-## Screenshots
-https://drive.google.com/drive/folders/1MYc4FzwckpV5-omu2OMrZunkWYBkxJti?usp=sharing
-
 ## Prerequisites
 1. Code Editor/IDE
+
+## Screenshots
+https://drive.google.com/drive/folders/1MYc4FzwckpV5-omu2OMrZunkWYBkxJti?usp=sharing
 
 ## Usage:
 1. Clone the repo
